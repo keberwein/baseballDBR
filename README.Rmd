@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 library(blscrapeR)
 ```
 # usmapR
-[![Build Status](https://travis-ci.org/keberwein/usmapR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/usmapR)](http://www.r-pkg.org/badges/version/blscrapeR)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#active)
+[![Build Status](https://travis-ci.org/keberwein/usmapR.png?branch=master)](https://travis-ci.org/keberwein/moneyball)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/usmapR)](http://www.r-pkg.org/badges/version/moneyball)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#concept)
 
 ### This is a concept project under devel.
-State, county and zip code mapping with keys based on Federal Information Processing Standard (FIPS).
+
