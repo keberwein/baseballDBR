@@ -5,7 +5,6 @@ Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
 Description: Updated version of the Lahman database along wiht additional statistical functions.
 Depends: R (>= 3.3.1)
-License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
