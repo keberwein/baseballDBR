@@ -1,5 +1,5 @@
 Package: moneyball
-Title: Sabermetrics on the Current Lahman Database
+Title: Sabermetrics on the Lahman database.
 Version: 0.0.0.9000
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
