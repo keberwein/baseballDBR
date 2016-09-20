@@ -1,13 +1,18 @@
 Package: moneyball
-Title: Sabermetrics on the Lahman database.
+Title: Sabermetrics on the Lahman database
 Version: 0.0.0.9000
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
-Description: Updated version of the Lahman database along wiht additional statistical functions.
-Depends: R (>= 3.3.1)
+Description: Updated version of the Lahman database along wiht additional
+    statistical functions.
+Depends:
+    R (>= 3.3.1)
+Importrs: magrittr
+Suggests:
+    Lahman
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/moneyball
 BugReports: https://github.com/keberwein/moneyball/issues
-
+RoxygenNote: 5.0.1

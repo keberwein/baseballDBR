@@ -10,7 +10,6 @@
 #' @param position This is a required argument that designates either a "batter" or "pitcher." The argument should
 #' be spelled out and within quotes.
 #' @keywords Kpct strikeout percentage
-#' @import Lahman
 #' @export Kpct
 #' @examples
 #' \dontrun{
@@ -20,25 +19,20 @@
 #' }
 #'
 Kpct <- function (dat, position){
-
     if (any(!isTRUE(c("SO", "IPouts") %in% names(dat))) & position == "pitcher"){
         ifelse(dat$IPouts > 0 & dat$SO > 0,
                dat$Kpct <- round(((dat$SO * 9) / (dat$IPouts / 3)), 3), NA)
     }
-
     if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat))) & position == "batter"){
         ifelse(dat$IPouts > 0 & dat$SO > 0,
                dat$Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
     }
-
     if (position == "batter" & any(isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'SO', 'BB', 'HBP', 'SF', and 'SH'")
     }
-
     if (position == "pitcher" & any(isTRUE(c("SO", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'SO' and 'IPouts'")
     }
-
     return(dat)
 }
 
@@ -46,12 +40,11 @@ Kpct <- function (dat, position){
 #' @title Calculate base on ball percentage
 #' @description Find base on ball percentage for batters or pitchers with more than zero at bats or innings pitched.
 #' Required fields for batters are; "AB", "SO", "BB", "HBP", "SF", and "SH." Required fields for pitchers are;
-#' "SO" and "IPouts"
+#' "BB" and "IPouts". Intentional base on balls (IBB) is added for the years that metric is available.
 #' @param dat The data you would wish to calculate.
 #' @param position This is a required argument that designates either a "batter" or "pitcher." The argument should
 #' be spelled out and within quotes.
 #' @keywords BBpct base on ball percentage bb
-#' @import Lahman
 #' @export BBpct
 #' @examples
 #' \dontrun{
@@ -61,31 +54,80 @@ Kpct <- function (dat, position){
 #' }
 #'
 BBpct <- function (dat, position){
-
-    if (any(!isTRUE(c("BB", "IPouts") %in% names(dat))) & position == "pitcher"){
+    if (any(!isTRUE(c("BB", "IPouts", "IBB") %in% names(dat))) & position == "pitcher"){
         ifelse(dat$IPouts > 0 & dat$BB > 0,
-               dat$BBpct <- round(((dat$BB * 9) / (dat$IPouts / 3)), 3), NA)
+               dat$BBpct <- round(((dat$BB+dat$IBB * 9) / (dat$IPouts / 3)), 3), NA)
     }
-
-    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat))) & position == "batter"){
+    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "IBB") %in% names(dat))) & position == "batter"){
         ifelse(dat$IPouts > 0 & dat$BB > 0,
-               dat$BBpct <- round((dat$BB / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
+               dat$BBpct <- round((dat$BB+dat$IBB / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
     }
-
     if (position == "batter" & any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'HBP', 'SF', and 'SH'")
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
-
-    if (position == "pitcher" & any(isTRUE(c("BB", "IPouts") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'BB' and 'IPouts'")
+    if (position == "pitcher" & any(isTRUE(c("BB", "IPouts", "IBB") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'IBB', and 'IPouts'")
     }
-
     return(dat)
 }
 
+#' @title Calculate home run percentage
+#' @description Find home run percentage for batters or pitchers with more than zero at bats or innings pitched.
+#' Required fields for batters are "AB" and "HR." Required fields for pitchers are "HR" and "IPouts"
+#' @param dat The data you would wish to calculate.
+#' @param position This is a required argument that designates either a "batter" or "pitcher." The argument should
+#' be spelled out and within quotes.
+#' @keywords HRpct home run percentage
+#' @export HRpct
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- HRpct(batting_df, position = "batter")
+#' new_df
+#' }
+#'
+HRpct <- function (dat, position){
+    if (any(!isTRUE(c("HR", "IPouts") %in% names(dat))) & position == "pitcher"){
+        ifelse(dat$IPouts > 0 & dat$HR > 0,
+               dat$HRpct <- round(((dat$HR * 9) / (dat$IPouts / 3)), 3), NA)
+    }
+    if (any(!isTRUE(c("AB", "HR") %in% names(dat))) & position == "batter"){
+        ifelse(dat$IPouts > 0 & dat$BB > 0,
+               dat$HRpct <- round((dat$AB / (dat$HR)), 3), NA)
+    }
+    if (position == "batter" & any(isTRUE(c("AB", "HR") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'HR'")
+    }
+    if (position == "pitcher" & any(isTRUE(c("BB", "IPouts") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'HR' and 'IPouts'")
+    }
+    return(dat)
+}
 
+#' @title Calculate xtra base percentage
+#' @description Find extra base percentage for batters or pitchers with more than zero at bats or innings pitched.
+#' Required fields for batters are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
+#' @param dat The data you would wish to calculate.
+#' @param position This is a required argument that designates either a "batter" or "pitcher." The argument should
+#' be spelled out and within quotes.
+#' @keywords XBHpct xtra base percentage
+#' @export XBHpct
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- XBHpct(batting_df, position = "batter")
+#' new_df
+#' }
+#'
+XBHpct <- function (dat, position){
+    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
+        ifelse(dat$AB > 0,
+               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR) /
+                                        (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
+    }
+    return(dat)
+}
 
-# hr_pct
 # xbh_pct (extra base hit percentage)
 # (2b + 3b +hr / pa)
 # x_h_pct (extra base per hit)
