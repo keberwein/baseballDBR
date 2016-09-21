@@ -4,22 +4,19 @@
 \alias{HRpct}
 \title{Calculate home run percentage}
 \usage{
-HRpct(dat, position)
+HRpct(dat)
 }
 \arguments{
 \item{dat}{The data you would wish to calculate.}
-
-\item{position}{This is a required argument that designates either a "batter" or "pitcher." The argument should
-be spelled out and within quotes.}
 }
 \description{
-Find home run percentage for batters or pitchers with more than zero at bats or innings pitched.
-Required fields for batters are "AB" and "HR." Required fields for pitchers are "HR" and "IPouts"
+Find home run percentage for batters with more than zero at bats.
+Required fields from the Batting table are "AB" and "HR."
 }
 \examples{
 \dontrun{
 batting_df <- Lahman::Batting
-new_df <- HRpct(batting_df, position = "batter")
+new_df <- HRpct(batting_df)
 new_df
 }
 

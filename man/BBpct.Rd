@@ -4,23 +4,20 @@
 \alias{BBpct}
 \title{Calculate base on ball percentage}
 \usage{
-BBpct(dat, position)
+BBpct(dat)
 }
 \arguments{
 \item{dat}{The data you would wish to calculate.}
-
-\item{position}{This is a required argument that designates either a "batter" or "pitcher." The argument should
-be spelled out and within quotes.}
 }
 \description{
-Find base on ball percentage for batters or pitchers with more than zero at bats or innings pitched.
-Required fields for batters are; "AB", "SO", "BB", "HBP", "SF", and "SH." Required fields for pitchers are;
-"BB" and "IPouts". Intentional base on balls (IBB) is added for the years that metric is available.
+Find base on ball percentage for batters with more than zero at bats.
+Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
+Intentional base on balls (IBB) is added for the years that metric is available.
 }
 \examples{
 \dontrun{
 batting_df <- Lahman::Batting
-new_df <- BBpct(batting_df, position = "batter")
+new_df <- BBpct(batting_df)
 new_df
 }
 

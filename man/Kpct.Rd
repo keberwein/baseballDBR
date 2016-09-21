@@ -4,23 +4,19 @@
 \alias{Kpct}
 \title{Calculate strikeout percentage}
 \usage{
-Kpct(dat, position)
+Kpct(dat)
 }
 \arguments{
 \item{dat}{The data you would wish to calculate.}
-
-\item{position}{This is a required argument that designates either a "batter" or "pitcher." The argument should
-be spelled out and within quotes.}
 }
 \description{
-Find strikeout percentage for batters or pitchers with more than zero at bats or innings pitched.
-Required fields for batters are; "AB", "SO", "BB", "HBP", "SF", and "SH." Required fields for pitchers are;
-"SO" and "IPouts"
+Find strikeout percentage for batters with more than zero at bats.
+Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
 }
 \examples{
 \dontrun{
 batting_df <- Lahman::Batting
-new_df <- Kpct(batting_df, position = "batter")
+new_df <- Kpct(batting_df)
 new_df
 }
 

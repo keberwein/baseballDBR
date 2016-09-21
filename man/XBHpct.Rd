@@ -2,30 +2,27 @@
 % Please edit documentation in R/battingStats.R
 \name{XBHpct}
 \alias{XBHpct}
-\title{Calculate xtra base percentage}
+\title{Calculate extra base percentage}
 \usage{
-XBHpct(dat, position)
+XBHpct(dat)
 }
 \arguments{
 \item{dat}{The data you would wish to calculate.}
-
-\item{position}{This is a required argument that designates either a "batter" or "pitcher." The argument should
-be spelled out and within quotes.}
 }
 \description{
-Find extra base percentage for batters or pitchers with more than zero at bats or innings pitched.
-Required fields for batters are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
+Find extra base percentage for batters with more than zero at bats.
+Required fields from the batting table are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
 }
 \examples{
 \dontrun{
 batting_df <- Lahman::Batting
-new_df <- XBHpct(batting_df, position = "batter")
+new_df <- XBHpct(batting_df)
 new_df
 }
 
 }
 \keyword{XBHpct}
 \keyword{base}
+\keyword{extra}
 \keyword{percentage}
-\keyword{xtra}
 
