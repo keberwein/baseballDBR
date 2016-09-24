@@ -4,10 +4,11 @@
 \alias{Kpct}
 \title{Calculate strikeout percentage}
 \usage{
-Kpct(dat)
+Kpct(dat = NULL)
 }
 \arguments{
-\item{dat}{The data you would wish to calculate.}
+\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+the Lahman package. However, functions will accept custom data frames as well.}
 }
 \description{
 Find strikeout percentage for batters with more than zero at bats.

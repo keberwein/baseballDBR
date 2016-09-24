@@ -4,10 +4,11 @@
 \alias{HRpct}
 \title{Calculate home run percentage}
 \usage{
-HRpct(dat)
+HRpct(dat = NULL)
 }
 \arguments{
-\item{dat}{The data you would wish to calculate.}
+\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+the Lahman package. However, functions will accept custom data frames as well.}
 }
 \description{
 Find home run percentage for batters with more than zero at bats.

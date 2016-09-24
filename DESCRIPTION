@@ -7,9 +7,11 @@ Description: Updated version of the Lahman database along wiht additional
     statistical functions.
 Depends:
     R (>= 3.3.1)
-Importrs: magrittr
+Importrs: 
+	magrittr
 Suggests:
-    Lahman
+	dplyr,
+	Lahman
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE

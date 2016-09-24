@@ -4,10 +4,11 @@
 \alias{CTpct}
 \title{Calculate a batter's contact rate}
 \usage{
-CTpct(dat)
+CTpct(dat = NULL)
 }
 \arguments{
-\item{dat}{The data you would wish to calculate.}
+\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+the Lahman package. However, functions will accept custom data frames as well.}
 }
 \description{
 Find the contact rate for batters.

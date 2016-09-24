@@ -4,10 +4,11 @@
 \alias{XBperH}
 \title{Calculate extra base per hit}
 \usage{
-XBperH(dat)
+XBperH(dat = NULL)
 }
 \arguments{
-\item{dat}{The data you would wish to calculate.}
+\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+the Lahman package. However, functions will accept custom data frames as well.}
 }
 \description{
 Find the average extra bases per hit for batters with more than zero hits.
