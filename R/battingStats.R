@@ -4,6 +4,35 @@
 
 # War: The fWar calculation can be found here. http://www.fangraphs.com/library/calculating-position-player-war-a-complete-example/
 
+#' @title Calculate batting average
+#' @description Find batting average for batters with more than zero at bats.
+#' Required fields from the Batting table are; "AB", and "H."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords BA base on ball percentage bb
+#' @export BA
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- BA(batting_df)
+#' new_df
+#' }
+#'
+BA <- function (dat=NULL){
+    if (is.null(dat)){
+        dat = Lahman::Batting
+    }
+    if (any(!isTRUE(c("AB", "H") %in% names(dat)))){
+        ifelse(dat$BA > 0,
+               dat$BA <- round((dat$H/dat$AB), 3), NA)
+    }
+    if (any(isTRUE(c("AB", "H") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
+    }
+    return(dat)
+}
+
+
 #' @title Calculate base on ball percentage
 #' @description Find base on ball percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
