@@ -32,6 +32,33 @@ BA <- function (dat=NULL){
     return(dat)
 }
 
+#' @title Calculate batting average on balls in play (BABIP)
+#' @description Find BABIP for batters with more than zero at bats.
+#' Required fields from the Batting table are; "AB", "BB", "H", "HBP", "SF", "SH", "HR"  and "SO."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords BABIP base on ball percentage bb
+#' @export BABIP
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- BABIP(batting_df)
+#' new_df
+#' }
+#'
+BABIP <- function (dat=NULL){
+    if (is.null(dat)){
+        dat = Lahman::Batting
+    }
+    if (any(!isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
+        ifelse(dat$AB > 0,
+               dat$BABIP <- round(((dat$H-dat$HR)/((dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)-dat$SO-dat$BB-dat$HR)), 3), NA)
+    }
+    if (any(isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'H', 'HBP', 'SF', 'SH', 'HR', and 'SO.'")
+    }
+    return(dat)
+}
 
 #' @title Calculate base on ball percentage
 #' @description Find base on ball percentage for batters with more than zero at bats.
@@ -81,7 +108,7 @@ CTpct <- function (dat=NULL){
         dat = Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "SO") %in% names(dat)))){
-        ifelse(dat$H > 0,
+        ifelse(dat$AB > 0,
                dat$CTpct <- round(((dat$AB-dat$SO)/dat$AB), 3), NA)
     }
     if (any(isTRUE(c("AB", "SO") %in% names(dat)))){
@@ -109,7 +136,7 @@ HRpct <- function (dat=NULL){
         dat = Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "HR") %in% names(dat)))){
-        ifelse(dat$IPouts > 0 & dat$BB > 0,
+        ifelse(dat$HR > 0,
                dat$HRpct <- round((dat$AB/(dat$HR)), 3), NA)
     }
     if (any(isTRUE(c("AB", "HR") %in% names(dat)))){
@@ -165,7 +192,7 @@ Kpct <- function (dat=NULL){
         dat = Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
-        ifelse(dat$IPouts > 0 & dat$SO > 0,
+        ifelse(dat$SO > 0,
                dat$Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
     }
     if (any(isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
@@ -232,6 +259,34 @@ OPS <- function (dat=NULL){
     return(dat)
 }
 
+#' @title Calculate plate appearances for batters
+#' @description Find the plate appearances (PA) for batters.
+#' Required fields from the batting table are "AB", "BB", "HBP", "SH", and "SF."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords PA on base percentage
+#' @export PA
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- PA(batting_df)
+#' new_df
+#' }
+#'
+PA <- function (dat=NULL){
+    if (is.null(dat)){
+        dat = Lahman::Batting
+    }
+    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
+        ifelse(dat$AB >= 0,
+               dat$PA <- dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)
+    }
+    if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds AB', 'BB', 'HBP', 'SF', and 'SH'")
+    }
+    return(dat)
+}
+
 #' @title Calculate slugging percentage (SLG)
 #' @description Find the SLG for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
@@ -262,7 +317,7 @@ SLG <- function (dat=NULL){
 
 #' @title Calculate a batter's total bases
 #' @description Find total bases.
-#' Required fields from the batting table are "H", "X2B", "X3B" and "HR."
+#' Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
 #' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
 #' the Lahman package. However, functions will accept custom data frames as well.
 #' @keywords TBs total bases
@@ -278,12 +333,12 @@ TBs <- function (dat=NULL){
     if (is.null(dat)){
         dat = Lahman::Batting
     }
-    if (any(!isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$H > 0,
+    if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
+        ifelse(dat$AB > 0,
                dat$TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
     }
     if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'H', 'X2B', 'X3B' and 'HR'")
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB','H', 'X2B', 'X3B' and 'HR'")
     }
     return(dat)
 }
@@ -345,6 +400,113 @@ XBperH <- function (dat=NULL){
     return(dat)
 }
 
+#' @title Calculate Runs Created using the basic formula.
+#' @description Find the runs created using the basic formula presented by Bill James in the late 1970s.
+#' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", and "HR."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords RCbasic extra base per hit
+#' @export RCbasic
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- RCbasic(batting_df)
+#' new_df
+#' }
+#'
+RCbasic <- function (dat=NULL){
+    if (is.null(dat)){
+        dat = Lahman::Batting
+    }
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
+        ifelse(dat$AB > 0,
+               dat$RCbasic <- ((dat$H+dat$BB)*(dat$H+2*dat$X2B+3*dat$X3B+4*dat$HR)/(dat$AB+dat$BB)), NA)
+    }
+    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B', and 'HR.'")
+    }
+
+    return(dat)
+}
+
+#' @title Calculate Runs Created using the technical formula.
+#' @description The "Technical Version" is the most well-known formula for RC. It adds several factors to the
+#' basic formula such as sacrifice hits, stolen bases and intentional base on balls.
+#' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP", "SB", "CS",
+#' "SF" and "SH," and "IBB."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords RCtech extra base per hit
+#' @export RCtech
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- RCtech(batting_df)
+#' new_df
+#' }
+#'
+RCtech <- function (dat=NULL){
+    if (is.null(dat)){
+        dat = Lahman::Batting
+        if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+                          "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
+    }
+    X2B=X3B=HR=NULL
+    X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
+    TB <- X1B + 2*X2B + 3*X3B + 4*HR
+    ifelse(dat$AB > 0,
+           dat$RCtech <- (((dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP)*
+                                        (TB+(.26*(dat$BB-dat$IBB+dat$HBP))) + (.52*(dat$SH+dat$SF+dat$SB)))/
+                                        (dat$AB+dat$BB+dat$HBP+dat$SH+dat$SF)), NA)
+    }
+    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+                     "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', and 'IBB.'")
+    }
+
+    return(dat)
+}
+
+#' @title Calculate Runs Created using the updated 2002 formula.
+#' @description The "2002 Version" is an updated version of the "Technical Version" by Bill James.
+#' The 2002 RC uses the same counting stats as the Technical Version but applies weights to many of the raw stats.
+#' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP", "SB", "CS",
+#' "SF" and "SH," "SO", and "IBB."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords RC2002 extra base per hit
+#' @export RC2002
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- RC2002(batting_df)
+#' new_df
+#' }
+#'
+RC2002 <- function (dat=NULL){
+    if (is.null(dat)){
+        dat = Lahman::Batting
+    }
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+                      "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat)))){
+    X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
+    OnBaseFact <- dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP
+    AdvanceFact <- (1.25*X1B)+(1.69*dat$X2B)+(3.02*dat$X3B)+(3.73*dat$HR)+0.29*(dat$BB-dat$IBB+dat$HBP)+
+        0.492*(dat$SH+dat$SF+dat$SB)-(0.04*dat$SO)
+    OpportunityFact <- dat$AB+dat$BB+dat$HBP+dat$SH+dat$SF
+    ifelse(dat$AB > 0,
+           dat$RC2002 <- (((((2.4*OpportunityFact)+OnBaseFact)*((3*OpportunityFact)+AdvanceFact))/
+                                  (9*OpportunityFact))-(0.9*OpportunityFact)), NA)
+    }
+    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+                     "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', 'SO', and 'IBB.'")
+    }
+
+    return(dat)
+}
 
 
 # OPS+
@@ -352,8 +514,6 @@ XBperH <- function (dat=NULL){
 
 # OFF (offensive runs above average)
 # http://www.fangraphs.com/library/offense/off/
-
-# RC
 
 # http://www.fangraphs.com/library/offense/wrc/
 # wRC (weighted runs created)
