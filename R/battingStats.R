@@ -1,7 +1,5 @@
 # Metrics not in current Lahman. There is no "pitchingStats table in R Lahman"
 
-# wOBA
-
 # War: The fWar calculation can be found here. http://www.fangraphs.com/library/calculating-position-player-war-a-complete-example/
 
 #' @title Calculate batting average
