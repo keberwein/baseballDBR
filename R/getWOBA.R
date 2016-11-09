@@ -2,13 +2,14 @@
 #' @description Get wOBA values for each year in your database. This calculation requires all fields of
 #' the Pitching, Fielding and Batting tables from the Lahman package.
 #' @keywords woba, wOBA, on base average
-#' @import Lahman, dplyr
+#' @import Lahman
+#' @import dplyr
 #' @export wOBA
 #' @examples
-#' \dontrun{
+#'
 #' woba_df <- wOBA()
-#' woba_df
-#' }
+#' head(woba_df)
+#'
 #'
 
 wOBA <- function(){
@@ -16,7 +17,7 @@ wOBA <- function(){
     fielding <- Lahman::Fielding
     # The "postf" field below is to filter out Natl. League players who may have
     # played as DH in inter-leauge games, and may have multiple entries at diff. positions.
-    PrimPos <- mutate(fielding, postf=ifelse(POS=="OF" & yearID>1995, 1,0)) %>%
+    PrimPos <- dplyr::mutate(fielding, postf=ifelse(POS=="OF" & yearID>1995, 1,0)) %>%
         subset(postf==0,
                select=c("playerID", "yearID", "teamID", "G", "POS")) %>%
         group_by(playerID, yearID, teamID, POS) %>%

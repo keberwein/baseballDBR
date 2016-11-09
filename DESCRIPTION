@@ -6,12 +6,13 @@ Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
 Description: Updated version of the Lahman database along wiht additional
     statistical functions.
 Depends:
-    R (>= 3.3.1)
-Importrs: 
-	magrittr
+    R (>= 3.3.2)
+Imports: 
+	magrittr,
+	Lahman,
+	dplyr
 Suggests:
-	dplyr,
-	Lahman
+	testthat
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
