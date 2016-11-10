@@ -7,10 +7,12 @@ Description: Updated version of the Lahman database along wiht additional
     statistical functions.
 Depends:
     R (>= 3.3.2)
-Imports: 
+Imports:
+	rvest,
+	xml2, 
 	magrittr,
-	Lahman,
-	dplyr
+	dplyr,
+	Lahman
 Suggests:
 	testthat
 Encoding: UTF-8
