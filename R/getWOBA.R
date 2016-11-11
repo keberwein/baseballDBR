@@ -21,6 +21,10 @@
 #'
 
 wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
+    # Declare values for Rcheck so it won't throw a note.
+    POS=yearID=postf=playerID=teamID=lgID=G=IPouts=R=RperOut=runBB=run1B=run2B=runHBP=run3B=
+    runHR=runSB=runCS=AB=H=X2B=X3B=HR=SB=CS=BB=SO=IBB=HBP=SF=runPlus=runMinus=wOBAscale=NULL
+    # Make sure users don't contradict themselves.
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
     }
