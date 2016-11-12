@@ -6,7 +6,7 @@ Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
 Description: Updated version of the Lahman database along wiht additional
     statistical functions.
 Depends:
-    R (>= 3.3.2)
+    R (>= 3.2.4)
 Imports:
 	rvest,
 	xml2, 
