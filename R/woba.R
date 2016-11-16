@@ -1,4 +1,4 @@
-#' @title Return wOBA values
+#' @title Return wOBA values per season
 #' @description Get wOBA values for each year in your database. This calculation requires all fields of
 #' the Pitching, Fielding and Batting tables from the Lahman package, or a comprable data set. The function uses
 #' a version of Tom Tango's wOBA formula by default, but can also return Fangraphs wOBA values.
