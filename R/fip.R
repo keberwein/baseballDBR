@@ -1,7 +1,11 @@
-#' @title Return fip values per season
-#' @description Get fip values for each season.
-#' @param Fangraphs if TRUE the function will return the Fangraphs wOBA values. By default the function uses a method adapted from
-#' Tom Tango. These values are often very close to Fangraphs, but aren't the same.
+#' @title Return FIP constants per season
+#' @description Get fip constants for each season. By default the function uses a method adapted from
+#' Tom Tango and used by Fangraphs. The function returns FIP constants based on ERA \code{FIP_ERA} as well as constants based on RA \code{FIP_RA}.
+#' Both the Tango and Frangraphs formulas use ERA for their FIP constants.
+#' @param Sep.Leagues If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
+#' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
+#' @param Fangraphs If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjuction with the
+#' \code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.
 #' @keywords woba, wOBA, on base average, fangraphs
 #' @importFrom rvest html_node
 #' @importFrom xml2 read_html
@@ -16,9 +20,12 @@
 #'}
 #'
 
-fip_values <- function(Fangraphs=FALSE){
+fip_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
     # Declare values for Rcheck so it won't throw a note.
-    yearID=lgID=G=IPouts=H=HR=BB=SO=IBB=HBP=R=SF=W=L=GS=CG=SHO=SV=ER=WP=BK=BFP=GF=SH=GIDP=IP=NULL
+    yearID=lgID=G=IPouts=H=HR=BB=SO=IBB=HBP=R=SF=W=L=GS=CG=SHO=SV=ER=WP=BK=BFP=GF=SH=GIDP=IP=lgERA=lgRA=NULL
+    if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
+        print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
+    }
 
     if(isTRUE(Fangraphs)){
         # If user wants to use Fangraphs, grab it from the website.
@@ -34,8 +41,15 @@ fip_values <- function(Fangraphs=FALSE){
         pitching <-  pitching[, !names(pitching) %in% c("playerID", "teamID", "stint", "BAOpp", "ERA")]
         # Replace NA with 0, otherwise our runsMinus and runsPlus calculations will thow NA.
         pitching[is.na(pitching)] <- 0
+
+        if(isTRUE(Sep.Leagues)){
+            pitching %<>% dplyr::group_by(yearID, lgID)
+        } else {
+            pitching %<>% dplyr::group_by(yearID)
+        }
+
         pitching %<>%
-            dplyr::group_by(yearID, lgID) %>%
+            #dplyr::group_by(yearID, lgID) %>%
             dplyr::summarise(W=sum(W), L=sum(L), G=sum(G), GS=sum(GS), CG=sum(CG), SHO=sum(SHO), SV=sum(SV),
                              IPouts=sum(IPouts), H=sum(H), ER=sum(ER), HR=sum(HR), BB=sum(BB), SO=sum(SO), IBB=sum(IBB),
                              WP=sum(WP), HBP=sum(HBP), BK=sum(BK), BFP=sum(BFP), GF=sum(GF), R=sum(R), SH=sum(SH),
@@ -43,11 +57,9 @@ fip_values <- function(Fangraphs=FALSE){
             dplyr::mutate(IP=IPouts/3) %>%
             dplyr::mutate(lgERA=ER / IP*9) %>%
             dplyr::mutate(lgRA=R / IP*9) %>%
-            dplyr::mutate(FIPERscale=(ER / (IPouts/3) *9) - (((HR*13) + (BB+HBP+IBB)*3 - (SO*2)) / IP))
-
-            # Find innings pitched per leauge.
-
-
+            dplyr::mutate(FIP_ERA=lgERA - (HR*13 + (BB + HBP - IBB)*3 - SO*2) / IP) %>%
+            dplyr::mutate(FIP_RA=lgRA - (HR*13 + (BB + HBP - IBB)*3 - SO*2) / IP)
     }
 
 }
+

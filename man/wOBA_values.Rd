@@ -11,7 +11,8 @@ wOBA_values(Sep.Leagues = FALSE, Fangraphs = FALSE)
 helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.}
 
 \item{Fangraphs}{if TRUE the function will return the Fangraphs wOBA values. By default the function uses a method adapted from
-Tom Tango. These values are often very close to Fangraphs, but aren't the same.}
+Tom Tango. These values are often very close to Fangraphs, but are not the same due to Fangraphs using a different algorithum.
+This can not be used in conjuction with the \code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.}
 }
 \description{
 Get wOBA values for each year in your database. This calculation requires all fields of

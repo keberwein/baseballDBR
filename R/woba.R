@@ -5,7 +5,8 @@
 #' @param Sep.Leagues If TRUE, this will split the calculation and return unique wOBA values for the various leagues. This can be
 #' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
 #' @param Fangraphs if TRUE the function will return the Fangraphs wOBA values. By default the function uses a method adapted from
-#' Tom Tango. These values are often very close to Fangraphs, but aren't the same.
+#' Tom Tango. These values are often very close to Fangraphs, but are not the same due to Fangraphs using a different algorithum.
+#' This can not be used in conjuction with the \code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.
 #' @keywords woba, wOBA, on base average, fangraphs
 #' @importFrom rvest html_node
 #' @importFrom xml2 read_html

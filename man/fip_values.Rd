@@ -2,16 +2,21 @@
 % Please edit documentation in R/fip.R
 \name{fip_values}
 \alias{fip_values}
-\title{Return fip values per season}
+\title{Return FIP constants per season}
 \usage{
-fip_values(Fangraphs = FALSE)
+fip_values(Sep.Leagues = FALSE, Fangraphs = FALSE)
 }
 \arguments{
-\item{Fangraphs}{if TRUE the function will return the Fangraphs wOBA values. By default the function uses a method adapted from
-Tom Tango. These values are often very close to Fangraphs, but aren't the same.}
+\item{Sep.Leagues}{If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
+helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.}
+
+\item{Fangraphs}{If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjuction with the
+\code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.}
 }
 \description{
-Get fip values for each season.
+Get fip constants for each season. By default the function uses a method adapted from
+Tom Tango and used by Fangraphs. The function returns FIP constants based on ERA \code{FIP_ERA} as well as constants based on RA \code{FIP_RA}.
+Both the Tango and Frangraphs formulas use ERA for their FIP constants.
 }
 \examples{
 \dontrun{
