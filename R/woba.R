@@ -28,13 +28,14 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
     # Make sure users don't contradict themselves.
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
+        Fangraphs=FALSE
     }
 
     if(isTRUE(Fangraphs)){
     # If user wants to use Fangraphs, grab it from the website.
     runsBatting <- xml2::read_html("http://www.fangraphs.com/guts.aspx?type=cn") %>%
         rvest::html_node(xpath = '//*[(@id = "GutsBoard1_dg1_ctl00")]') %>%
-        rvest::html_table %>%
+        rvest::html_table() %>%
         stats::setNames(c("yearID", "lg_woba", "woba_scale", "wBB", "wHBP", "w1B", "w2B",
                    "w3B", "wHR", "runSB", "runCS", "lg_r_pa", "lg_r_w", "cFIP"))
     }
@@ -104,7 +105,7 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
 
     # Use Position Players table to find the runsPlus and runsMinus values to use in the wOBA multiplier.
     batting <- Lahman::Batting
-    batting <- batting[[, !names(batting) %in% c("G")]]
+    batting <- batting[, !names(batting) %in% c("G")]
     batting <- dplyr::inner_join(batting, PrimPos, by=c("playerID", "yearID", "lgID"))
     # Replace NA with 0, otherwise our runsMinus and runsPlus calculations will thow NA.
     batting[is.na(batting)] <- 0
@@ -179,4 +180,4 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
 }
 
 
-
+woba_df <- wOBA_values(Sep.Leagues=FALSE, Fangraphs=FALSE)

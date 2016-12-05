@@ -507,6 +507,75 @@ RC2002 <- function (dat=NULL){
 }
 
 
+#' @title Calculate Weighted On-Base Average wOBA
+#' @description Find the wOBA for all players with one or more hits for a particular season.
+#' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leauges. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
+#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wOBA for any player prior to 1954.
+#' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
+#' If FALSE, the wOBA calculation will return NaN for years with missing data.
+#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. If FALSE the function will use the internal
+#' formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
+#' does not require an external download. If not specified, the default is set to FALSE.
+#' @keywords wOBA Weighted On-Base Average
+#' @export wOBA
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- wOBA(batting_df)
+#' new_df
+#' }
+#'
+wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    if (is.null(dat)){
+        dat <- Lahman::Batting
+    }
+
+    if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
+        print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
+        Fangraphs=FALSE
+    }
+
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
+        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T), woba <- moneyball::wOBA_values())
+        ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values())
+
+        if (isTRUE(NA_to_zero)){
+            dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
+            dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
+            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+        }
+
+
+        if(isTRUE(Sep.Leagues)){
+            woba <- woba[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
+            dat <- dplyr::left_join(dat, woba, by=c("yearID", "lgID"))
+        } else {
+            woba <- woba[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
+            dat <- dplyr::left_join(dat, woba, by="yearID")
+        }
+
+        ifelse(dat$H > 0,
+               dat$wOBA <- (dat$wBB*(dat$BB-dat$IBB) + dat$wHBP*dat$HBP + dat$w1B*(dat$H-dat$X2B-dat$X3B-dat$HR) +
+                                dat$w2B*dat$X2B + dat$w3B*dat$X3B + dat$wHR*dat$HR)/
+                                  (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP) , NA)
+    }
+    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'HBP', 'SF', and 'IBB.'")
+    }
+
+    dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
+
+    return(dat)
+    }
+
+
 # OPS+
 # Baseball refreence has its own method. Try to find a couple.
 
