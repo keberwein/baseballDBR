@@ -178,6 +178,3 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
 
     return(runsBatting)
 }
-
-
-woba_df <- wOBA_values(Sep.Leagues=FALSE, Fangraphs=FALSE)
