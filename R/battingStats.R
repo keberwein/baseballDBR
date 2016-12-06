@@ -507,7 +507,7 @@ RC2002 <- function (dat=NULL){
 }
 
 
-#' @title Calculate Weighted On-Base Average wOBA
+#' @title Calculate Weighted On-Base Average (wOBA)
 #' @description Find the wOBA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
@@ -527,7 +527,7 @@ RC2002 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' batting_df <- Lahman::Batting
-#' new_df <- wOBA(batting_df)
+#' new_df <- wOBA(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' new_df
 #' }
 #'
@@ -542,15 +542,14 @@ wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
     }
 
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T), woba <- moneyball::wOBA_values())
-        ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values())
+        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T),
+               ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values()))
 
         if (isTRUE(NA_to_zero)){
             dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
             dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
             dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
         }
-
 
         if(isTRUE(Sep.Leagues)){
             woba <- woba[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
@@ -573,29 +572,168 @@ wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
     dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
 
     return(dat)
+}
+
+
+#' @title Calculate Weighted Runs Above Average (wRAA)
+#' @description Find the wRAA for all players with one or more hits for a particular season.
+#' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leauges. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
+#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wRAA for any player prior to 1954.
+#' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
+#' If FALSE, the wRAA calculation will return NaN for years with missing data.
+#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRAA
+#' calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
+#' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRAA should be expected.
+#' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
+#' @keywords wRAA Weighted Runs Above Average
+#' @export wRAA
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- wRAA(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' new_df
+#' }
+#'
+wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    if (is.null(dat)){
+        dat <- Lahman::Batting
+    }
+
+    if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
+        print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
+        Fangraphs=FALSE
+    }
+
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
+        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T),
+               ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values()))
+
+        if (isTRUE(NA_to_zero)){
+            dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
+            dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
+            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+        }
+
+        if(isTRUE(Sep.Leagues)){
+            woba <- woba[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, woba, by=c("yearID", "lgID"))
+        } else {
+            woba <- woba[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, woba, by="yearID")
+        }
+
+        ifelse(dat$H > 0,
+               dat$wOBA <- (dat$wBB*(dat$BB-dat$IBB) + dat$wHBP*dat$HBP + dat$w1B*(dat$H-dat$X2B-dat$X3B-dat$HR) +
+                                dat$w2B*dat$X2B + dat$w3B*dat$X3B + dat$wHR*dat$HR)/
+                   (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP), NA)
+
+        ifelse(dat$H > 0,
+               dat$wRAA <- ((dat$wOBA-dat$lg_woba) / dat$woba_scale * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
+
+    }
+    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'HBP', 'SF', and 'IBB.'")
+    }
+
+    dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+
+    return(dat)
+}
+
+
+#' @title Calculate Weighted Runs Created (wRC)
+#' @description Find the wRC for all players with one or more hits for a particular season.
+#' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leauges. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
+#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wRC for any player prior to 1954.
+#' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
+#' If FALSE, the wRC calculation will return NaN for years with missing data.
+#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRC
+#' calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
+#' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRC should be expected.
+#' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
+#' @keywords wRC Weighted Runs Above Average
+#' @export wRC
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- wRC(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' new_df
+#' }
+#'
+wRC <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    if (is.null(dat)){
+        dat <- Lahman::Batting
+    }
+
+    if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
+        print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
+        Fangraphs=FALSE
+    }
+
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
+        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T),
+               ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values()))
+
+        if (!isTRUE(Fangraphs)) {
+            woba$lg_r_pa <- woba$R / (woba$AB+woba$BB+woba$HBP+woba$SF)
+        }
+
+        if (isTRUE(NA_to_zero)){
+            dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
+            dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
+            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+        }
+
+        if(isTRUE(Sep.Leagues)){
+            woba <- woba[, c("yearID", "lg_r_pa", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, woba, by=c("yearID", "lgID"))
+        } else {
+            woba <- woba[, c("yearID", "lg_r_pa", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, woba, by="yearID")
+        }
+
+        ifelse(dat$H > 0,
+               dat$wOBA <- (dat$wBB*(dat$BB-dat$IBB) + dat$wHBP*dat$HBP + dat$w1B*(dat$H-dat$X2B-dat$X3B-dat$HR) +
+                                dat$w2B*dat$X2B + dat$w3B*dat$X3B + dat$wHR*dat$HR)/
+                   (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP), NA)
+
+        ifelse(dat$H > 0,
+               dat$wRC <- ((((dat$wOBA-dat$lg_woba) / dat$woba_scale) + dat$lg_r_pa) * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
+
+    }
+    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'HBP', 'SF', and 'IBB.'")
+    }
+
+    dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+
+    return(dat)
     }
 
 
-# OPS+
-# Baseball refreence has its own method. Try to find a couple.
+
 
 # OFF (offensive runs above average)
 # http://www.fangraphs.com/library/offense/off/
-
-# http://www.fangraphs.com/library/offense/wrc/
-# wRC (weighted runs created)
-# wRC = (((wOBA-League wOBA)/wOBA Scale)+(League R/PA))*PA
-
-# wRC+ this one uses park factors and leauge adjustments.
-# wRC+ = (((wRAA/PA + League R/PA) + (League R/PA – Park Factor* League R/PA))/
-# (AL or NL wRC/PA excluding pitchers))*100
 
 # RAA (runs above average)
 
 # WAA (wins above average)
 
-# wRAA (weighted runs above average)
-# http://www.fangraphs.com/library/offense/wraa/
-# wRAA = ((wOBA – league wOBA) / wOBA scale) × PA
+
 
 

@@ -129,18 +129,18 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
             dplyr::mutate(runPlus = ((runBB*(BB-IBB)) + (runHBP*HBP) + (run1B*(H-X2B-X3B-HR)) +
                                   (run2B*X2B) + (run3B*X3B) + (1.4*HR) + (runSB*SB) - (runCS*CS)) / (BB-IBB+HBP+H)) %>%
             # Calculate league wOBA.
-            dplyr::mutate(wOBA = (H+BB+IBB+HBP) / (AB+BB-IBB+HBP+SF)) %>%
+            dplyr::mutate(lg_woba = (H+BB+IBB+HBP) / (AB+BB-IBB+HBP+SF)) %>%
             # Calculate wOBA scale.
-            dplyr::mutate(wOBAscale = 1/(runPlus+runMinus)) %>%
+            dplyr::mutate(woba_scale = 1/(runPlus+runMinus)) %>%
             # wOBA hit-event modifiers.
-            dplyr::mutate(wBB = (runBB+runMinus)*wOBAscale) %>%
-            dplyr::mutate(wHBP = (runHBP+runMinus)*wOBAscale) %>%
-            dplyr::mutate(w1B = (run1B+runMinus)*wOBAscale) %>%
-            dplyr::mutate(w2B = (run2B+runMinus)*wOBAscale) %>%
-            dplyr::mutate(w3B = (run3B+runMinus)*wOBAscale) %>%
-            dplyr::mutate(wHR = (runHR+runMinus)*wOBAscale) %>%
-            dplyr::mutate(wSB = runSB*wOBAscale) %>%
-            dplyr::mutate(wCS = runCS*wOBAscale)
+            dplyr::mutate(wBB = (runBB+runMinus)*woba_scale) %>%
+            dplyr::mutate(wHBP = (runHBP+runMinus)*woba_scale) %>%
+            dplyr::mutate(w1B = (run1B+runMinus)*woba_scale) %>%
+            dplyr::mutate(w2B = (run2B+runMinus)*woba_scale) %>%
+            dplyr::mutate(w3B = (run3B+runMinus)*woba_scale) %>%
+            dplyr::mutate(wHR = (runHR+runMinus)*woba_scale) %>%
+            dplyr::mutate(wSB = runSB*woba_scale) %>%
+            dplyr::mutate(wCS = runCS*woba_scale)
     } else {
         # Summarize values by year.
         yearbatting <- subset(batting, select=c("yearID", "AB", "R", "H", "X2B", "X3B", "HR",
@@ -160,18 +160,18 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
             dplyr::mutate(runPlus = ((runBB*(BB-IBB)) + (runHBP*HBP) + (run1B*(H-X2B-X3B-HR)) +
                                   (run2B*X2B) + (run3B*X3B) + (1.4*HR) + (runSB*SB) - (runCS*CS)) / (BB-IBB+HBP+H)) %>%
             # Calculate league wOBA.
-            dplyr::mutate(wOBA = (H+BB+IBB+HBP) / (AB+BB-IBB+HBP+SF)) %>%
+            dplyr::mutate(lg_woba = (H+BB+IBB+HBP) / (AB+BB-IBB+HBP+SF)) %>%
             # Calculate wOBA scale.
-            dplyr::mutate(wOBAscale = 1/(runPlus+runMinus)) %>%
+            dplyr::mutate(woba_scale = 1/(runPlus+runMinus)) %>%
             # wOBA hit-event modifiers.
-            dplyr::mutate(wBB = (runBB+runMinus)*wOBAscale) %>%
-            dplyr::mutate(wHBP = (runHBP+runMinus)*wOBAscale) %>%
-            dplyr::mutate(w1B = (run1B+runMinus)*wOBAscale) %>%
-            dplyr::mutate(w2B = (run2B+runMinus)*wOBAscale) %>%
-            dplyr::mutate(w3B = (run3B+runMinus)*wOBAscale) %>%
-            dplyr::mutate(wHR = (runHR+runMinus)*wOBAscale) %>%
-            dplyr::mutate(wSB = runSB*wOBAscale) %>%
-            dplyr::mutate(wCS = runCS*wOBAscale)
+            dplyr::mutate(wBB = (runBB+runMinus)*woba_scale) %>%
+            dplyr::mutate(wHBP = (runHBP+runMinus)*woba_scale) %>%
+            dplyr::mutate(w1B = (run1B+runMinus)*woba_scale) %>%
+            dplyr::mutate(w2B = (run2B+runMinus)*woba_scale) %>%
+            dplyr::mutate(w3B = (run3B+runMinus)*woba_scale) %>%
+            dplyr::mutate(wHR = (runHR+runMinus)*woba_scale) %>%
+            dplyr::mutate(wSB = runSB*woba_scale) %>%
+            dplyr::mutate(wCS = runCS*woba_scale)
 
     }
     }
