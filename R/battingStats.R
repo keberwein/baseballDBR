@@ -1,6 +1,3 @@
-# Metrics not in current Lahman. There is no "pitchingStats table in R Lahman"
-
-# War: The fWar calculation can be found here. http://www.fangraphs.com/library/calculating-position-player-war-a-complete-example/
 
 #' @title Calculate batting average
 #' @description Find batting average for batters with more than zero at bats.
@@ -723,16 +720,6 @@ wRC <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 
     return(dat)
     }
-
-
-
-
-# OFF (offensive runs above average)
-# http://www.fangraphs.com/library/offense/off/
-
-# RAA (runs above average)
-
-# WAA (wins above average)
 
 
 
