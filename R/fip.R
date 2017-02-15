@@ -57,8 +57,8 @@ fip_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
             dplyr::mutate(IP=IPouts/3) %>%
             dplyr::mutate(lgERA=ER / IP*9) %>%
             dplyr::mutate(lgRA=R / IP*9) %>%
-            dplyr::mutate(FIP_ERA=lgERA - (HR*13 + (BB + HBP - IBB)*3 - SO*2) / IP) %>%
-            dplyr::mutate(FIP_RA=lgRA - (HR*13 + (BB + HBP - IBB)*3 - SO*2) / IP)
+            dplyr::mutate(FIP_ERA=lgERA - ((HR*13) + ((BB + HBP - IBB)*3) - (SO*2)) / IP) %>%
+            dplyr::mutate(FIP_RA=lgRA - ((HR*13) + ((BB + HBP - IBB)*3) - (SO*2)) / IP)
     }
 
 }
