@@ -32,4 +32,3 @@ head(woba_df)
 \keyword{on}
 \keyword{wOBA,}
 \keyword{woba,}
-

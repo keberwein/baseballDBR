@@ -38,4 +38,3 @@ MLB. These stats are primarily used in calculated advanced player stats.
 Last updated 2016-09-21
 }
 \keyword{internal}
-

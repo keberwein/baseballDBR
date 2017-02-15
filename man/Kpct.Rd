@@ -25,4 +25,3 @@ new_df
 \keyword{Kpct}
 \keyword{percentage}
 \keyword{strikeout}
-

@@ -25,4 +25,3 @@ new_df
 \keyword{ISO}
 \keyword{isolated}
 \keyword{power}
-

@@ -17,17 +17,133 @@ BB_9 <- function (dat=NULL){
     if (is.null(dat)){
         dat <- Lahman::Pitching
     }
-    if (any(!isTRUE(c("IPouts", "H") %in% names(dat)))){
+    if (any(!isTRUE(c("IPouts", "BB") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
                dat$BB_9 <- round((dat$BB*9 / (dat$IPouts / 3)), 3), NA)
     }
     if (any(isTRUE(c("BB", "IPouts") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
+        message("Not enough data to calculate. Please make sure your data inclueds 'BB', and 'IPouts'")
     }
     return(dat)
 }
 
+#' @title Fielding Independent Pitching (FIP)
+#' @description Find the FIP for all pitchers with one or strike outs in a particular season.
+#' Required fields from the batting table are "BB", "HBP", "SO", and "IPouts."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leauges. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
+#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wOBA for any player prior to 1954.
+#' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
+#' If FALSE, the wOBA calculation will return NaN for years with missing data.
+#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. If FALSE the function will use the internal
+#' formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
+#' does not require an external download. If not specified, the default is set to FALSE.
+#' @keywords FIP fielding independent pitching
+#' @export FIP
+#' @examples
+#' \dontrun{
+#' batting_df <- Lahman::Batting
+#' new_df <- FIP(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' new_df
+#' }
+#'
+FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    if (is.null(dat)){
+        dat <- Lahman::Pitching
+    }
 
+    if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
+        print("The Fangraphs Guts table does not sperate FIP by league. Applying the default calculation...")
+        Fangraphs=FALSE
+    }
+
+    if (any(!isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
+        ifelse(isTRUE(Fangraphs), fip <- moneyball::fip_values(Fangraphs=T),
+               ifelse(isTRUE(Sep.Leagues), fip <- moneyball::fip_values(Sep.Leagues=T), fip <- moneyball::fip_values()))
+
+        if (isTRUE(NA_to_zero)){
+            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+        }
+
+        if(isTRUE(Sep.Leagues)){
+            fip <- fip[, c("yearID", "lgID", "FIP_ERA")]
+            dat <- dplyr::left_join(dat, fip, by=c("yearID", "lgID"))
+        } else {
+            fip <- fip[, c("yearID", "FIP_ERA")]
+            dat <- dplyr::left_join(dat, fip, by="yearID")
+        }
+
+        ifelse(dat$SO > 0,
+               dat$fip <- (((13*dat$HR) + (3*(dat$BB+dat$HBP)-(2*dat$SO))) / ((dat$IPouts/3)) + dat$FIP_ERA), NA)
+    }
+    if (any(isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'HBP', 'K', and 'IPouts'")
+    }
+
+    dat <- dat[, !names(dat) %in% c("FIP_ERA")]
+
+    return(dat)
+}
+
+#' @title Calculate Hits per Nine innings
+#' @description Find the number of hits a pitcher throws per nine innings pitched.
+#' Required fields from the Batting table are; "H" and "IPouts."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords hits per nine innings
+#' @export H_9
+#' @examples
+#' \dontrun{
+#' pitching_df <- Lahman::Pitching
+#' new_df <- H_9(pitching_df)
+#' new_df
+#' }
+#'
+H_9 <- function (dat=NULL){
+    if (is.null(dat)){
+        dat <- Lahman::Pitching
+    }
+    if (any(!isTRUE(c("H", "IPouts") %in% names(dat)))){
+        ifelse(dat$IPouts > 2,
+               dat$H_9 <- round((BB*9) / (dat$IPouts/3), 3), NA)
+    }
+    if (any(isTRUE(c("H", "IPouts") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'IPouts'")
+    }
+    return(dat)
+}
+
+#' @title Calculate Home Runs per Nine innings
+#' @description Find the number of home runs a pitcher allows per nine innings pitched.
+#' Required fields from the Batting table are; "H" and "IPouts."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords hits per nine innings
+#' @export HR_9
+#' @examples
+#' \dontrun{
+#' pitching_df <- Lahman::Pitching
+#' new_df <- HR_9(pitching_df)
+#' new_df
+#' }
+#'
+HR_9 <- function (dat=NULL){
+    if (is.null(dat)){
+        dat <- Lahman::Pitching
+    }
+    if (any(!isTRUE(c("HR", "IPouts") %in% names(dat)))){
+        ifelse(dat$IPouts > 2,
+               dat$HR <- round((HR*9) / (dat$IPouts/3), 3), NA)
+    }
+    if (any(isTRUE(c("Hr", "IPouts") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'Hr', and 'IPouts'")
+    }
+    return(dat)
+}
 
 #' @title Calculate the innings pitched
 #' @description Find the number of innings a player has ptiched for a season.
@@ -39,7 +155,7 @@ BB_9 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' pitching_df <- Lahman::Pitching
-#' new_df <- LOB_pct(pitching_df)
+#' new_df <- IP(pitching_df)
 #' new_df
 #' }
 #'
@@ -47,23 +163,50 @@ IP <- function (dat=NULL){
     if (is.null(dat)){
         dat <- Lahman::Pitching
     }
-    if (any(!isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
+    if (any(!isTRUE(c("IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
                dat$IP <- round(dat$IPouts/3, 3), NA)
     }
-    if (any(isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
+    if (any(isTRUE(c("IPouts") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'IPouts'")
     }
     return(dat)
 }
 
+#' @title Calculate Strikes per Nine innings
+#' @description Find the number of strikes a pitcher throws per nine innings pitched.
+#' Required fields from the Batting table are; "H", "BB", and "IPouts."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords strikes per nine innings
+#' @export K_9
+#' @examples
+#' \dontrun{
+#' pitching_df <- Lahman::Pitching
+#' new_df <- K_9(pitching_df)
+#' new_df
+#' }
+#'
+K_9 <- function (dat=NULL){
+    if (is.null(dat)){
+        dat <- Lahman::Pitching
+    }
+    if (any(!isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
+        ifelse(dat$IPouts > 2,
+               dat$K_9 <- round((SO*9) / (dat$IPouts/3), 3), NA)
+    }
+    if (any(isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', 'SO', and 'IPouts'")
+    }
+    return(dat)
+}
 
 #' @title Calculate the left on base percentage
 #' @description Find the percentaqge of base runners that a pitcher leaves on base of the course of a season.
 #' Required fields from the Batting table are; "H", "BB", "HBP", "R", and "HR."
 #' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
 #' the Lahman package. However, functions will accept custom data frames as well.
-#' @keywords LOB_pct LOB LOB%
+#' @keywords LOB_pct LOB LOB percentage
 #' @export LOB_pct
 #' @examples
 #' \dontrun{
@@ -88,20 +231,33 @@ LOB_pct <- function (dat=NULL){
     return(dat)
 }
 
-############ Pitching
-
-# WHIP
-# WHIP = ifelse(IP > 0, round((BB+H) / IP, 3), NA)
-
-# K per 9
-#K_9 = ifelse(IP > 0, round((SO*9) / IP, 3), NA)
-
-# ERA+ (do research)
-
-# h9
-# hr9
-# so9
-
+#' @title Calculate Walks plus Hits per Innings Pitched
+#' @description Find the number of walks plus hits a pitcher allows per inning pitched.
+#' Required fields from the Batting table are; "H", "BB", and "IPouts."
+#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
+#' the Lahman package. However, functions will accept custom data frames as well.
+#' @keywords Walks plus Hits per Innings Pitched WHIP
+#' @export WHIP
+#' @examples
+#' \dontrun{
+#' pitching_df <- Lahman::Pitching
+#' new_df <- WHIP(pitching_df)
+#' new_df
+#' }
+#'
+WHIP <- function (dat=NULL){
+    if (is.null(dat)){
+        dat <- Lahman::Pitching
+    }
+    if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
+        ifelse(dat$IPouts > 2,
+               dat$WHIP <- round((BB+H) / (dat$IPouts/3), 3), NA)
+    }
+    if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', and 'IPouts'")
+    }
+    return(dat)
+}
 
 
 

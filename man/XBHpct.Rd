@@ -26,4 +26,3 @@ new_df
 \keyword{base}
 \keyword{extra}
 \keyword{percentage}
-

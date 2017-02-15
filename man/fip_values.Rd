@@ -31,4 +31,3 @@ head(fip_df)
 \keyword{on}
 \keyword{wOBA,}
 \keyword{woba,}
-

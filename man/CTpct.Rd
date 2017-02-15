@@ -25,4 +25,3 @@ new_df
 \keyword{CTpct}
 \keyword{contact}
 \keyword{rate}
-
