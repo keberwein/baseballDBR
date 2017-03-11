@@ -7,8 +7,9 @@
 SLG(dat = NULL)
 }
 \arguments{
-\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-the Lahman package. However, functions will accept custom data frames as well.}
+\item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
+The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+For a list of column names, use the \code{Lahman_names()} function.}
 }
 \description{
 Find the SLG for batters with more than zero hits.
@@ -16,8 +17,8 @@ Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 }
 \examples{
 \dontrun{
-batting_df <- Lahman::Batting
-new_df <- SLG(batting_df)
+get_bbdb("Batting")
+new_df <- SLG(Batting)
 new_df
 }
 

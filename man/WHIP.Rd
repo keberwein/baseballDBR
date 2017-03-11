@@ -7,16 +7,17 @@
 WHIP(dat = NULL)
 }
 \arguments{
-\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-the Lahman package. However, functions will accept custom data frames as well.}
+\item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
+The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+For a list of column names, use the \code{Lahman_names()} function.}
 }
 \description{
 Find the number of walks plus hits a pitcher allows per inning pitched.
-Required fields from the Batting table are; "H", "BB", and "IPouts."
+Required fields from the Pitching table are; "H", "BB", and "IPouts."
 }
 \examples{
 \dontrun{
-pitching_df <- Lahman::Pitching
+get_bbdb("Pitching")
 new_df <- WHIP(pitching_df)
 new_df
 }

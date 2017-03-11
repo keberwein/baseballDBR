@@ -1,21 +1,21 @@
 
 #' @title Calculate walks per nine innings
 #' @description Find batting average walks per nine innings for pitchers with more one or more inning pitched.
-#' Required fields from the Batting table are; "IPouts", and "BB."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "IPouts", and "BB."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BB BB_9 BB9 bb/9
 #' @export BB_9
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
-#' new_df <- BB_9(pitching_df)
+#' get_bbdb("Pitching")
+#' new_df <- BB_9(Pitching)
 #' new_df
 #' }
 #'
 BB_9 <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
     if (any(!isTRUE(c("IPouts", "BB") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -29,9 +29,10 @@ BB_9 <- function (dat=NULL){
 
 #' @title Fielding Independent Pitching (FIP)
 #' @description Find the FIP for all pitchers with one or strike outs in a particular season.
-#' Required fields from the batting table are "BB", "HBP", "SO", and "IPouts."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are "BB", "HBP", "SO", and "IPouts."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -46,14 +47,13 @@ BB_9 <- function (dat=NULL){
 #' @export FIP
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- FIP(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' get_bbdb("Pitching")
+#' new_df <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' new_df
 #' }
 #'
 FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -91,27 +91,27 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 
 #' @title Calculate Hits per Nine innings
 #' @description Find the number of hits a pitcher throws per nine innings pitched.
-#' Required fields from the Batting table are; "H" and "IPouts."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "H", "BB", and "IPouts."
+#' @param dat A data frame you would wish to calculate.  The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords hits per nine innings
 #' @export H_9
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
-#' new_df <- H_9(pitching_df)
+#' get_bbdb("Pitching")
+#' new_df <- H_9(Pitching)
 #' new_df
 #' }
 #'
 H_9 <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
-    if (any(!isTRUE(c("H", "IPouts") %in% names(dat)))){
+    if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
                dat$H_9 <- round((BB*9) / (dat$IPouts/3), 3), NA)
     }
-    if (any(isTRUE(c("H", "IPouts") %in% names(dat)))){
+    if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'IPouts'")
     }
     return(dat)
@@ -119,21 +119,21 @@ H_9 <- function (dat=NULL){
 
 #' @title Calculate Home Runs per Nine innings
 #' @description Find the number of home runs a pitcher allows per nine innings pitched.
-#' Required fields from the Batting table are; "H" and "IPouts."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "H" and "IPouts."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords hits per nine innings
 #' @export HR_9
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
-#' new_df <- HR_9(pitching_df)
+#' get_bbdb("Pitching")
+#' new_df <- HR_9(Pitching)
 #' new_df
 #' }
 #'
 HR_9 <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
     if (any(!isTRUE(c("HR", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -147,21 +147,21 @@ HR_9 <- function (dat=NULL){
 
 #' @title Calculate the innings pitched
 #' @description Find the number of innings a player has ptiched for a season.
-#' Required fields from the Batting table are; "IPouts."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "IPouts."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords innings pitched
 #' @export IP
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
-#' new_df <- IP(pitching_df)
+#' get_bbdb("Pitching")
+#' new_df <- IP(Pitching)
 #' new_df
 #' }
 #'
 IP <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
     if (any(!isTRUE(c("IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -175,21 +175,21 @@ IP <- function (dat=NULL){
 
 #' @title Calculate Strikes per Nine innings
 #' @description Find the number of strikes a pitcher throws per nine innings pitched.
-#' Required fields from the Batting table are; "H", "BB", and "IPouts."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "H", "BB", "IPouts", and "SO."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords strikes per nine innings
 #' @export K_9
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
-#' new_df <- K_9(pitching_df)
+#' get_bbdb("Pitching")
+#' new_df <- K_9(Pitching)
 #' new_df
 #' }
 #'
 K_9 <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
     if (any(!isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -203,21 +203,21 @@ K_9 <- function (dat=NULL){
 
 #' @title Calculate the left on base percentage
 #' @description Find the percentaqge of base runners that a pitcher leaves on base of the course of a season.
-#' Required fields from the Batting table are; "H", "BB", "HBP", "R", and "HR."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "H", "BB", "HBP", "R", and "HR."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords LOB_pct LOB LOB percentage
 #' @export LOB_pct
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
+#' get_bbdb("Pitching")
 #' new_df <- LOB_pct(pitching_df)
 #' new_df
 #' }
 #'
 LOB_pct <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -233,21 +233,21 @@ LOB_pct <- function (dat=NULL){
 
 #' @title Calculate Walks plus Hits per Innings Pitched
 #' @description Find the number of walks plus hits a pitcher allows per inning pitched.
-#' Required fields from the Batting table are; "H", "BB", and "IPouts."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' Required fields from the Pitching table are; "H", "BB", and "IPouts."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords Walks plus Hits per Innings Pitched WHIP
 #' @export WHIP
 #' @examples
 #' \dontrun{
-#' pitching_df <- Lahman::Pitching
+#' get_bbdb("Pitching")
 #' new_df <- WHIP(pitching_df)
 #' new_df
 #' }
 #'
 WHIP <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Pitching
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,

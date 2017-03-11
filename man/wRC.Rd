@@ -8,8 +8,9 @@ wRC(dat = NULL, Fangraphs = FALSE, NA_to_zero = TRUE,
   Sep.Leagues = FALSE)
 }
 \arguments{
-\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-the Lahman package. However, functions will accept custom data frames as well.}
+\item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
+The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+For a list of column names, use the \code{Lahman_names()} function.}
 
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRC
 calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
@@ -31,8 +32,8 @@ Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", 
 }
 \examples{
 \dontrun{
-batting_df <- Lahman::Batting
-new_df <- wRC(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+get_bbdb("Batting")
+new_df <- wRC(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 new_df
 }
 

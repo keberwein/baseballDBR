@@ -2,20 +2,20 @@
 #' @title Calculate batting average
 #' @description Find batting average for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", and "H."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BA base on ball percentage bb
 #' @export BA
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- BA(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- BA(Batting)
 #' new_df
 #' }
 #'
 BA <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "H") %in% names(dat)))){
         ifelse(dat$BA > 0,
@@ -30,20 +30,20 @@ BA <- function (dat=NULL){
 #' @title Calculate batting average on balls in play (BABIP)
 #' @description Find BABIP for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "BB", "H", "HBP", "SF", "SH", "HR"  and "SO."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BABIP base on ball percentage bb
 #' @export BABIP
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
+#' get_bbdb("Batting")
 #' new_df <- BABIP(batting_df)
 #' new_df
 #' }
 #'
 BABIP <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -59,20 +59,20 @@ BABIP <- function (dat=NULL){
 #' @description Find base on ball percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
 #' Intentional base on balls (IBB) is added for the years that metric is available.
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BBpct base on ball percentage bb
 #' @export BBpct
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- BBpct(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- BBpct(Batting)
 #' new_df
 #' }
 #'
 BBpct <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "IBB") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -87,14 +87,15 @@ BBpct <- function (dat=NULL){
 #' @title Calculate a batter's contact rate
 #' @description Find the contact rate for batters.
 #' Required fields from the batting table are "AB" and "SO."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords CTpct contact rate
 #' @export CTpct
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- CTpct(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- CTpct(Batting)
 #' new_df
 #' }
 #'
@@ -115,20 +116,20 @@ CTpct <- function (dat=NULL){
 #' @title Calculate home run percentage
 #' @description Find home run percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are "AB" and "HR."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords HRpct home run percentage
 #' @export HRpct
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- HRpct(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- HRpct(Batting)
 #' new_df
 #' }
 #'
 HRpct <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "HR") %in% names(dat)))){
         ifelse(dat$HR > 0,
@@ -143,20 +144,20 @@ HRpct <- function (dat=NULL){
 #' @title Calculate ISO for batters
 #' @description Find isolated power (ISO) for batters with more than zero at bats.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords ISO isolated power
 #' @export ISO
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- ISO(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- ISO(Batting)
 #' new_df
 #' }
 #'
 ISO <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -171,20 +172,20 @@ ISO <- function (dat=NULL){
 #' @title Calculate strikeout percentage
 #' @description Find strikeout percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords Kpct strikeout percentage
 #' @export Kpct
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- Kpct(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- Kpct(Batting)
 #' new_df
 #' }
 #'
 Kpct <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$SO > 0,
@@ -199,20 +200,20 @@ Kpct <- function (dat=NULL){
 #' @title Calculate on base percentage (OBP)
 #' @description Find the OBP for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords OBP on base percentage
 #' @export OBP
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- OBP(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- OBP(Batting)
 #' new_df
 #' }
 #'
 OBP <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -227,20 +228,20 @@ OBP <- function (dat=NULL){
 #' @title Calculate on base percentage plus slugging (OPS)
 #' @description Find the OPS for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR", "BB", "HBP", "AB" and "SF."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords OPS on base percentage
 #' @export OPS
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- OPS(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- OPS(Batting)
 #' new_df
 #' }
 #'
 OPS <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -257,20 +258,20 @@ OPS <- function (dat=NULL){
 #' @title Calculate plate appearances for batters
 #' @description Find the plate appearances (PA) for batters.
 #' Required fields from the batting table are "AB", "BB", "HBP", "SH", and "SF."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords PA on base percentage
 #' @export PA
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- PA(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- PA(Batting)
 #' new_df
 #' }
 #'
 PA <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$AB >= 0,
@@ -285,20 +286,20 @@ PA <- function (dat=NULL){
 #' @title Calculate slugging percentage (SLG)
 #' @description Find the SLG for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords SLG on base percentage
 #' @export SLG
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- SLG(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- SLG(Batting)
 #' new_df
 #' }
 #'
 SLG <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -313,20 +314,20 @@ SLG <- function (dat=NULL){
 #' @title Calculate a batter's total bases
 #' @description Find total bases.
 #' Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords TBs total bases
 #' @export TBs
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- TBs(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- TBs(Batting)
 #' new_df
 #' }
 #'
 TBs <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -341,20 +342,20 @@ TBs <- function (dat=NULL){
 #' @title Calculate extra base percentage
 #' @description Find extra base percentage for batters with more than zero at bats.
 #' Required fields from the batting table are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords XBHpct extra base percentage
 #' @export XBHpct
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- XBHpct(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- XBHpct(Batting)
 #' new_df
 #' }
 #'
 XBHpct <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -369,20 +370,20 @@ XBHpct <- function (dat=NULL){
 #' @title Calculate extra base per hit
 #' @description Find the average extra bases per hit for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords XBperH extra base per hit
 #' @export XBperH
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- XBperH(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- XBperH(Batting)
 #' new_df
 #' }
 #'
 XBperH <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -398,20 +399,20 @@ XBperH <- function (dat=NULL){
 #' @title Calculate Runs Created using the basic formula.
 #' @description Find the runs created using the basic formula presented by Bill James in the late 1970s.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", and "HR."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords RCbasic extra base per hit
 #' @export RCbasic
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- RCbasic(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- RCbasic(Batting)
 #' new_df
 #' }
 #'
 RCbasic <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -429,20 +430,20 @@ RCbasic <- function (dat=NULL){
 #' basic formula such as sacrifice hits, stolen bases and intentional base on balls.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP", "SB", "CS",
 #' "SF" and "SH," and "IBB."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords RCtech extra base per hit
 #' @export RCtech
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- RCtech(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- RCtech(Batting)
 #' new_df
 #' }
 #'
 RCtech <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
         if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
                           "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
     }
@@ -468,20 +469,20 @@ RCtech <- function (dat=NULL){
 #' The 2002 RC uses the same counting stats as the Technical Version but applies weights to many of the raw stats.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP", "SB", "CS",
 #' "SF" and "SH," "SO", and "IBB."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords RC2002 extra base per hit
 #' @export RC2002
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- RC2002(batting_df)
+#' get_bbdb("Batting")
+#' new_df <- RC2002(Batting)
 #' new_df
 #' }
 #'
 RC2002 <- function (dat=NULL){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
                       "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat)))){
@@ -507,8 +508,9 @@ RC2002 <- function (dat=NULL){
 #' @title Calculate Weighted On-Base Average (wOBA)
 #' @description Find the wOBA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -523,14 +525,13 @@ RC2002 <- function (dat=NULL){
 #' @export wOBA
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- wOBA(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' get_bbdb("Batting")
+#' new_df <- wOBA(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' new_df
 #' }
 #'
 wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -575,8 +576,9 @@ wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' @title Calculate Weighted Runs Above Average (wRAA)
 #' @description Find the wRAA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -592,14 +594,13 @@ wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' @export wRAA
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- wRAA(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' get_bbdb("Batting")
+#' new_df <- wRAA(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' new_df
 #' }
 #'
 wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -648,8 +649,9 @@ wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' @title Calculate Weighted Runs Created (wRC)
 #' @description Find the wRC for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
-#' @param dat A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-#' the Lahman package. However, functions will accept custom data frames as well.
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -665,14 +667,13 @@ wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' @export wRC
 #' @examples
 #' \dontrun{
-#' batting_df <- Lahman::Batting
-#' new_df <- wRC(batting_df, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' get_bbdb("Batting")
+#' new_df <- wRC(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' new_df
 #' }
 #'
 wRC <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
-        dat <- Lahman::Batting
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){

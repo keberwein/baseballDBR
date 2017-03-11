@@ -7,8 +7,9 @@
 CTpct(dat = NULL)
 }
 \arguments{
-\item{dat}{A data frame you would wish to calculate. If NULL, it will use the appropriate table from
-the Lahman package. However, functions will accept custom data frames as well.}
+\item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
+The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+For a list of column names, use the \code{Lahman_names()} function.}
 }
 \description{
 Find the contact rate for batters.
@@ -16,8 +17,8 @@ Required fields from the batting table are "AB" and "SO."
 }
 \examples{
 \dontrun{
-batting_df <- Lahman::Batting
-new_df <- CTpct(batting_df)
+get_bbdb("Batting")
+new_df <- CTpct(Batting)
 new_df
 }
 
