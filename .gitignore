@@ -1,9 +1,9 @@
-# History files
+.Rproj.user
 .Rhistory
-.Rapp.history
-
-# Session Data files
 .RData
+inst/doc
+README.Rmd
+NEWS.Rmd
 
 # Example code in package build process
 *-Ex.R
