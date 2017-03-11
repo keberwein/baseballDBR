@@ -16,6 +16,7 @@
 #'
 BB_9 <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("IPouts", "BB") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -54,6 +55,7 @@ BB_9 <- function (dat=NULL){
 #'
 FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -106,6 +108,7 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 #'
 H_9 <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -134,6 +137,7 @@ H_9 <- function (dat=NULL){
 #'
 HR_9 <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("HR", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -162,6 +166,7 @@ HR_9 <- function (dat=NULL){
 #'
 IP <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -190,6 +195,7 @@ IP <- function (dat=NULL){
 #'
 K_9 <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -218,6 +224,7 @@ K_9 <- function (dat=NULL){
 #'
 LOB_pct <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
@@ -248,6 +255,7 @@ LOB_pct <- function (dat=NULL){
 #'
 WHIP <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,

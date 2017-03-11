@@ -16,6 +16,7 @@
 #'
 BA <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "H") %in% names(dat)))){
         ifelse(dat$BA > 0,
@@ -44,6 +45,7 @@ BA <- function (dat=NULL){
 #'
 BABIP <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -73,6 +75,7 @@ BABIP <- function (dat=NULL){
 #'
 BBpct <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "IBB") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -101,7 +104,7 @@ BBpct <- function (dat=NULL){
 #'
 CTpct <- function (dat=NULL){
     if (is.null(dat)){
-        dat = Lahman::Batting
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "SO") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -130,6 +133,7 @@ CTpct <- function (dat=NULL){
 #'
 HRpct <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "HR") %in% names(dat)))){
         ifelse(dat$HR > 0,
@@ -158,6 +162,7 @@ HRpct <- function (dat=NULL){
 #'
 ISO <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -186,6 +191,7 @@ ISO <- function (dat=NULL){
 #'
 Kpct <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$SO > 0,
@@ -214,6 +220,7 @@ Kpct <- function (dat=NULL){
 #'
 OBP <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -242,6 +249,7 @@ OBP <- function (dat=NULL){
 #'
 OPS <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -272,6 +280,7 @@ OPS <- function (dat=NULL){
 #'
 PA <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$AB >= 0,
@@ -300,6 +309,7 @@ PA <- function (dat=NULL){
 #'
 SLG <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -328,6 +338,7 @@ SLG <- function (dat=NULL){
 #'
 TBs <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -356,6 +367,7 @@ TBs <- function (dat=NULL){
 #'
 XBHpct <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -384,6 +396,7 @@ XBHpct <- function (dat=NULL){
 #'
 XBperH <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
@@ -413,6 +426,7 @@ XBperH <- function (dat=NULL){
 #'
 RCbasic <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
@@ -444,9 +458,10 @@ RCbasic <- function (dat=NULL){
 #'
 RCtech <- function (dat=NULL){
     if (is.null(dat)){
-        if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
-                          "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+                          "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
     X2B=X3B=HR=NULL
     X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
     TB <- X1B + 2*X2B + 3*X3B + 4*HR
@@ -483,6 +498,7 @@ RCtech <- function (dat=NULL){
 #'
 RC2002 <- function (dat=NULL){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
                       "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat)))){
@@ -532,6 +548,7 @@ RC2002 <- function (dat=NULL){
 #'
 wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -601,6 +618,7 @@ wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
 wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -674,6 +692,7 @@ wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
 wRC <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
