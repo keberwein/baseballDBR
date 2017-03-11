@@ -4,8 +4,9 @@
 #' There is also an option to download the entire directory.
 #' @param table The tables you would like to download. Uses Lahman table names Ex. "Batting", "Master", "AllstarFull", etc...
 #' If this argument is left as NULL, the function will download all twenty-seven tables.
-#' @param downlaodZip If ture, this will download a zip file of all twenty-seven tables in .csv format to your working directory.
+#' @param downloadZip If ture, this will download a zip file of all twenty-seven tables in .csv format to your working directory.
 #' @keywords database, data frame
+#' @importFrom  utils download.file
 #' @export get_bbdb
 #' @examples
 #' \dontrun{

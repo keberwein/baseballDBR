@@ -10,7 +10,7 @@ get_bbdb(table = NULL, downloadZip = FALSE)
 \item{table}{The tables you would like to download. Uses Lahman table names Ex. "Batting", "Master", "AllstarFull", etc...
 If this argument is left as NULL, the function will download all twenty-seven tables.}
 
-\item{downlaodZip}{If ture, this will download a zip file of all twenty-seven tables in .csv format to your working directory.}
+\item{downloadZip}{If ture, this will download a zip file of all twenty-seven tables in .csv format to your working directory.}
 }
 \description{
 Download the newest version of the Baseball Databank from the Chadwick Bureau GitHub repository. This is the soruce of
