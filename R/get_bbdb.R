@@ -6,7 +6,7 @@
 #' If this argument is left as NULL, the function will download all twenty-seven tables.
 #' @param downloadZip If ture, this will download a zip file of all twenty-seven tables in .csv format to your working directory.
 #' @keywords database, data frame
-#' @importFrom  utils download.file
+#' @import utils
 #' @export get_bbdb
 #' @examples
 #' \dontrun{
