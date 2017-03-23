@@ -2,6 +2,12 @@
 #' @description Get wOBA values for each year in your database. This calculation requires all fields of
 #' the Pitching, Fielding and Batting tables from the Lahman package, or a comprable data set. The function uses
 #' a version of Tom Tango's wOBA formula by default, but can also return Fangraphs wOBA values.
+#' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE, this will split the calculation and return unique wOBA values for the various leagues. This can be
 #' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
 #' @param Fangraphs if TRUE the function will return the Fangraphs wOBA values. By default the function uses a method adapted from
@@ -12,7 +18,6 @@
 #' @importFrom xml2 read_html
 #' @importFrom stats setNames
 #' @import dplyr
-#' @import Lahman
 #' @export wOBA_values
 #' @examples
 #' \dontrun{
@@ -21,7 +26,7 @@
 #'}
 #'
 
-wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
+wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=FALSE, Fangraphs=FALSE){
     # Declare values for Rcheck so it won't throw a note.
     POS=yearID=postf=playerID=teamID=lgID=G=IPouts=R=RperOut=runBB=run1B=run2B=runHBP=run3B=
     runHR=runSB=runCS=AB=H=X2B=X3B=HR=SB=CS=BB=SO=IBB=HBP=SF=runPlus=runMinus=wOBAscale=NULL
@@ -42,7 +47,7 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
 
     if(!isTRUE(Fangraphs)){
     # Find primary positions
-    fielding <- Lahman::Fielding
+    fielding <- FieldingTable
     # The "postf" field below is to filter out Natl. League players who may have
     # played as DH in inter-leauge games, and may have multiple entries at diff. positions.
     PrimPos <- dplyr::mutate(fielding, postf=ifelse(POS=="OF" & yearID>1995, 1,0)) %>%
@@ -52,7 +57,7 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
         dplyr::summarise(G = sum(G))
 
     # Find a run environment for each season, including pitchers.
-    pitching <- Lahman::Pitching %>%  subset(select=c("yearID", "playerID", "lgID","R", "IPouts"))
+    pitching <- PitchingTable %>%  subset(select=c("yearID", "playerID", "lgID","R", "IPouts"))
 
     pitchersPOS <- subset(PrimPos, POS=="P")
 
@@ -104,7 +109,7 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
 
 
     # Use Position Players table to find the runsPlus and runsMinus values to use in the wOBA multiplier.
-    batting <- Lahman::Batting
+    batting <- BattingTable
     batting <- batting[, !names(batting) %in% c("G")]
     batting <- dplyr::inner_join(batting, PrimPos, by=c("playerID", "yearID", "lgID"))
     # Replace NA with 0, otherwise our runsMinus and runsPlus calculations will thow NA.
@@ -172,9 +177,7 @@ wOBA_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
             dplyr::mutate(wHR = (runHR+runMinus)*woba_scale) %>%
             dplyr::mutate(wSB = runSB*woba_scale) %>%
             dplyr::mutate(wCS = runCS*woba_scale)
-
     }
     }
-
     return(runsBatting)
 }

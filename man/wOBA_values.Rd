@@ -4,9 +4,19 @@
 \alias{wOBA_values}
 \title{Return wOBA values per season}
 \usage{
-wOBA_values(Sep.Leagues = FALSE, Fangraphs = FALSE)
+wOBA_values(BattingTable, PitchingTable, FieldingTable, Sep.Leagues = FALSE,
+  Fangraphs = FALSE)
 }
 \arguments{
+\item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
+\item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
+\item{FieldingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
 \item{Sep.Leagues}{If TRUE, this will split the calculation and return unique wOBA values for the various leagues. This can be
 helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.}
 

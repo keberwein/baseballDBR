@@ -546,7 +546,7 @@ RC2002 <- function (dat=NULL){
 #' new_df
 #' }
 #'
-wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+wOBA <- function (dat=NULL, wOBA_values=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if (is.null(dat)){
         print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
@@ -567,11 +567,11 @@ wOBA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
         }
 
         if(isTRUE(Sep.Leagues)){
-            woba <- woba[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
-            dat <- dplyr::left_join(dat, woba, by=c("yearID", "lgID"))
+            wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
+            dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
-            woba <- woba[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
-            dat <- dplyr::left_join(dat, woba, by="yearID")
+            wOBA_values <- wOBA_values[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
+            dat <- dplyr::left_join(dat, wOBA_values, by="yearID")
         }
 
         ifelse(dat$H > 0,
