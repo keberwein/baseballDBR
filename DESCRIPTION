@@ -6,10 +6,10 @@ Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
 Description: Updated version of the Lahman database along wiht additional statistical functions.
 Depends:
-    R (>= 3.2.4)
+    R (>= 3.3.3)
 Imports:
 	rvest,
-	xml2, 
+	xml2,
 	magrittr,
 	dplyr,
 	Lahman
@@ -18,10 +18,9 @@ Suggests:
 	tidyr,
 	rmarkdown,
 	knitr
-Encoding: UTF-8
-LazyData: true
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/moneyball
 BugReports: https://github.com/keberwein/moneyball/issues
+LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

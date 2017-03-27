@@ -2,6 +2,8 @@
 #' @description Get fip constants for each season. By default the function uses a method adapted from
 #' Tom Tango and used by Fangraphs. The function returns FIP constants based on ERA \code{FIP_ERA} as well as constants based on RA \code{FIP_RA}.
 #' Both the Tango and Frangraphs formulas use ERA for their FIP constants.
+#' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
 #' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
 #' @param Fangraphs If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjuction with the
@@ -11,7 +13,6 @@
 #' @importFrom xml2 read_html
 #' @importFrom stats setNames
 #' @import dplyr
-#' @import Lahman
 #' @export fip_values
 #' @examples
 #' \dontrun{
@@ -20,7 +21,7 @@
 #'}
 #'
 
-fip_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
+fip_values <- function(PitchingTAble=NULL, Sep.Leagues=FALSE, Fangraphs=FALSE){
     # Declare values for Rcheck so it won't throw a note.
     yearID=lgID=G=IPouts=H=HR=BB=SO=IBB=HBP=R=SF=W=L=GS=CG=SHO=SV=ER=WP=BK=BFP=GF=SH=GIDP=IP=lgERA=lgRA=NULL
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -37,7 +38,7 @@ fip_values <- function(Sep.Leagues=FALSE, Fangraphs=FALSE){
     }
 
     if(!isTRUE(Fangraphs)){
-        pitching <- Lahman::Pitching
+        pitching <- PitchingTable
         pitching <-  pitching[, !names(pitching) %in% c("playerID", "teamID", "stint", "BAOpp", "ERA")]
         # Replace NA with 0, otherwise our runsMinus and runsPlus calculations will thow NA.
         pitching[is.na(pitching)] <- 0

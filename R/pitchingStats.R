@@ -63,10 +63,9 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
         Fangraphs=FALSE
     }
 
-    if (any(!isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
-        ifelse(isTRUE(Fangraphs), fip <- moneyball::fip_values(Fangraphs=T),
-               ifelse(isTRUE(Sep.Leagues), fip <- moneyball::fip_values(Sep.Leagues=T), fip <- moneyball::fip_values()))
+    fip <- fip_values(PitchingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
+    if (any(!isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
         if (isTRUE(NA_to_zero)){
             dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
         }

@@ -524,9 +524,12 @@ RC2002 <- function (dat=NULL){
 #' @title Calculate Weighted On-Base Average (wOBA)
 #' @description Find the wOBA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
-#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
-#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
+#' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -546,9 +549,9 @@ RC2002 <- function (dat=NULL){
 #' new_df
 #' }
 #'
-wOBA <- function (dat=NULL, wOBA_values=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    if (is.null(BattingTable) | is.null(PitchingTable) | is.null(FieldingTable)){
+        print("Please supply source Batting, Pitching, and Fielding data frames.")
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -556,16 +559,15 @@ wOBA <- function (dat=NULL, wOBA_values=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, 
         Fangraphs=FALSE
     }
 
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T),
-               ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values()))
+    dat <- BattingTable
+    wOBA_values <- wOBA_values(BattingTable, PitchingTable, FieldingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
+    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
         if (isTRUE(NA_to_zero)){
             dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
             dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
             dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
         }
-
         if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
             dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
@@ -593,9 +595,12 @@ wOBA <- function (dat=NULL, wOBA_values=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, 
 #' @title Calculate Weighted Runs Above Average (wRAA)
 #' @description Find the wRAA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
-#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
-#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
+#' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -625,11 +630,10 @@ wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
         Fangraphs=FALSE
     }
+    dat <- BattingTable
+    wOBA_values <- wOBA_values(BattingTable, PitchingTable, FieldingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T),
-               ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values()))
-
         if (isTRUE(NA_to_zero)){
             dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
             dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
@@ -667,9 +671,12 @@ wRAA <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' @title Calculate Weighted Runs Created (wRC)
 #' @description Find the wRC for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
-#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
-#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
+#' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -699,11 +706,10 @@ wRC <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
         Fangraphs=FALSE
     }
+    dat <- BattingTable
+    wOBA_values <- wOBA_values(BattingTable, PitchingTable, FieldingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        ifelse(isTRUE(Fangraphs), woba <- moneyball::wOBA_values(Fangraphs=T),
-               ifelse(isTRUE(Sep.Leagues), woba <- moneyball::wOBA_values(Sep.Leagues=T), woba <- moneyball::wOBA_values()))
-
         if (!isTRUE(Fangraphs)) {
             woba$lg_r_pa <- woba$R / (woba$AB+woba$BB+woba$HBP+woba$SF)
         }

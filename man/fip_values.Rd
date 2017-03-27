@@ -4,7 +4,7 @@
 \alias{fip_values}
 \title{Return FIP constants per season}
 \usage{
-fip_values(Sep.Leagues = FALSE, Fangraphs = FALSE)
+fip_values(PitchingTAble = NULL, Sep.Leagues = FALSE, Fangraphs = FALSE)
 }
 \arguments{
 \item{Sep.Leagues}{If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
@@ -12,6 +12,9 @@ helpful in handling Designated Hitters and National League pitchers. It also iso
 
 \item{Fangraphs}{If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjuction with the
 \code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.}
+
+\item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
 }
 \description{
 Get fip constants for each season. By default the function uses a method adapted from

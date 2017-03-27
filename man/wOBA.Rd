@@ -4,13 +4,18 @@
 \alias{wOBA}
 \title{Calculate Weighted On-Base Average (wOBA)}
 \usage{
-wOBA(dat = NULL, Fangraphs = FALSE, NA_to_zero = TRUE,
-  Sep.Leagues = FALSE)
+wOBA(BattingTable, PitchingTable, FieldingTable, Fangraphs = FALSE,
+  NA_to_zero = TRUE, Sep.Leagues = FALSE)
 }
 \arguments{
-\item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
-The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-For a list of column names, use the \code{Lahman_names()} function.}
+\item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
+\item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
+\item{FieldingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
 
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. If FALSE the function will use the internal
 formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
