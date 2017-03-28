@@ -1,10 +1,6 @@
 # CRAN TODO LIST:
 
-# Write Lahnam_names() function. Maybe a convert_names function too, using dplyr::rename
-
-# Remove Lahman package depends.
-
-# Think of new package name.
+# Think of new package name. Rename vars.R to package name
 
 # Add / write vignettes. use drob's post http://varianceexplained.org/r/empirical_bayes_baseball/ Maybe some of those as functions.
 

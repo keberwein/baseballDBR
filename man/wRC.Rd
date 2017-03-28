@@ -4,10 +4,19 @@
 \alias{wRC}
 \title{Calculate Weighted Runs Created (wRC)}
 \usage{
-wRC(dat = NULL, Fangraphs = FALSE, NA_to_zero = TRUE,
-  Sep.Leagues = FALSE)
+wRC(BattingTable = NULL, PitchingTable = NULL, FieldingTable = NULL,
+  Fangraphs = FALSE, NA_to_zero = TRUE, Sep.Leagues = FALSE)
 }
 \arguments{
+\item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
+\item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
+\item{FieldingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRC
 calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
 This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRC should be expected.
@@ -21,15 +30,6 @@ If FALSE, the wRC calculation will return NaN for years with missing data.}
 \item{Sep.Leagues}{If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 park factors between the American and National leauges. The default for this argument is FALSE.}
-
-\item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
-
-\item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
-
-\item{FieldingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
 }
 \description{
 Find the wRC for all players with one or more hits for a particular season.

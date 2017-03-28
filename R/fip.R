@@ -21,7 +21,7 @@
 #'}
 #'
 
-fip_values <- function(PitchingTAble=NULL, Sep.Leagues=FALSE, Fangraphs=FALSE){
+fip_values <- function(PitchingTable=NULL, Sep.Leagues=FALSE, Fangraphs=FALSE){
     # Declare values for Rcheck so it won't throw a note.
     yearID=lgID=G=IPouts=H=HR=BB=SO=IBB=HBP=R=SF=W=L=GS=CG=SHO=SV=ER=WP=BK=BFP=GF=SH=GIDP=IP=lgERA=lgRA=NULL
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
