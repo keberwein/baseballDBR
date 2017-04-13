@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message=FALSE
 )
-library(blscrapeR)
+library(baseballDBR)
 ```
 # BaseballDBR
 [![Build Status](https://travis-ci.org/keberwein/baseballDBR.png?branch=master)](https://travis-ci.org/keberwein/baseballDBR)
@@ -23,11 +23,23 @@ library(blscrapeR)
 
 ### This is a concept to apply advanced metrics to the baseball databank (the Lahman database.) It is currently under devlopmment. Additions will be frequent until it is submitted to CRAN.
 
-* The latest development version from GitHub:
+# Install
 
+* The latest development version from GitHub:
 
 ```{r eval=FALSE}
 devtools::install_github("keberwein/baseballDBR")
 ```
+
+# Gathering Data
+
+The `baseballDBR` package requires data that is formatted similar to teh [Baseball Databank](https://github.com/chadwickbureau/baseballdatabank) or Sean Lahman's [Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/). The `Lahman` package is great source for these data. The package also contains the `get_bbdb()` function, which allows us to download the most up-to-date tables directly from the Chadwick Bureau's GitHub repository. For example, we can easily load the "Batting" table into our R enviornment.
+
+```{r}
+get_bbdb(table = "Batting")
+head(Batting)
+```
+
+# Adding Basic Metrics
 
 
