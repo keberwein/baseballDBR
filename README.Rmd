@@ -33,13 +33,57 @@ devtools::install_github("keberwein/baseballDBR")
 
 # Gathering Data
 
-The `baseballDBR` package requires data that is formatted similar to teh [Baseball Databank](https://github.com/chadwickbureau/baseballdatabank) or Sean Lahman's [Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/). The `Lahman` package is great source for these data. The package also contains the `get_bbdb()` function, which allows us to download the most up-to-date tables directly from the Chadwick Bureau's GitHub repository. For example, we can easily load the "Batting" table into our R enviornment.
+The `baseballDBR` package requires data that is formatted similar to the [Baseball Databank](https://github.com/chadwickbureau/baseballdatabank) or Sean Lahman's [Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/). The `Lahman` package is great source for these data. The package also contains the `get_bbdb()` function, which allows us to download the most up-to-date tables directly from the Chadwick Bureau's GitHub repository. For example, we can easily load the "Batting" table into our R environment.
 
 ```{r}
+library(baseballDBR)
+
 get_bbdb(table = "Batting")
 head(Batting)
 ```
 
 # Adding Basic Metrics
 
+Simple batting metrics can be easily added to any batting data frame. For example, we can add slugging percentage, on-base percentage and on-base plus slugging. Note that OPS and OBP appears as "NA" for the years before IBB was tracked. 
+
+```{r}
+library(baseballDBR)
+
+Batting <- SLG(Batting) %>% OBP() %>% OPS()
+```
+
+# Advanced Metrics
+
+The package includes a suite of advanced metrics such as wOBA, RAA, and FIP among others. Many of the advanced metrics require multiple tables. For example, the wOBA metric requires the Batting, Pitching, and Fielding tables in order to establish a player's regular defensive position.
+
+```{r}
+library(baseballDBR)
+
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
+```
+
+The code above uses [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn) wOBA values. The default behavior is to uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/). Other options include `Sep.Leagues`, which may act as a buffer to any bias created by the designated hitter.
+
+```{r}
+library(baseballDBR)
+
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = F, Sep.Leagues = T)
+```
+
+We can also produce a data frame that only shows the wOBA multipliers. Notice the Fangraphs wOBA multipliers slightly differ from the Tango multipliers.
+
+```{r}
+library(baseballDBR)
+
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+fangraphs_woba <- wOBA_values(Batting, Pitching, Fielding, Fangraphs=T)
+
+tango_woba <- wOBA_values(Batting, Pitching, Fielding, Fangraphs=F)
+
+```
 

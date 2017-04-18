@@ -292,64 +292,6 @@ PA <- function (dat=NULL){
     return(dat)
 }
 
-#' @title Calculate slugging percentage (SLG)
-#' @description Find the SLG for batters with more than zero hits.
-#' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
-#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
-#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
-#' @keywords SLG on base percentage
-#' @export SLG
-#' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' new_df <- SLG(Batting)
-#' new_df
-#' }
-#'
-SLG <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
-        ifelse(dat$H > 0,
-               dat$OBP <- round((dat$H+dat$X2B+dat$X3B+dat$HR)/dat$AB, 3), NA)
-    }
-    if (any(isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'X2B', 'X3B' and 'HR'")
-    }
-    return(dat)
-}
-
-#' @title Calculate a batter's total bases
-#' @description Find total bases.
-#' Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
-#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
-#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
-#' @keywords TBs total bases
-#' @export TBs
-#' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' new_df <- TBs(Batting)
-#' new_df
-#' }
-#'
-TBs <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               dat$TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
-    }
-    if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB','H', 'X2B', 'X3B' and 'HR'")
-    }
-    return(dat)
-}
-
 #' @title Calculate extra base percentage
 #' @description Find extra base percentage for batters with more than zero at bats.
 #' Required fields from the batting table are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
@@ -519,6 +461,65 @@ RC2002 <- function (dat=NULL){
 
     return(dat)
 }
+
+#' @title Calculate slugging percentage (SLG)
+#' @description Find the SLG for batters with more than zero hits.
+#' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
+#' @keywords SLG on base percentage
+#' @export SLG
+#' @examples
+#' \dontrun{
+#' get_bbdb("Batting")
+#' new_df <- SLG(Batting)
+#' new_df
+#' }
+#'
+SLG <- function (dat=NULL){
+    if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
+    }
+    if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
+        ifelse(dat$H > 0,
+               dat$SLG <- round((dat$H+dat$X2B+dat$X3B+dat$HR)/dat$AB, 3), NA)
+    }
+    if (any(isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'X2B', 'X3B' and 'HR'")
+    }
+    return(dat)
+}
+
+#' @title Calculate a batter's total bases
+#' @description Find total bases.
+#' Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
+#' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
+#' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' For a list of column names, use the \code{Lahman_names()} function.
+#' @keywords TBs total bases
+#' @export TBs
+#' @examples
+#' \dontrun{
+#' get_bbdb("Batting")
+#' new_df <- TBs(Batting)
+#' new_df
+#' }
+#'
+TBs <- function (dat=NULL){
+    if (is.null(dat)){
+        print("Please supply a source data frame. See the get_bbdb() function for help.")
+    }
+    if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
+        ifelse(dat$AB > 0,
+               dat$TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
+    }
+    if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB','H', 'X2B', 'X3B' and 'HR'")
+    }
+    return(dat)
+}
+
 
 
 #' @title Calculate Weighted On-Base Average (wOBA)
