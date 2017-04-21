@@ -50,6 +50,7 @@ Simple batting metrics can be easily added to any batting data frame. For exampl
 library(baseballDBR)
 
 Batting <- SLG(Batting) %>% OBP() %>% OPS()
+head(Batting, 3)
 ```
 
 # Advanced Metrics
@@ -62,6 +63,7 @@ library(baseballDBR)
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 
 Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
+head(Batting, 3)
 ```
 
 The code above uses [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn) wOBA values. The default behavior is to uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/). Other options include `Sep.Leagues`, which may act as a buffer to any bias created by the designated hitter.
@@ -72,6 +74,7 @@ library(baseballDBR)
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 
 Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = F, Sep.Leagues = T)
+head(Batting, 3)
 ```
 
 We can also produce a data frame that only shows the wOBA multipliers. Notice the Fangraphs wOBA multipliers slightly differ from the Tango multipliers.
@@ -82,8 +85,36 @@ library(baseballDBR)
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 
 fangraphs_woba <- wOBA_values(Batting, Pitching, Fielding, Fangraphs=T)
+head(fangraphs_woba, 3)
 
 tango_woba <- wOBA_values(Batting, Pitching, Fielding, Fangraphs=F)
+head(tango_woba, 3)
+
 
 ```
+
+# Create Local Database
+
+A relational database is not needed to work with these data. However, we may want to store the data to be called more quickly at a later time. We can download all of the tables at once with the `get_bbdb()` function and then write them to an empty schema in our favorite database. The example uses a newly created PostgreSQL instance, but other database tools can be used asuming an appropriate R package exists.
+
+```{r}
+library(baseballDBR)
+get_bbdb(AllTables = TRUE)
+
+
+dbTables <- names(which(unlist(eapply(.GlobalEnv,is.data.frame))))
+
+
+#for (i in 1:length(dbTables)) { dbWriteTable(con, name =  dbTables[i], value = dbTables[i], overwrite=T) }
+
+
+library(RPostgreSQL)
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv, host= "localhost", dbname, user, password)
+dbWriteTable(con, "Batting", Batting)
+dbDisconnect(con)
+rm(con, drv)
+```
+
+
 

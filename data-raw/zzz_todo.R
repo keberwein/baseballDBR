@@ -1,8 +1,10 @@
 # CRAN TODO LIST:
 
+# Figure out how to load multiple tables at once using dbWritetable().
+
 # Add / write vignettes. use drob's post http://varianceexplained.org/r/empirical_bayes_baseball/ Maybe some of those as functions.
 
-# Expand README with database example.
+# Write Lahman crosswalk functin to rename columns. Dplyr rename will be good for this.
 
 # Add notes MD
 

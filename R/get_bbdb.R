@@ -5,6 +5,7 @@
 #' @param table The tables you would like to download. Uses Lahman table names Ex. "Batting", "Master", "AllstarFull", etc...
 #' If this argument is left as NULL, the function will download all twenty-seven tables.
 #' @param downloadZip If ture, this will download a zip file of all twenty-seven tables in .csv format to your working directory.
+#' @param AllTables If true, this will download all the tables in the database. The default is set to false.
 #' @keywords database, data frame
 #' @import utils
 #' @export get_bbdb
@@ -20,7 +21,7 @@
 # Todo: Clean up code block with ifelse()
 # Todo: Need to add TryCatch
 # This function could replace the dependency on the Lahman package.
-get_bbdb <- function(table=NULL, downloadZip=FALSE){
+get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
     if (isTRUE(downloadZip)) {
         download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
     }
@@ -33,19 +34,16 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE){
         }
         list2env(lapply(setNames(urlList, make.names(gsub("*.csv$", "", table))), read.csv, stringsAsFactors=FALSE), envir = .GlobalEnv)
     }
-    if (is.null(table)) {
+    if (is.null(table) | isTRUE(AllTables)) {
         download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
-        # It would be better to read the file names of the unzipped directory in case table names change.
-        table <- c("AllstarFull", "Appearances", "AwardsManagers", "AwardsPlayers", "AwardsShareManagers", "AwardsSharePlayers", "Batting", "BattingPost", "CollegePlaying",
-                   "Fielding", "FieldingOF", "FieldingOFsplit", "FieldingPost", "HallOfFame", "HomeGames", "Managers", "ManagersHalf", "Master", "Parks", "Pitching", "PitchingPost",
-                   "Salaries", "Schools", "SeriesPost", "Teams", "TeamsFranchises", "TeamsHalf")
         unzip("master.zip")
-        baseURL <- "baseballdatabank-master/core/"
+        baseDIR <- "baseballdatabank-master/core/"
+        fileList <- list.files(path = baseDIR, pattern = "*.csv")
         urlList <- list()
-        for (i in 1:length(table)) {
-            urlList[[i]] <- paste0(baseURL, table[i], ".csv")
+        for (i in 1:length(fileList)) {
+            urlList[[i]] <- paste0(baseDIR, fileList[i])
         }
-        list2env(lapply(setNames(urlList, make.names(gsub("*.csv$", "", table))), read.csv, stringsAsFactors=FALSE), envir = .GlobalEnv)
+        list2env(lapply(setNames(urlList, make.names(gsub("*.csv$", "", fileList))), read.csv, stringsAsFactors=FALSE), envir = .GlobalEnv)
         rm("master.zip")
         unlink("baseballdatabank-master", recursive=T)
     }
