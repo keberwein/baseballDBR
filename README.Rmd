@@ -7,21 +7,12 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-",
-  warning = FALSE,
-  message=FALSE
-)
 library(baseballDBR)
 ```
 # BaseballDBR
 [![Build Status](https://travis-ci.org/keberwein/baseballDBR.png?branch=master)](https://travis-ci.org/keberwein/baseballDBR)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/baseballDBR)](http://www.r-pkg.org/badges/version/baseballDBR)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#concept)
-
-### This is a concept to apply advanced metrics to the baseball databank (the Lahman database.) It is currently under devlopmment. Additions will be frequent until it is submitted to CRAN.
 
 # Install
 
@@ -95,18 +86,15 @@ head(tango_woba, 3)
 
 # Create Local Database
 
-A relational database is not needed to work with these data. However, we may want to store the data to be called more quickly at a later time. We can download all of the tables at once with the `get_bbdb()` function and then write them to an empty schema in our favorite database. The example uses a newly created PostgreSQL instance, but other database tools can be used asuming an appropriate R package exists.
+A relational database is not needed to work with these data. However, we may want to store the data to be called more quickly at a later time. We can download all of the tables at once with the `get_bbdb()` function and then write them to an empty schema in our favorite database. The example uses a newly created PostgreSQL instance, but other database tools can be used assuming an appropriate R package exists.
 
-```{r}
+```{r, eval=F}
 library(baseballDBR)
 get_bbdb(AllTables = TRUE)
 
-
 dbTables <- names(which(unlist(eapply(.GlobalEnv,is.data.frame))))
 
-
 #for (i in 1:length(dbTables)) { dbWriteTable(con, name =  dbTables[i], value = dbTables[i], overwrite=T) }
-
 
 library(RPostgreSQL)
 drv <- dbDriver("PostgreSQL")
