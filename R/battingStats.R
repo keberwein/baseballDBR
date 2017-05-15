@@ -166,7 +166,7 @@ ISO <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$XBHpct <- round(((dat$X2B+(2*dat$X3B)+(3*dat$X3B)/dat$AB)), 3), NA)
+               dat$ISO <- round(((dat$X2B+(2*dat$X3B)+(3*dat$X3B)/dat$AB)), 3), NA)
     }
     if (any(isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'X2B', 'X3B' and 'HR'")
@@ -483,7 +483,7 @@ SLG <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
-               dat$SLG <- round((dat$H+dat$X2B+dat$X3B+dat$HR)/dat$AB, 3), NA)
+               dat$SLG <- round(((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
     }
     if (any(isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'X2B', 'X3B' and 'HR'")
