@@ -4,7 +4,7 @@
 
 # Check the FIP function one last time.
 
-# Check all functions.
+# QA pitching functions
 
 # Write tests.
 

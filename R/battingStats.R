@@ -79,7 +79,7 @@ BBpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "IBB") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$BBpct <- round((dat$BB+dat$IBB/(dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)), 3), NA)
+               dat$BBpct <- round((dat$BB/(dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)) * 100, 3) , NA)
     }
     if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
@@ -108,7 +108,7 @@ CTpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "SO") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$CTpct <- round(((dat$AB-dat$SO)/dat$AB), 3), NA)
+               dat$CTpct <- round(((dat$AB-dat$SO)/dat$AB) * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "SO") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB' and 'SO'")
@@ -137,7 +137,7 @@ HRpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "HR") %in% names(dat)))){
         ifelse(dat$HR > 0,
-               dat$HRpct <- round((dat$AB/(dat$HR)), 3), NA)
+               dat$HRpct <- round(dat$HR/dat$AB * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'HR'")
@@ -195,7 +195,7 @@ Kpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$SO > 0,
-               dat$Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
+               dat$Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'SO', 'BB', 'HBP', 'SF', and 'SH'")
@@ -313,7 +313,7 @@ XBHpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)), 3), NA)
+               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'HBP', 'SF', 'SH', 'X2B', 'X2B' and 'HR'")
@@ -342,7 +342,7 @@ XBperH <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
-               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)), 3), NA)
+               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
     }
     if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'X2B', 'X3B' and 'HR'")
@@ -404,9 +404,9 @@ RCtech <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
                           "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
-    X2B=X3B=HR=NULL
+    #X2B=X3B=HR=NULL
     X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
-    TB <- X1B + 2*X2B + 3*X3B + 4*HR
+    TB <- X1B + 2*dat$X2B + 3*dat$X3B + 4*dat$HR
     ifelse(dat$AB > 0,
            dat$RCtech <- (((dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP)*
                                         (TB+(.26*(dat$BB-dat$IBB+dat$HBP))) + (.52*(dat$SH+dat$SF+dat$SB)))/
