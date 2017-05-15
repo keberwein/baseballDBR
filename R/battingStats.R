@@ -255,7 +255,7 @@ OPS <- function (dat=NULL){
         ifelse(dat$H > 0,
                dat$OPS <- round((dat$H+dat$BB+dat$HBP)/
                                     (dat$AB+dat$BB+dat$HBP+dat$SF)+
-                                    ((dat$H+dat$X2B+dat$X3B+dat$HR)/dat$AB), 3), NA)
+                                    ((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'BB', 'SF', 'X2B', 'X3B', and 'HR'")
@@ -642,11 +642,11 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
         }
 
         if(isTRUE(Sep.Leagues)){
-            woba <- woba[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, woba, by=c("yearID", "lgID"))
+            wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
-            woba <- woba[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, woba, by="yearID")
+            wOBA_values <- wOBA_values[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, wOBA_values, by="yearID")
         }
 
         ifelse(dat$H > 0,
@@ -722,11 +722,11 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
         }
 
         if(isTRUE(Sep.Leagues)){
-            woba <- woba[, c("yearID", "lg_r_pa", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, woba, by=c("yearID", "lgID"))
+            wOBA_values <- wOBA_values[, c("yearID", "lg_r_pa", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
-            woba <- woba[, c("yearID", "lg_r_pa", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, woba, by="yearID")
+            wOBA_values <- wOBA_values[, c("yearID", "lg_r_pa", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            dat <- dplyr::left_join(dat, wOBA_values, by="yearID")
         }
 
         ifelse(dat$H > 0,
