@@ -623,7 +623,7 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
 #' }
 #'
 wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(dat)){
+    if (is.null(BattingTable) | is.null(PitchingTable) | is.null(FieldingTable)){
         print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
 
@@ -699,7 +699,7 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' }
 #'
 wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(dat)){
+    if (is.null(BattingTable) | is.null(PitchingTable) | is.null(FieldingTable)){
         print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
 

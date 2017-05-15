@@ -40,7 +40,7 @@ Simple batting metrics can be easily added to any batting data frame. For exampl
 ```{r}
 library(baseballDBR)
 
-Batting <- SLG(Batting) %>% OBP() %>% OPS()
+Batting <- SLG(Batting) %>% OBP() %>% OPS() %>% ISO()
 head(Batting, 3)
 ```
 
