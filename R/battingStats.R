@@ -47,9 +47,9 @@ BABIP <- function (dat=NULL){
     if (is.null(dat)){
         print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
-    if (any(!isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
+    if (any(!isTRUE(c("AB", "SO", "H", "SF") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$BABIP <- round(((dat$H-dat$HR)/((dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)-dat$SO-dat$BB-dat$HR)), 3), NA)
+               dat$BABIP <- round(((dat$H-dat$HR)/(dat$AB-dat$SO-dat$HR+dat$SF)), 3), NA)
     }
     if (any(isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'H', 'HBP', 'SF', 'SH', 'HR', and 'SO.'")
@@ -166,7 +166,7 @@ ISO <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$ISO <- round(((dat$X2B+(2*dat$X3B)+(3*dat$X3B)/dat$AB)), 3), NA)
+               dat$ISO <- round((((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB)-dat$H/dat$AB, 3), NA)
     }
     if (any(isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'X2B', 'X3B' and 'HR'")
