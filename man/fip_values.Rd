@@ -4,10 +4,10 @@
 \alias{fip_values}
 \title{Return FIP constants per season}
 \usage{
-fip_values(PitchingTable = NULL, Sep.Leagues = FALSE, Fangraphs = FALSE)
+fip_values(dat = NULL, Sep.Leagues = FALSE, Fangraphs = FALSE)
 }
 \arguments{
-\item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+\item{dat}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 Any subsetting or removal of players will affect your results. All players for each year are recomended.}
 
 \item{Sep.Leagues}{If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be

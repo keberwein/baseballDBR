@@ -63,7 +63,7 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
         Fangraphs=FALSE
     }
 
-    fip <- fip_values(PitchingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
+    fip <- fip_values(dat=dat, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
     if (any(!isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
         if (isTRUE(NA_to_zero)){
@@ -71,24 +71,25 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
         }
 
         if(isTRUE(Sep.Leagues)){
-            fip <- fip[, c("yearID", "lgID", "FIP_ERA")]
+            fip <- fip[, c("yearID", "lgID", "cFIP")]
             dat <- dplyr::left_join(dat, fip, by=c("yearID", "lgID"))
         } else {
-            fip <- fip[, c("yearID", "FIP_ERA")]
+            fip <- fip[, c("yearID", "cFIP")]
             dat <- dplyr::left_join(dat, fip, by="yearID")
         }
 
         ifelse(dat$SO > 0,
-               dat$fip <- (((13*dat$HR) + (3*(dat$BB+dat$HBP)-(2*dat$SO))) / ((dat$IPouts/3)) + dat$FIP_ERA), NA)
+               dat$fip <- (((dat$HR*13) + ((dat$BB + dat$IBB + dat$HBP - dat$IBB)*3) - (dat$SO*2)) / (dat$IPouts/3) + dat$cFIP), NA)
     }
     if (any(isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'HBP', 'K', and 'IPouts'")
     }
 
-    dat <- dat[, !names(dat) %in% c("FIP_ERA")]
+    dat <- dat[, !names(dat) %in% c("cFIP")]
 
     return(dat)
 }
+
 
 #' @title Calculate Hits per Nine innings
 #' @description Find the number of hits a pitcher throws per nine innings pitched.
@@ -111,7 +112,7 @@ H_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$H_9 <- round((BB*9) / (dat$IPouts/3), 3), NA)
+               dat$H_9 <- round((dat$H*9) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'IPouts'")
@@ -140,7 +141,7 @@ HR_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("HR", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$HR <- round((HR*9) / (dat$IPouts/3), 3), NA)
+               dat$HR <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("Hr", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'Hr', and 'IPouts'")
@@ -167,11 +168,11 @@ IP <- function (dat=NULL){
     if (is.null(dat)){
         print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
-    if (any(!isTRUE(c("IPouts") %in% names(dat)))){
+    if (any(isTRUE(c("IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
                dat$IP <- round(dat$IPouts/3, 3), NA)
     }
-    if (any(isTRUE(c("IPouts") %in% names(dat)))){
+    if (any(!isTRUE(c("IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'IPouts'")
     }
     return(dat)
@@ -198,7 +199,7 @@ K_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$K_9 <- round((SO*9) / (dat$IPouts/3), 3), NA)
+               dat$K_9 <- round((dat$SO*9) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', 'SO', and 'IPouts'")
@@ -258,7 +259,7 @@ WHIP <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$WHIP <- round((BB+H) / (dat$IPouts/3), 3), NA)
+               dat$WHIP <- round((dat$BB+dat$H) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', and 'IPouts'")
