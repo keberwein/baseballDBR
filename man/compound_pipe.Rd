@@ -2,11 +2,11 @@
 % Please edit documentation in R/utils.R
 \name{\%<>\%}
 \alias{\%<>\%}
-\title{Compound pipe}
+\title{Compound_pipe}
 \usage{
-lhs %<>% rhs
+lhs \%<>\% rhs
 }
 \description{
-Compound pipe
+Compound_pipe
 }
 \keyword{internal}
