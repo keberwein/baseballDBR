@@ -23,19 +23,53 @@
 # This function could replace the dependency on the Lahman package.
 get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
     if (isTRUE(downloadZip)) {
-        download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
+        # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
+        if (isTRUE(baseballDBR::urlExists("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip"))){
+            download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
+        }
+        else {
+            print(print("Chadwick Bureau failed to connect, trying backup."))
+            if (isTRUE(baseballDBR::urlExists("https://github.com/keberwein/baseballdatabank/archive/master.zip"))){
+                download.file("https://github.com/keberwein/baseballdatabank/archive/master.zip", "master.zip")
+            }
+            else {print("Primary and backup URLs failed. Please check your internet connection.")}
+        }
     }
     if (!is.null(table)) {
-        baseURL <- "https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"
+        # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
+        if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"))){
+            baseURL <- "https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"
+        }
+        else {
+            print(print("Chadwick Bureau failed to connect, trying backup."))
+            if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/"))){
+                baseURL <- "https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/"
+            }
+            else {print("Primary and backup URLs failed. Please check your internet connection.")}
+        }
+
         urlList <- list()
 
         for (i in 1:length(table)) {
             urlList[[i]] <- paste0(baseURL, table[i], ".csv")
         }
+
         list2env(lapply(setNames(urlList, make.names(gsub("*.csv$", "", table))), read.csv, stringsAsFactors=FALSE), envir = .GlobalEnv)
     }
+
     if (is.null(table) | isTRUE(AllTables)) {
-        download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
+        # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
+        if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"))){
+            download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
+        }
+        else {
+            print(print("Chadwick Bureau failed to connect, trying backup."))
+            if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/"))){
+                download.file("https://github.com/keberwein/baseballdatabank/archive/master.zip", "master.zip")
+            }
+            else {print("Primary and backup URLs failed. Please check your internet connection.")}
+        }
+
         unzip("master.zip")
         baseDIR <- "baseballdatabank-master/core/"
         fileList <- list.files(path = baseDIR, pattern = "*.csv")
