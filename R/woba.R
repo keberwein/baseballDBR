@@ -77,13 +77,8 @@ wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=
 
         RunValues <- subset(LeagueRunsPerOut, select=c("yearID", "lgID", "RperOut")) %>%
             dplyr::group_by(yearID, lgID) %>%
-            dplyr::mutate(runBB=RperOut+0.14) %>%
-            dplyr::mutate(runHBP=runBB+0.025) %>%
-            dplyr::mutate(run1B=runBB+0.155) %>%
-            dplyr::mutate(run2B=run1B+0.3) %>%
-            dplyr::mutate(run3B=run2B+0.27) %>%
-            dplyr::mutate(runHR=1.4) %>% mutate(runSB=0.2) %>%
-            dplyr::mutate(runCS=(2*RperOut)+0.075) %>%
+            dplyr::mutate(runBB=RperOut+0.14, runHBP=runBB+0.025, run1B=runBB+0.155, run2B=run1B+0.3, run3B=run2B+0.27,
+                          runHR=1.4, runSB=0.2, runCS=(2*RperOut)+0.075) %>%
             dplyr::group_by(yearID, lgID ,RperOut, runBB, runHBP, run1B, run2B, run3B, runHR, runSB, runCS)
     } else {
         LeagueRunsPerOut <-  dplyr::group_by(LeagueRunsPerOut, yearID) %>%
@@ -97,13 +92,8 @@ wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=
         # Note that HR and SB are static values. Tango admits this isn't perfect but is close.
         RunValues <- subset(LeagueRunsPerOut, select=c("yearID", "RperOut")) %>%
             dplyr::group_by(yearID) %>%
-            dplyr::mutate(runBB=RperOut+0.14) %>%
-            dplyr::mutate(runHBP=runBB+0.025) %>%
-            dplyr::mutate(run1B=runBB+0.155) %>%
-            dplyr::mutate(run2B=run1B+0.3) %>%
-            dplyr::mutate(run3B=run2B+0.27) %>%
-            dplyr::mutate(runHR=1.4) %>% mutate(runSB=0.2) %>%
-            dplyr::mutate(runCS=(2*RperOut)+0.075) %>%
+            dplyr::mutate(runBB=RperOut+0.14, runHBP=runBB+0.025, run1B=runBB+0.155, run2B=run1B+0.3, run3B=run2B+0.27,
+                          runHR=1.4, runSB=0.2, runCS=(2*RperOut)+0.075) %>%
             dplyr::group_by(yearID, RperOut, runBB, runHBP, run1B, run2B, run3B, runHR, runSB, runCS)
     }
 
@@ -138,15 +128,9 @@ wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=
             # Calculate wOBA scale.
             dplyr::mutate(woba_scale = 1/(runPlus+runMinus)) %>%
             # wOBA hit-event modifiers.
-            dplyr::mutate(wBB = (runBB+runMinus)*woba_scale) %>%
-            dplyr::mutate(wHBP = (runHBP+runMinus)*woba_scale) %>%
-            dplyr::mutate(w1B = (run1B+runMinus)*woba_scale) %>%
-            dplyr::mutate(w2B = (run2B+runMinus)*woba_scale) %>%
-            dplyr::mutate(w3B = (run3B+runMinus)*woba_scale) %>%
-            dplyr::mutate(wHR = (runHR+runMinus)*woba_scale) %>%
-            dplyr::mutate(wSB = runSB*woba_scale) %>%
-            dplyr::mutate(wCS = runCS*woba_scale)
-    } else {
+            dplyr::mutate(wBB = (runBB+runMinus)*woba_scale, wHBP = (runHBP+runMinus)*woba_scale, wHBP = (runHBP+runMinus)*woba_scale,
+                          w1B = (run1B+runMinus)*woba_scale, w2B = (run2B+runMinus)*woba_scale, w3B = (run3B+runMinus)*woba_scale,
+                          wHR = (runHR+runMinus)*woba_scale, wSB = runSB*woba_scale, wCS = runCS*woba_scale)
         # Summarize values by year.
         yearbatting <- subset(batting, select=c("yearID", "AB", "R", "H", "X2B", "X3B", "HR",
                                                 "SB", "CS", "BB", "SO", "IBB", "HBP", "SF")) %>%
@@ -169,15 +153,10 @@ wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=
             # Calculate wOBA scale.
             dplyr::mutate(woba_scale = 1/(runPlus+runMinus)) %>%
             # wOBA hit-event modifiers.
-            dplyr::mutate(wBB = (runBB+runMinus)*woba_scale) %>%
-            dplyr::mutate(wHBP = (runHBP+runMinus)*woba_scale) %>%
-            dplyr::mutate(w1B = (run1B+runMinus)*woba_scale) %>%
-            dplyr::mutate(w2B = (run2B+runMinus)*woba_scale) %>%
-            dplyr::mutate(w3B = (run3B+runMinus)*woba_scale) %>%
-            dplyr::mutate(wHR = (runHR+runMinus)*woba_scale) %>%
-            dplyr::mutate(wSB = runSB*woba_scale) %>%
-            dplyr::mutate(wCS = runCS*woba_scale)
-    }
+            dplyr::mutate(wBB = (runBB+runMinus)*woba_scale, wHBP = (runHBP+runMinus)*woba_scale, wHBP = (runHBP+runMinus)*woba_scale,
+                          w1B = (run1B+runMinus)*woba_scale, w2B = (run2B+runMinus)*woba_scale, w3B = (run3B+runMinus)*woba_scale,
+                          wHR = (runHR+runMinus)*woba_scale, wSB = runSB*woba_scale, wCS = runCS*woba_scale)
+        }
     }
     return(runsBatting)
 }
