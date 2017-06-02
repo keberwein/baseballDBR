@@ -676,7 +676,7 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
-#' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+#' @param FieldingTable A full fielding table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for

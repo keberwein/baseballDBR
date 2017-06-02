@@ -1,0 +1,82 @@
+---
+title: "Weighted On-base Average (wOBA)"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `baseballDBR` package provides several variations of the wOBA calculation. There are two primary functions that provide the data and calculations. The `wOBA()` function provides the final calculation, while the `WOBA_values()` function provides the season average data that drive the higher level calculation.
+
+## Quick Start
+
+```{r}
+library(baseballDBR)
+# Load data from Baseball Databank
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
+head(Batting, 3)
+```
+
+
+## Understanding wOBA
+
+Weighted on-base average was a statistic first used by sabermatrican Tom Tango and published in [The Book](http://www.insidethebook.com/). The wOBA metric has been show to strongly correlate to the number of runs scored. The basic formula is:
+
+$$\frac{wBB*BB + wHBP*HBP + wX1B*X1B + wX2B*X2B + wX3B*X3B + wHR*HR}{AB+BB-IBB+SF+HBP}$$
+The basic formula is simple enough, but first we must find the `w` values, or weighted values. Calculating the weighted values is not as straight forward is is done by applying a system of linear weights to yearly league averages in order to create a "run scoring environment" for the year. The `baseballDBR` package uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/) to calculate weighted values, but the functions also offer a "Fangraphs" argument, which uses the weights provided by [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn) instead.
+
+### Data
+The `wOBA()` and `wOBA_values()` functions require three data frames:
+
+* Batting
+
+* Pitching
+
+* Fielding
+
+Even though wOBA is a batting metric, the Pitching and Fielding tables are used to determine a player's primary position. The tables should be full tables of entire years, and not a subset, because the wOBA calculation depends on league average values.
+
+### The wOBA_values Function
+
+The higher-level `wOBA()` function relies on `wOBA_values()`. It is not necessary to call the `wOBA_values()` function to use the `wOBA()` function, but it this function has been exported to the package to give users the opportunity for deeper analysis. Arguments include:
+
+* Sep.Leagues - If `TRUE`, this will calculate separate wOBA vales for the American and National leagues. The default setting is `FALSE` because league separation is not typically performed in wOBA calculations. The advantage to separating the leagues is, the resulting wOBA values will naturally account for the DH and batting pitchers.
+
+* Fangraphs - If `TRUE` the function will use wOBA values provided by Fangraphs. The default is to use a ported version of Tom Tango's algorithm as applied to the Baseball Databank. The two algorithms produce similar, but slightly different results. The advantage to using the Tango algorithm is, it can be used in conjunction with `Sep.Leagues=TRUE`, whereas the Fangraphs data only provide for the combined leagues.
+
+```{r}
+library(baseballDBR)
+# Load data from Baseball Databank
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+# Run wOBA values for seperate leagues
+w_vals <- wOBA_values(BattingTable = Batting, FieldingTable = Fielding, PitchingTable = Pitching, Sep.Leagues = TRUE)
+
+```
+
+If we look at the data, we notice that the years 1871 to 1875 produce several NAs. This is due to incomplete or untracked data during that time period. We also notice there was only one league in existence during those years. Otherwise, the data are complete. The "league wOBA" for the two leagues is often close, but varies depending on the quality of play across various years.
+
+```{r}
+head(w_vals)
+```
+
+```{r}
+library(dygraphs)
+library(tidyr)
+w_vals %<>% subset(yearID > 1900 & !(lgID %in% "FL"), select = c("yearID", "lgID", "lg_woba")) %>%
+spread(lgID, lg_woba) %>% dygraph(main = "League wOBA Average") %>% dyRangeSelector()
+w_vals
+```
+
+"League wOBA" is a yearly league average on-base percentage `OBP`, defined as:
+
+$$\frac{SUM(H) + SUM(BB) + SUM(IBB) + SUM(HBP)}{SUM(AB)+SUM(BB)-SUM(IBB)+SUM(SF)+SUM(HBP)}$$
+
+League wOBA can be helpful in calculating other metrics such as weighted runs above average `wRAA` weighted runs created `wRC`.
+
+
