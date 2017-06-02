@@ -29,7 +29,7 @@ Weighted on-base average was a statistic first used by sabermatrican Tom Tango a
 
 $$\frac{wBB*BB + wHBP*HBP + wX1B*X1B + wX2B*X2B + wX3B*X3B + wHR*HR}{AB+BB-IBB+SF+HBP}$$
 
-The basic formula is simple enough, but first we must find the `w` values, or weighted values. Calculating the weighted values is not as straight forward and is done by applying a system of linear weights to yearly league averages in order to create a "run scoring environment" for the year. The `baseballDBR` package uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/) to calculate weighted values, but the functions also offer a "Fangraphs" argument, which uses the weights provided by [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn) instead.
+The basic formula is simple enough, but first we must find the `w` values, or weighted values. Calculating the weighted values is not as straight forward and is done by applying a system of linear weights to yearly league averages in order to create a "run scoring environment" for the year. The `baseballDBR` package uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/) to calculate weighted values. Tango's `SQL` has been ported to `R` for our use. The wOBA functions also offer a "Fangraphs" argument, which uses the weights provided by [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn).
 
 ### Data
 The `wOBA()` and `wOBA_values()` functions require three data frames:
@@ -40,7 +40,7 @@ The `wOBA()` and `wOBA_values()` functions require three data frames:
 
 * Fielding
 
-Even though wOBA is a batting metric, the Pitching and Fielding tables are used to determine a player's primary position. The tables should be full tables of entire years, and not a subset, because the wOBA calculation depends on league average values.
+Even though wOBA is a batting metric, the Pitching and Fielding tables are used to determine a player's primary position. The tables should be full tables of entire years, and not a subset, because the wOBA calculation depends on yearly league average values.
 
 ### The wOBA_values Function
 
