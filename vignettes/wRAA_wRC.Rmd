@@ -1,0 +1,22 @@
+---
+title: "Weighted Runs Above Average (wRAA) and Weighted Runs Created (wRC)"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Weighted Runs Above Average (wRAA)
+
+The wRAA metric attempts to establish an average of runs scored by all the players in the league and rate a single player as how many runs, above or below average, that player scored in a given year. The baseline of the metric is zero, so some players may have a negative wRAA.
+
+Despite having all the characteristics of a "counting statistic," wRAA is based on wOBA and the wOBA scale, which rely on linear weights, which utilize linear weights, so wRAA could certainly be considered a predictive metric.
+
+The formula for wRAA is:
+
+$$\frac{wOBA - league wOBA}{wOBA scale} * (AB+BB-IBB+SF+SH+HBP) = PA$$
+
+The multiplier to the right is a formula for plate appearances, which differs from at-bats. For more information on wOBA, league wOBA, and wOBA scale; please see the `wOBA` vignette.

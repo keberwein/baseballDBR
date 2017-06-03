@@ -6,5 +6,8 @@
 
 # create fips vin
 
-# create database creation vin with postgres and mysql
+# create database creation vin with postgres and mysql.
+# Need to figure out a way to add all tables to database.
+
+
 
