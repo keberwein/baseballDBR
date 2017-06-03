@@ -14,7 +14,7 @@ Any subsetting or removal of players will affect your results. All players for e
 \item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 Any subsetting or removal of players will affect your results. All players for each year are recomended.}
 
-\item{FieldingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
+\item{FieldingTable}{A full fielding table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 Any subsetting or removal of players will affect your results. All players for each year are recomended.}
 
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRC

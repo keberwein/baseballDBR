@@ -13,7 +13,7 @@ The `baseballDBR` package provides several variations of the wOBA calculation. T
 
 ## Quick Start
 
-```{r}
+```{r, eval=FALSE}
 library(baseballDBR)
 # Load data from Baseball Databank
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
@@ -50,7 +50,7 @@ The higher-level `wOBA()` function relies on `wOBA_values()`. It is not necessar
 
 * Fangraphs - If `TRUE` the function will use wOBA values provided by Fangraphs. The default is to use a ported version of Tom Tango's algorithm as applied to the Baseball Databank. The two algorithms produce similar, but slightly different results. The advantage to using the Tango algorithm is, it can be used in conjunction with `Sep.Leagues=TRUE`, whereas the Fangraphs data only provide for the combined leagues.
 
-```{r}
+```{r, eval=FALSE}
 library(baseballDBR)
 # Load data from Baseball Databank
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
@@ -62,11 +62,11 @@ w_vals <- wOBA_values(BattingTable = Batting, FieldingTable = Fielding, Pitching
 
 If we look at the data, we notice that the years 1871 to 1875 produce several NAs. This is due to incomplete or untracked data during that time period. We also notice there was only one league in existence during those years. Otherwise, the data are complete. The "league wOBA" for the two leagues is often close, but varies depending on the quality of play across various years.
 
-```{r}
+```{r, eval=FALSE}
 head(w_vals)
 ```
 
-```{r}
+```{r, eval=FALSE}
 library(dygraphs)
 library(tidyr)
 w_vals %<>% subset(yearID > 1900 & !(lgID %in% "FL"), select = c("yearID", "lgID", "lg_woba")) %>%
