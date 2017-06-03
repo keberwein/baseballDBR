@@ -10,3 +10,5 @@
 
 # create database creation vin with postgres and mysql
 
+# Write testthat just for url checks
+
