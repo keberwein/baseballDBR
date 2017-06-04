@@ -633,7 +633,6 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
         if (isTRUE(NA_to_zero)){
             dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
-
         if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
             dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
@@ -703,18 +702,16 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
 
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
         if (!isTRUE(Fangraphs)) {
-            woba$lg_r_pa <- woba$R / (woba$AB+woba$BB+woba$HBP+woba$SF)
+            wOBA_values$lg_r_pa <- wOBA_values$R / (wOBA_values$AB+wOBA_values$BB+wOBA_values$HBP+wOBA_values$SF)
         }
-
         if (isTRUE(NA_to_zero)){
             dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
-
         if(isTRUE(Sep.Leagues)){
-            wOBA_values <- wOBA_values[, c("yearID", "lg_r_pa", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba", "lg_r_pa")]
             dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
-            wOBA_values <- wOBA_values[, c("yearID", "lg_r_pa", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
+            wOBA_values <- wOBA_values[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba", "lg_r_pa")]
             dat <- left_join(dat, wOBA_values, by="yearID")
         }
 
@@ -731,9 +728,6 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
                 'HR', 'HBP', 'SF', and 'IBB.'")
     }
-
-    dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-
     return(wRC)
     }
 
