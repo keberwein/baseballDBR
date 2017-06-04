@@ -11,4 +11,3 @@
 
 # need to re-test all metrics after I reproted to output as vector.
 
-# cleanup mutate syntax in wOBA and wOBA_values.

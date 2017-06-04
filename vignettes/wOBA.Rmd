@@ -61,11 +61,11 @@ head(Batting_2016)
 
 The `wOBA()` and `wOBA_values()` functions require three data frames:
 
-* Batting
+* Fangraphs: Should the function use Fangraphs wOBA values or the package's native Tango method?
 
-* Pitching
+* NA_to_zero: Should the function apply `0` to statistics that may not have been counted. For example, Babe Ruth's sacrifice fly `SF` metric is NA because that statistic wasn't tracked when he played, so his `wOBA` should be NA. Note, that it is a statistically unsound practice to set NAs to zero. However, the authors of this package recognize the desire to compare past players to current players.
 
-* Fielding
+* Sep.Leagues: Should the function determine separate wOBA values for the National and American leagues. Standard practice would be to use wOBA values that combine both leagues. Note, this function is not possible if `Fangraphs=TRUE`.
 
 Even though wOBA is a batting metric, the Pitching and Fielding tables are used to determine a player's primary position. The tables should be full tables of entire years, and not a subset, because the wOBA calculation depends on yearly league average values.
 

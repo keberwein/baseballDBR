@@ -10,8 +10,8 @@
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- BA(Batting)
-#' new_df
+#' Batting$BA <- BA(Batting)
+#'
 #' }
 #'
 BA <- function (dat=NULL){
@@ -39,8 +39,8 @@ BA <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- BABIP(batting_df)
-#' new_df
+#' Batting$BABIP <- BABIP(batting_df)
+#'
 #' }
 #'
 BABIP <- function (dat=NULL){
@@ -69,8 +69,8 @@ BABIP <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- BBpct(Batting)
-#' new_df
+#' Batting$BBpct <- BBpct(Batting)
+#'
 #' }
 #'
 BBpct <- function (dat=NULL){
@@ -98,8 +98,8 @@ BBpct <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- CTpct(Batting)
-#' new_df
+#' Batting$CTpct <- CTpct(Batting)
+#'
 #' }
 #'
 CTpct <- function (dat=NULL){
@@ -127,8 +127,8 @@ CTpct <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- HRpct(Batting)
-#' new_df
+#' Batting$HRpct <- HRpct(Batting)
+#'
 #' }
 #'
 HRpct <- function (dat=NULL){
@@ -156,8 +156,8 @@ HRpct <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- ISO(Batting)
-#' new_df
+#' Batting$ISO <- ISO(Batting)
+#'
 #' }
 #'
 ISO <- function (dat=NULL){
@@ -185,8 +185,8 @@ ISO <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- Kpct(Batting)
-#' new_df
+#' Batting$Kpct <- Kpct(Batting)
+#'
 #' }
 #'
 Kpct <- function (dat=NULL){
@@ -214,8 +214,8 @@ Kpct <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- OBP(Batting)
-#' new_df
+#' Batting$OBP <- OBP(Batting)
+#'
 #' }
 #'
 OBP <- function (dat=NULL){
@@ -243,8 +243,8 @@ OBP <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- OPS(Batting)
-#' new_df
+#' Batting$OPS <- OPS(Batting)
+#'
 #' }
 #'
 OPS <- function (dat=NULL){
@@ -274,8 +274,8 @@ OPS <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- PA(Batting)
-#' new_df
+#' Batting$PA <- PA(Batting)
+#'
 #' }
 #'
 PA <- function (dat=NULL){
@@ -284,7 +284,7 @@ PA <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$AB >= 0,
-               PA <- dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)
+               PA <- dat$AB+dat$BB+dat$HBP+dat$SF)
     }
     if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds AB', 'BB', 'HBP', 'SF', and 'SH'")
@@ -303,8 +303,8 @@ PA <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- XBHpct(Batting)
-#' new_df
+#' Batting$XBHpct <- XBHpct(Batting)
+#'
 #' }
 #'
 XBHpct <- function (dat=NULL){
@@ -332,8 +332,8 @@ XBHpct <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- XBperH(Batting)
-#' new_df
+#' Batting$XBperH <- XBperH(Batting)
+#'
 #' }
 #'
 XBperH <- function (dat=NULL){
@@ -362,8 +362,8 @@ XBperH <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- RCbasic(Batting)
-#' new_df
+#' Batting$RCbasic <- RCbasic(Batting)
+#'
 #' }
 #'
 RCbasic <- function (dat=NULL){
@@ -394,8 +394,8 @@ RCbasic <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- RCtech(Batting)
-#' new_df
+#' Batting$RCtech <- RCtech(Batting)
+#'
 #' }
 #'
 RCtech <- function (dat=NULL){
@@ -433,8 +433,8 @@ RCtech <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- RC2002(Batting)
-#' new_df
+#' Batting$RC2002 <- RC2002(Batting)
+#'
 #' }
 #'
 RC2002 <- function (dat=NULL){
@@ -471,8 +471,8 @@ RC2002 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- SLG(Batting)
-#' new_df
+#' Batting$SLG <- SLG(Batting)
+#'
 #' }
 #'
 SLG <- function (dat=NULL){
@@ -500,8 +500,8 @@ SLG <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- TBs(Batting)
-#' new_df
+#' Batting$TBs <- TBs(Batting)
+#'
 #' }
 #'
 TBs <- function (dat=NULL){
@@ -545,8 +545,8 @@ TBs <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- wOBA(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-#' new_df
+#' Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#'
 #' }
 #'
 wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
@@ -613,8 +613,8 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- wRAA(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-#' new_df
+#' Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#'
 #' }
 #'
 wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
@@ -685,8 +685,8 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' new_df <- wRC(Batting, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-#' new_df
+#' Batting$wRC <- wRC(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#'
 #' }
 #'
 wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){

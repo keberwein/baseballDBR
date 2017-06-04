@@ -13,10 +13,33 @@ vignette: >
 
 The wRAA metric attempts to establish an average of runs scored by all the players in the league and rate a single player as how many runs, above or below average, that player scored in a given year. The baseline of the metric is zero, so some players may have a negative wRAA.
 
-Despite having all the characteristics of a "counting statistic," wRAA is based on wOBA and the wOBA scale, which rely on linear weights, which utilize linear weights, so wRAA could certainly be considered a predictive metric.
+Despite having all the characteristics of a "counting statistic," wRAA is based on wOBA and the wOBA scale, which rely on linear weights, so wRAA could certainly be considered a predictive metric.
 
 The formula for wRAA is:
 
-$$\frac{wOBA - leagueWOBA}{wOBA scale} * (AB+BB-IBB+SF+SH+HBP) = PA$$
+$$\frac{wOBA - leagueWOBA}{wOBA scale} * (AB+BB-IBB+SF+HBP) = PA$$
 
-The multiplier to the right is a formula for plate appearances, which differs from at-bats. For more information on wOBA, league wOBA, and wOBA scale; please see the `wOBA` vignette.
+The multiplier to the right is a formula for plate appearances, which differs from at-bats. Note that, SHs and IBBs are not counted in the `PA` formula because they are largely regarded as managerial decisions. For more information on wOBA, league wOBA, and wOBA scale; please see the `wOBA` vignette.
+
+The wRAA metric is also used to calculate wins above replacement (WAR.)
+
+## Usage
+
+Since wRAA relies on wOBA coefficients, we need three tables to make the calculation; `Batting`, `Pitching`, and `Fielding`. We use all three tables in order to determine a player's primary position. More on this can be found in the wOBA vignette.
+
+```{r}
+library(baseballDBR)
+# Load data from Baseball Databank
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+```
+
+### Arguments
+
+* Fangraphs: Should the function use Fangraphs wOBA values or the package's native Tango method?
+
+* NA_to_zero: Should the function apply `0` to statistics that may not have been counted. For example, Babe Ruth's sacrifice fly `SF` metric is NA because that statistic wasn't tracked when he played, so his `wRAA` should be NA. Note, that it is a statistically unsound practice to set NAs to zero. However, the authors of this package recognize the desire to compare past players to current players.
+
+* Sep.Leagues: Should the function determine separate wOBA values for the National and American leagues. Standard practice would be to use wOBA values that combine both leagues. Note, this function is not possible if `Fangraphs=TRUE`.
+

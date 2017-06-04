@@ -10,8 +10,8 @@
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- BB_9(Pitching)
-#' new_df
+#' Pitching$BB_9 <- BB_9(Pitching)
+#'
 #' }
 #'
 BB_9 <- function (dat=NULL){
@@ -49,8 +49,8 @@ BB_9 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-#' new_df
+#' Pitching$FIP <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#'
 #' }
 #'
 FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
@@ -99,8 +99,8 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- H_9(Pitching)
-#' new_df
+#' Pitching$H_9 <- H_9(Pitching)
+#'
 #' }
 #'
 H_9 <- function (dat=NULL){
@@ -128,8 +128,8 @@ H_9 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- HR_9(Pitching)
-#' new_df
+#' Pitching$HR_9 <- HR_9(Pitching)
+#'
 #' }
 #'
 HR_9 <- function (dat=NULL){
@@ -157,8 +157,8 @@ HR_9 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- IP(Pitching)
-#' new_df
+#' Pitching$IP <- IP(Pitching)
+#'
 #' }
 #'
 IP <- function (dat=NULL){
@@ -186,8 +186,8 @@ IP <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- K_9(Pitching)
-#' new_df
+#' Pitching$K_9 <- K_9(Pitching)
+#'
 #' }
 #'
 K_9 <- function (dat=NULL){
@@ -215,8 +215,8 @@ K_9 <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- LOB_pct(pitching_df)
-#' new_df
+#' Pitching$LOB_pct <- LOB_pct(pitching_df)
+#'
 #' }
 #'
 LOB_pct <- function (dat=NULL){
@@ -246,8 +246,8 @@ LOB_pct <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Pitching")
-#' new_df <- WHIP(pitching_df)
-#' new_df
+#' Pitching$WHIP <- WHIP(pitching_df)
+#'
 #' }
 #'
 WHIP <- function (dat=NULL){
