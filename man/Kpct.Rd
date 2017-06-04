@@ -18,8 +18,8 @@ Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "
 \examples{
 \dontrun{
 get_bbdb("Batting")
-new_df <- Kpct(Batting)
-new_df
+Batting$Kpct <- Kpct(Batting)
+
 }
 
 }

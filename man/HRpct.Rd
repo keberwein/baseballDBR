@@ -18,8 +18,8 @@ Required fields from the Batting table are "AB" and "HR."
 \examples{
 \dontrun{
 get_bbdb("Batting")
-new_df <- HRpct(Batting)
-new_df
+Batting$HRpct <- HRpct(Batting)
+
 }
 
 }

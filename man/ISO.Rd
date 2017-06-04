@@ -18,8 +18,8 @@ Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 \examples{
 \dontrun{
 get_bbdb("Batting")
-new_df <- ISO(Batting)
-new_df
+Batting$ISO <- ISO(Batting)
+
 }
 
 }

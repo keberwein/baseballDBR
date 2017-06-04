@@ -18,8 +18,8 @@ Required fields from the batting table are "AB" and "SO."
 \examples{
 \dontrun{
 get_bbdb("Batting")
-new_df <- CTpct(Batting)
-new_df
+Batting$CTpct <- CTpct(Batting)
+
 }
 
 }

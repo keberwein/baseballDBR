@@ -18,8 +18,8 @@ Required fields from the Pitching table are; "H", "BB", "IPouts", and "SO."
 \examples{
 \dontrun{
 get_bbdb("Pitching")
-new_df <- K_9(Pitching)
-new_df
+Pitching$K_9 <- K_9(Pitching)
+
 }
 
 }

@@ -23,8 +23,6 @@ The multiplier to the right is a formula for plate appearances, which differs fr
 
 The wRAA metric is also used to calculate wins above replacement (WAR.)
 
-## Usage
-
 Since wRAA relies on wOBA coefficients, we need three tables to make the calculation; `Batting`, `Pitching`, and `Fielding`. We use all three tables in order to determine a player's primary position. More on this can be found in the wOBA vignette.
 
 ```{r}
@@ -42,4 +40,23 @@ Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TR
 * NA_to_zero: Should the function apply `0` to statistics that may not have been counted. For example, Babe Ruth's sacrifice fly `SF` metric is NA because that statistic wasn't tracked when he played, so his `wRAA` should be NA. Note, that it is a statistically unsound practice to set NAs to zero. However, the authors of this package recognize the desire to compare past players to current players.
 
 * Sep.Leagues: Should the function determine separate wOBA values for the National and American leagues. Standard practice would be to use wOBA values that combine both leagues. Note, this function is not possible if `Fangraphs=TRUE`.
+
+# Weighted Runs Created (wRC) 
+
+The wRC metric attempts to quantify a player’s total offensive value and measure it by runs that player creates. The wRC metric is based the "Runs Created" metric that was originally used by Bill James.
+
+wRC requres the same data and accepts the same argumets as the `wRAA()` and `wOBA()` functions.
+
+```{r}
+library(baseballDBR)
+# Load data from Baseball Databank
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting$wRC <- wRC(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+```
+
+
+
+
+
 

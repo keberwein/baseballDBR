@@ -19,8 +19,8 @@ Intentional base on balls (IBB) is added for the years that metric is available.
 \examples{
 \dontrun{
 get_bbdb("Batting")
-new_df <- BBpct(Batting)
-new_df
+Batting$BBpct <- BBpct(Batting)
+
 }
 
 }

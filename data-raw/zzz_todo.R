@@ -9,5 +9,4 @@
 # create database creation vin with postgres and mysql.
 # Need to figure out a way to add all tables to database.
 
-# need to re-test all metrics after I reproted to output as vector.
 

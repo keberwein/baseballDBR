@@ -18,8 +18,8 @@ Required fields from the Pitching table are; "H", "BB", "HBP", "R", and "HR."
 \examples{
 \dontrun{
 get_bbdb("Pitching")
-new_df <- LOB_pct(pitching_df)
-new_df
+Pitching$LOB_pct <- LOB_pct(pitching_df)
+
 }
 
 }

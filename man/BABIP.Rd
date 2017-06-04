@@ -18,8 +18,8 @@ Required fields from the Batting table are; "AB", "BB", "H", "HBP", "SF", "SH", 
 \examples{
 \dontrun{
 get_bbdb("Batting")
-new_df <- BABIP(batting_df)
-new_df
+Batting$BABIP <- BABIP(batting_df)
+
 }
 
 }

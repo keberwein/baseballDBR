@@ -18,8 +18,8 @@ Required fields from the Pitching table are; "IPouts."
 \examples{
 \dontrun{
 get_bbdb("Pitching")
-new_df <- IP(Pitching)
-new_df
+Pitching$IP <- IP(Pitching)
+
 }
 
 }

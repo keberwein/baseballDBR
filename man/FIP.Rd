@@ -32,8 +32,8 @@ Required fields from the Pitching table are "BB", "HBP", "SO", and "IPouts."
 \examples{
 \dontrun{
 get_bbdb("Pitching")
-new_df <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-new_df
+Pitching$FIP <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+
 }
 
 }
