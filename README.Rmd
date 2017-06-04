@@ -47,7 +47,10 @@ Simple batting metrics can be easily added to any batting data frame. For exampl
 ```{r}
 library(baseballDBR)
 
-Batting <- SLG(Batting) %>% OBP() %>% OPS() %>% ISO()
+Batting$SLG <- SLG(Batting)
+
+Batting$OBP <- OBP(Batting)
+
 head(Batting, 3)
 ```
 
@@ -60,7 +63,7 @@ library(baseballDBR)
 
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 
-Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
+Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
 head(Batting, 3)
 ```
 
@@ -71,7 +74,7 @@ library(baseballDBR)
 
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 
-Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = F, Sep.Leagues = T)
+Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = F, Sep.Leagues = T)
 head(Batting, 3)
 ```
 

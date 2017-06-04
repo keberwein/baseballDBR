@@ -72,9 +72,17 @@ As we discussed above, the
 
 ```{r}
 library(baseballDBR)
+library(dplyr)
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 
-Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = T) %>% wOBA(Batting, Pitching, Fielding, Fangraphs = F)
+Batting$f_wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
+    
+Batting$t_wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = F)
+
+# Going to subset for players who had more than 100 at-bats and played in at least eighty games.
+# This shoul eliminate most of the pitchers and minor league call-ups.
+Batting_2016 <- subset(Batting, yearID >= 2016 & AB >= 100 & G >= 80)
+
 
 ```
 

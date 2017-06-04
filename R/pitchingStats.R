@@ -20,12 +20,12 @@ BB_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("IPouts", "BB") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$BB_9 <- round((dat$BB*9 / (dat$IPouts / 3)), 3), NA)
+               BB_9 <- round((dat$BB*9 / (dat$IPouts / 3)), 3), NA)
     }
     if (any(isTRUE(c("BB", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'BB', and 'IPouts'")
     }
-    return(dat)
+    return(BB_9)
 }
 
 #' @title Fielding Independent Pitching (FIP)
@@ -79,15 +79,12 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
         }
 
         ifelse(dat$SO > 0,
-               dat$fip <- (((dat$HR*13) + ((dat$BB + dat$IBB + dat$HBP - dat$IBB)*3) - (dat$SO*2)) / (dat$IPouts/3) + dat$cFIP), NA)
+               fip <- (((dat$HR*13) + ((dat$BB + dat$IBB + dat$HBP - dat$IBB)*3) - (dat$SO*2)) / (dat$IPouts/3) + dat$cFIP), NA)
     }
     if (any(isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'HBP', 'K', and 'IPouts'")
     }
-
-    dat <- dat[, !names(dat) %in% c("cFIP")]
-
-    return(dat)
+    return(fip)
 }
 
 
@@ -112,12 +109,12 @@ H_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$H_9 <- round((dat$H*9) / (dat$IPouts/3), 3), NA)
+               H_9 <- round((dat$H*9) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'IPouts'")
     }
-    return(dat)
+    return(H_9)
 }
 
 #' @title Calculate Home Runs per Nine innings
@@ -141,12 +138,12 @@ HR_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("HR", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$HR <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
+               HR_9 <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("Hr", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'Hr', and 'IPouts'")
     }
-    return(dat)
+    return(HR_9)
 }
 
 #' @title Calculate the innings pitched
@@ -170,12 +167,12 @@ IP <- function (dat=NULL){
     }
     if (any(isTRUE(c("IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$IP <- round(dat$IPouts/3, 3), NA)
+               IP <- round(dat$IPouts/3, 3), NA)
     }
     if (any(!isTRUE(c("IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'IPouts'")
     }
-    return(dat)
+    return(IP)
 }
 
 #' @title Calculate Strikes per Nine innings
@@ -199,12 +196,12 @@ K_9 <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$K_9 <- round((dat$SO*9) / (dat$IPouts/3), 3), NA)
+               K_9 <- round((dat$SO*9) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', 'SO', and 'IPouts'")
     }
-    return(dat)
+    return(K_9)
 }
 
 #' @title Calculate the left on base percentage
@@ -228,14 +225,14 @@ LOB_pct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$LOB_pct <- round(
+               LOB_pct <- round(
                    (dat$H+dat$BB+dat$HBP-dat$R) / (dat$H+dat$BB+dat$HBP-(1.4*dat$HR))
                    , 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
-    return(dat)
+    return(LOB_pct)
 }
 
 #' @title Calculate Walks plus Hits per Innings Pitched
@@ -259,12 +256,12 @@ WHIP <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         ifelse(dat$IPouts > 2,
-               dat$WHIP <- round((dat$BB+dat$H) / (dat$IPouts/3), 3), NA)
+               WHIP <- round((dat$BB+dat$H) / (dat$IPouts/3), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', and 'IPouts'")
     }
-    return(dat)
+    return(WHIP)
 }
 
 

@@ -19,13 +19,13 @@ BA <- function (dat=NULL){
         print("Please supply a source data frame. See the get_bbdb() function for help.")
     }
     if (any(!isTRUE(c("AB", "H") %in% names(dat)))){
-        ifelse(dat$BA > 0,
-               dat$BA <- round((dat$H/dat$AB), 3), NA)
+        ifelse(dat$AB > 0,
+               BA <- round((dat$H/dat$AB), 3), NA)
     }
     if (any(isTRUE(c("AB", "H") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
-    return(dat)
+    return(BA)
 }
 
 #' @title Calculate batting average on balls in play (BABIP)
@@ -49,12 +49,12 @@ BABIP <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "SO", "H", "SF") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$BABIP <- round(((dat$H-dat$HR)/(dat$AB-dat$SO-dat$HR+dat$SF)), 3), NA)
+               BABIP <- round(((dat$H-dat$HR)/(dat$AB-dat$SO-dat$HR+dat$SF)), 3), NA)
     }
     if (any(isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'H', 'HBP', 'SF', 'SH', 'HR', and 'SO.'")
     }
-    return(dat)
+    return(BABIP)
 }
 
 #' @title Calculate base on ball percentage
@@ -79,12 +79,12 @@ BBpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "IBB") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$BBpct <- round((dat$BB/(dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)) * 100, 3) , NA)
+               BBpct <- round((dat$BB/(dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)) * 100, 3) , NA)
     }
     if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
-    return(dat)
+    return(BBpct)
 }
 
 #' @title Calculate a batter's contact rate
@@ -94,7 +94,7 @@ BBpct <- function (dat=NULL){
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords CTpct contact rate
-#' @export CTpct
+#' @export BBpct
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
@@ -108,12 +108,12 @@ CTpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "SO") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$CTpct <- round(((dat$AB-dat$SO)/dat$AB) * 100, 3), NA)
+               CTpct <- round(((dat$AB-dat$SO)/dat$AB) * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "SO") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB' and 'SO'")
     }
-    return(dat)
+    return(BBpct)
 }
 
 #' @title Calculate home run percentage
@@ -137,12 +137,12 @@ HRpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "HR") %in% names(dat)))){
         ifelse(dat$HR > 0,
-               dat$HRpct <- round(dat$HR/dat$AB * 100, 3), NA)
+               HRpct <- round(dat$HR/dat$AB * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'HR'")
     }
-    return(dat)
+    return(HRpct)
 }
 
 #' @title Calculate ISO for batters
@@ -166,12 +166,12 @@ ISO <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$ISO <- round((((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB)-dat$H/dat$AB, 3), NA)
+               ISO <- round((((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB)-dat$H/dat$AB, 3), NA)
     }
     if (any(isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'X2B', 'X3B' and 'HR'")
     }
-    return(dat)
+    return(ISO)
 }
 
 #' @title Calculate strikeout percentage
@@ -195,12 +195,12 @@ Kpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$SO > 0,
-               dat$Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
+               Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'SO', 'BB', 'HBP', 'SF', and 'SH'")
     }
-    return(dat)
+    return(Kpct)
 }
 
 #' @title Calculate on base percentage (OBP)
@@ -224,12 +224,12 @@ OBP <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF") %in% names(dat)))){
         ifelse(dat$H > 0,
-               dat$OBP <- round((dat$H+dat$BB+dat$HBP)/(dat$AB+dat$BB+dat$HBP+dat$SF), 3), NA)
+               OBP <- round((dat$H+dat$BB+dat$HBP)/(dat$AB+dat$BB+dat$HBP+dat$SF), 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "HBP", "AB", "SF") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'BB', 'HBP' and 'SF'")
     }
-    return(dat)
+    return(OBP)
 }
 
 #' @title Calculate on base percentage plus slugging (OPS)
@@ -253,14 +253,14 @@ OPS <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
         ifelse(dat$H > 0,
-               dat$OPS <- round((dat$H+dat$BB+dat$HBP)/
+               OPS <- round((dat$H+dat$BB+dat$HBP)/
                                     (dat$AB+dat$BB+dat$HBP+dat$SF)+
                                     ((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
     }
     if (any(isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'BB', 'SF', 'X2B', 'X3B', and 'HR'")
     }
-    return(dat)
+    return(OPS)
 }
 
 #' @title Calculate plate appearances for batters
@@ -284,12 +284,12 @@ PA <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         ifelse(dat$AB >= 0,
-               dat$PA <- dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)
+               PA <- dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)
     }
     if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds AB', 'BB', 'HBP', 'SF', and 'SH'")
     }
-    return(dat)
+    return(PA)
 }
 
 #' @title Calculate extra base percentage
@@ -313,12 +313,12 @@ XBHpct <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
+               XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
     }
     if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'HBP', 'SF', 'SH', 'X2B', 'X2B' and 'HR'")
     }
-    return(dat)
+    return(XBHpct)
 }
 
 #' @title Calculate extra base per hit
@@ -342,13 +342,13 @@ XBperH <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
-               dat$XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
+               XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
     }
     if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'X2B', 'X3B' and 'HR'")
     }
 
-    return(dat)
+    return(XBHpct)
 }
 
 #' @title Calculate Runs Created using the basic formula.
@@ -372,13 +372,13 @@ RCbasic <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$RCbasic <- ((dat$H+dat$BB)*(dat$H+2*dat$X2B+3*dat$X3B+4*dat$HR)/(dat$AB+dat$BB)), NA)
+               RCbasic <- ((dat$H+dat$BB)*(dat$H+2*dat$X2B+3*dat$X3B+4*dat$HR)/(dat$AB+dat$BB)), NA)
     }
     if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B', and 'HR.'")
     }
 
-    return(dat)
+    return(RCbasic)
 }
 
 #' @title Calculate Runs Created using the technical formula.
@@ -408,7 +408,7 @@ RCtech <- function (dat=NULL){
     X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
     TB <- X1B + 2*dat$X2B + 3*dat$X3B + 4*dat$HR
     ifelse(dat$AB > 0,
-           dat$RCtech <- (((dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP)*
+           RCtech <- (((dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP)*
                                         (TB+(.26*(dat$BB-dat$IBB+dat$HBP))) + (.52*(dat$SH+dat$SF+dat$SB)))/
                                         (dat$AB+dat$BB+dat$HBP+dat$SH+dat$SF)), NA)
     }
@@ -417,8 +417,7 @@ RCtech <- function (dat=NULL){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
                 'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', and 'IBB.'")
     }
-
-    return(dat)
+    return(RCtech)
 }
 
 #' @title Calculate Runs Created using the updated 2002 formula.
@@ -450,7 +449,7 @@ RC2002 <- function (dat=NULL){
         0.492*(dat$SH+dat$SF+dat$SB)-(0.04*dat$SO)
     OpportunityFact <- dat$AB+dat$BB+dat$HBP+dat$SH+dat$SF
     ifelse(dat$AB > 0,
-           dat$RC2002 <- (((((2.4*OpportunityFact)+OnBaseFact)*((3*OpportunityFact)+AdvanceFact))/
+           RC2002 <- (((((2.4*OpportunityFact)+OnBaseFact)*((3*OpportunityFact)+AdvanceFact))/
                                   (9*OpportunityFact))-(0.9*OpportunityFact)), NA)
     }
     if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
@@ -458,8 +457,7 @@ RC2002 <- function (dat=NULL){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
                 'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', 'SO', and 'IBB.'")
     }
-
-    return(dat)
+    return(RC2002)
 }
 
 #' @title Calculate slugging percentage (SLG)
@@ -483,12 +481,12 @@ SLG <- function (dat=NULL){
     }
     if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
         ifelse(dat$H > 0,
-               dat$SLG <- round(((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
+               SLG <- round(((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
     }
     if (any(isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'X2B', 'X3B' and 'HR'")
     }
-    return(dat)
+    return(SLG)
 }
 
 #' @title Calculate a batter's total bases
@@ -512,12 +510,12 @@ TBs <- function (dat=NULL){
     }
     if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
         ifelse(dat$AB > 0,
-               dat$TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
+               TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
     }
     if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB','H', 'X2B', 'X3B' and 'HR'")
     }
-    return(dat)
+    return(TBs)
 }
 
 
@@ -578,7 +576,7 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
         }
 
         ifelse(dat$H > 0,
-               dat$wOBA <- (dat$wBB*(dat$BB-dat$IBB) + dat$wHBP*dat$HBP + dat$w1B*(dat$H-dat$X2B-dat$X3B-dat$HR) +
+               wOBA <- (dat$wBB*(dat$BB-dat$IBB) + dat$wHBP*dat$HBP + dat$w1B*(dat$H-dat$X2B-dat$X3B-dat$HR) +
                                 dat$w2B*dat$X2B + dat$w3B*dat$X3B + dat$wHR*dat$HR)/
                                   (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP) , NA)
     }
@@ -586,10 +584,7 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
                 'HR', 'HBP', 'SF', and 'IBB.'")
     }
-
-    dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
-
-    return(dat)
+    return(wOBA)
 }
 
 
@@ -655,17 +650,14 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
                    (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP), NA)
 
         ifelse(dat$H > 0,
-               dat$wRAA <- ((dat$wOBA-dat$lg_woba) / dat$woba_scale * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
+               wRAA <- ((dat$wOBA-dat$lg_woba) / dat$woba_scale * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
 
     }
     if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
                 'HR', 'HBP', 'SF', and 'IBB.'")
     }
-
-    dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-
-    return(dat)
+    return(wRAA)
 }
 
 
@@ -735,7 +727,7 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
                    (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP), NA)
 
         ifelse(dat$H > 0,
-               dat$wRC <- ((((dat$wOBA-dat$lg_woba) / dat$woba_scale) + dat$lg_r_pa) * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
+               wRC <- ((((dat$wOBA-dat$lg_woba) / dat$woba_scale) + dat$lg_r_pa) * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
 
     }
     if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
@@ -745,7 +737,7 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
 
     dat <- dat[, !names(dat) %in% c("wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
 
-    return(dat)
+    return(wRC)
     }
 
 
