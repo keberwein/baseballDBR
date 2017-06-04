@@ -66,13 +66,22 @@ If we look at the data, we notice that the years 1871 to 1875 produce several NA
 head(w_vals)
 ```
 
-```{r, eval=FALSE}
-library(dygraphs)
-library(tidyr)
-w_vals %<>% subset(yearID > 1900 & !(lgID %in% "FL"), select = c("yearID", "lgID", "lg_woba")) %>%
-spread(lgID, lg_woba) %>% dygraph(main = "League wOBA Average") %>% dyRangeSelector()
-w_vals
+### Fangraphs wOBA vs Tango wOBA
+
+As we discussed above, the 
+
+```{r}
+library(baseballDBR)
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting <- wOBA(Batting, Pitching, Fielding, Fangraphs = T) %>% wOBA(Batting, Pitching, Fielding, Fangraphs = F)
+
 ```
+
+
+
+
+### Data Dictionary
 
 "League wOBA" is a yearly league average on-base percentage `OBP`, defined as:
 

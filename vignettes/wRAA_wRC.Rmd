@@ -17,6 +17,6 @@ Despite having all the characteristics of a "counting statistic," wRAA is based 
 
 The formula for wRAA is:
 
-$$\frac{wOBA - league wOBA}{wOBA scale} * (AB+BB-IBB+SF+SH+HBP) = PA$$
+$$\frac{wOBA - leagueWOBA}{wOBA scale} * (AB+BB-IBB+SF+SH+HBP) = PA$$
 
 The multiplier to the right is a formula for plate appearances, which differs from at-bats. For more information on wOBA, league wOBA, and wOBA scale; please see the `wOBA` vignette.
