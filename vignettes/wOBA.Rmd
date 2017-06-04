@@ -29,9 +29,36 @@ Weighted on-base average was a statistic first used by sabermatrican Tom Tango a
 
 $$\frac{wBB*BB + wHBP*HBP + wX1B*X1B + wX2B*X2B + wX3B*X3B + wHR*HR}{(AB+BB-IBB+SF+SH+HBP)=PA}$$
 
-The basic formula is simple enough, but first we must find the `w` values, or weighted values. Calculating the weighted values is not as straight forward and is done by applying a system of linear weights to yearly league averages in order to create a "run scoring environment" for the year. The `baseballDBR` package uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/) to calculate weighted values. Tango's `SQL` has been ported to `R` for our use. The wOBA functions also offer a "Fangraphs" argument, which uses the weights provided by [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn).
+The basic formula is simple enough, but first we must find the `w` values, or weighted values. Calculating the weighted values is not as straight forward and is done by applying a system of linear weights to yearly league averages in order to create a "run scoring environment" for the year. The `baseballDBR` package uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/) to calculate weighted values. Tango's `SQL` has been ported to `R` for our use. The wOBA functions also offer a "Fangraphs" argument, which uses the weights provided by [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn). The Fangraphs algorithm and Tango algorithm produce similar woba values, but can be slightly different.
 
-### Data
+### Fangraphs wOBA vs Tango wOBA
+
+As we discussed above, the modifiers that Fangraphs produces are slightly different than the modifiers that the Tango algorithm produces, therefore the two produce slightly different wOBA values. The wOBA values are normally within one one-thousandth of one percent.
+
+**Why are they different?**
+
+The data from the Baseball Databank does not specify a player's position. Therefore, "fuzzy logic" is used to determine a player's primary position. This may cause instances where a player's statistics are weighted according to a position other than their primary position.
+
+```{r}
+library(baseballDBR)
+library(dplyr)
+get_bbdb(table = c("Batting", "Pitching", "Fielding"))
+
+Batting$f_wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
+    
+Batting$t_wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = F)
+
+# Going to subset for players who had more than 100 at-bats and played in at least eighty games.
+# This shoul eliminate most of the pitchers and minor league call-ups.
+Batting_2016 <- subset(Batting, yearID >= 2016 & AB >= 100 & G >= 80) %>%
+    arrange(desc(t_wOBA))
+
+head(Batting_2016)
+
+```
+
+### Arguments
+
 The `wOBA()` and `wOBA_values()` functions require three data frames:
 
 * Batting
@@ -65,36 +92,4 @@ If we look at the data, we notice that the years 1871 to 1875 produce several NA
 ```{r, eval=FALSE}
 head(w_vals)
 ```
-
-### Fangraphs wOBA vs Tango wOBA
-
-As we discussed above, the 
-
-```{r}
-library(baseballDBR)
-library(dplyr)
-get_bbdb(table = c("Batting", "Pitching", "Fielding"))
-
-Batting$f_wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
-    
-Batting$t_wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = F)
-
-# Going to subset for players who had more than 100 at-bats and played in at least eighty games.
-# This shoul eliminate most of the pitchers and minor league call-ups.
-Batting_2016 <- subset(Batting, yearID >= 2016 & AB >= 100 & G >= 80)
-
-
-```
-
-
-
-
-### Data Dictionary
-
-"League wOBA" is a yearly league average on-base percentage `OBP`, defined as:
-
-$$\frac{SUM(H) + SUM(BB) + SUM(IBB) + SUM(HBP)}{SUM(AB)+SUM(BB)-SUM(IBB)+SUM(SF)+SUM(HBP)}$$
-
-League wOBA can be helpful in calculating other metrics such as weighted runs above average `wRAA` weighted runs created `wRC`.
-
 

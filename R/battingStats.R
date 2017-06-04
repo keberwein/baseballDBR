@@ -540,6 +540,7 @@ TBs <- function (dat=NULL){
 #' formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
 #' does not require an external download. If not specified, the default is set to FALSE.
 #' @keywords wOBA Weighted On-Base Average
+#' @import dplyr
 #' @export wOBA
 #' @examples
 #' \dontrun{
@@ -563,16 +564,14 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
 
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
         if (isTRUE(NA_to_zero)){
-            dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
-            dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
-            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+            dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
         if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
-            dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
+            dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
             wOBA_values <- wOBA_values[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
-            dat <- dplyr::left_join(dat, wOBA_values, by="yearID")
+            dat <- left_join(dat, wOBA_values, by="yearID")
         }
 
         ifelse(dat$H > 0,
@@ -609,6 +608,7 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
 #' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRAA should be expected.
 #' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
 #' @keywords wRAA Weighted Runs Above Average
+#' @import dplyr
 #' @export wRAA
 #' @examples
 #' \dontrun{
@@ -631,17 +631,15 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 
     if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
         if (isTRUE(NA_to_zero)){
-            dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
-            dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
-            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+            dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
 
         if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
+            dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
             wOBA_values <- wOBA_values[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, wOBA_values, by="yearID")
+            dat <- left_join(dat, wOBA_values, by="yearID")
         }
 
         ifelse(dat$H > 0,
@@ -682,6 +680,7 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRC should be expected.
 #' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
 #' @keywords wRC Weighted Runs Above Average
+#' @import dplyr
 #' @export wRC
 #' @examples
 #' \dontrun{
@@ -708,17 +707,15 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
         }
 
         if (isTRUE(NA_to_zero)){
-            dat <- dplyr::mutate(dat, SF=ifelse(is.na(SF),0,SF))
-            dat <- dplyr::mutate(dat, IBB=ifelse(is.na(IBB),0,IBB))
-            dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
+            dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
 
         if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lg_r_pa", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, wOBA_values, by=c("yearID", "lgID"))
+            dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
             wOBA_values <- wOBA_values[, c("yearID", "lg_r_pa", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
-            dat <- dplyr::left_join(dat, wOBA_values, by="yearID")
+            dat <- left_join(dat, wOBA_values, by="yearID")
         }
 
         ifelse(dat$H > 0,
