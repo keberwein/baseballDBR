@@ -19,8 +19,6 @@
 #'}
 
 # Todo: Clean up code block with ifelse()
-# Todo: Need to add TryCatch
-# This function could replace the dependency on the Lahman package.
 get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
     if (isTRUE(downloadZip)) {
         # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
@@ -37,12 +35,12 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
     }
     if (!is.null(table)) {
         # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
-        if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"))){
+        if (isTRUE(baseballDBR::urlExists("https://github.com/chadwickbureau/baseballdatabank/tree/master/core"))){
             baseURL <- "https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"
         }
         else {
             print(print("Chadwick Bureau failed to connect, trying backup."))
-            if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/"))){
+            if (isTRUE(baseballDBR::urlExists("https://github.com/keberwein/baseballdatabank/tree/master/core"))){
                 baseURL <- "https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/"
             }
             else {print("Primary and backup URLs failed. Please check your internet connection.")}
@@ -59,12 +57,12 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
 
     if (is.null(table) | isTRUE(AllTables)) {
         # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
-        if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"))){
+        if (isTRUE(baseballDBR::urlExists("https://github.com/chadwickbureau/baseballdatabank/tree/master/core"))){
             download.file("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip", "master.zip")
         }
         else {
             print(print("Chadwick Bureau failed to connect, trying backup."))
-            if (isTRUE(baseballDBR::urlExists("https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/"))){
+            if (isTRUE(baseballDBR::urlExists("https://github.com/keberwein/baseballdatabank/tree/master/core"))){
                 download.file("https://github.com/keberwein/baseballdatabank/archive/master.zip", "master.zip")
             }
             else {print("Primary and backup URLs failed. Please check your internet connection.")}
