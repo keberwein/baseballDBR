@@ -14,14 +14,13 @@
 #'
 #' }
 #'
-BB_9 <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+BB_9 <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("BB", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'BB', and 'IPouts'")
     }
-    
+
     ifelse(dat$IPouts > 2,
                BB_9 <- round((dat$BB*9 / (dat$IPouts / 3)), 3), NA)
     return(BB_9)
@@ -52,10 +51,9 @@ BB_9 <- function (dat){
 #'
 #' }
 #'
-FIP <- function (dat, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("BB", "HBP", "SO", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'HBP', 'K', and 'IPouts'")
     }
@@ -101,14 +99,13 @@ FIP <- function (dat, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 #'
 #' }
 #'
-H_9 <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+H_9 <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("H", "BB", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'IPouts'")
     }
-    
+
     ifelse(dat$IPouts > 2,
                H_9 <- round((dat$H*9) / (dat$IPouts/3), 3), NA)
 
@@ -130,16 +127,14 @@ H_9 <- function (dat){
 #'
 #' }
 #'
-HR_9 <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+HR_9 <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("Hr", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'Hr', and 'IPouts'")
     }
 
-    ifelse(dat$IPouts > 2,
-               HR_9 <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
+    ifelse(dat$IPouts > 2, HR_9 <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
     return(HR_9)
 }
 
@@ -158,14 +153,13 @@ HR_9 <- function (dat){
 #'
 #' }
 #'
-IP <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+IP <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'IPouts'")
     }
-    
+
     ifelse(dat$IPouts > 2, IP <- round(dat$IPouts/3, 3), NA)
     return(IP)
 }
@@ -185,14 +179,13 @@ IP <- function (dat){
 #'
 #' }
 #'
-K_9 <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+K_9 <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("H", "BB", "IPouts", "SO") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', 'SO', and 'IPouts'")
     }
-    
+
     ifelse(dat$IPouts > 2, K_9 <- round((dat$SO*9) / (dat$IPouts/3), 3), NA)
     return(K_9)
 }
@@ -212,16 +205,15 @@ K_9 <- function (dat){
 #'
 #' }
 #'
-LOB_pct <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+LOB_pct <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("H", "BB", "HBP", "R", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
-    
+
     ifelse(dat$IPouts > 2, LOB_pct <- round((dat$H+dat$BB+dat$HBP-dat$R) / (dat$H+dat$BB+dat$HBP-(1.4*dat$HR)), 3), NA)
-    
+
     return(LOB_pct)
 }
 
@@ -240,16 +232,15 @@ LOB_pct <- function (dat){
 #'
 #' }
 #'
-WHIP <- function (dat){
-    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
-           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
-    
+WHIP <- function (dat=NULL){
+    ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
+
     if (!all(c("H", "BB", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', and 'IPouts'")
     }
 
     ifelse(dat$IPouts > 2, WHIP <- round((dat$BB+dat$H) / (dat$IPouts/3), 3), NA)
-    
+
     return(WHIP)
 }
 
