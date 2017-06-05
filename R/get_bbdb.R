@@ -76,7 +76,7 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
             urlList[[i]] <- paste0(baseDIR, fileList[i])
         }
         list2env(lapply(setNames(urlList, make.names(gsub("*.csv$", "", fileList))), read.csv, stringsAsFactors=FALSE), envir = .GlobalEnv)
-        rm("master.zip")
+        unlink("master.zip")
         unlink("baseballdatabank-master", recursive=T)
     }
 }
