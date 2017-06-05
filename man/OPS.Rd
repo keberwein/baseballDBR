@@ -4,7 +4,7 @@
 \alias{OPS}
 \title{Calculate on base percentage plus slugging (OPS)}
 \usage{
-OPS(dat = NULL)
+OPS(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

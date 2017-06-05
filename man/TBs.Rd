@@ -4,7 +4,7 @@
 \alias{TBs}
 \title{Calculate a batter's total bases}
 \usage{
-TBs(dat = NULL)
+TBs(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

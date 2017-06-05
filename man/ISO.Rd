@@ -4,7 +4,7 @@
 \alias{ISO}
 \title{Calculate ISO for batters}
 \usage{
-ISO(dat = NULL)
+ISO(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

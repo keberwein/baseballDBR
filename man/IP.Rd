@@ -4,7 +4,7 @@
 \alias{IP}
 \title{Calculate the innings pitched}
 \usage{
-IP(dat = NULL)
+IP(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

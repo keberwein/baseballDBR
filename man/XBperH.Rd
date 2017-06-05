@@ -4,7 +4,7 @@
 \alias{XBperH}
 \title{Calculate extra base per hit}
 \usage{
-XBperH(dat = NULL)
+XBperH(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

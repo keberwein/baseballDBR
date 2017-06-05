@@ -25,7 +25,7 @@ The wRAA metric is also used to calculate wins above replacement (WAR.)
 
 Since wRAA relies on wOBA coefficients, we need three tables to make the calculation; `Batting`, `Pitching`, and `Fielding`. We use all three tables in order to determine a player's primary position. More on this can be found in the wOBA vignette.
 
-```{r}
+```{r, eval=FALSE}
 library(baseballDBR)
 # Load data from Baseball Databank
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))
@@ -47,7 +47,7 @@ The wRC metric attempts to quantify a player’s total offensive value and measu
 
 wRC requres the same data and accepts the same argumets as the `wRAA()` and `wOBA()` functions.
 
-```{r}
+```{r, eval=FALSE}
 library(baseballDBR)
 # Load data from Baseball Databank
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))

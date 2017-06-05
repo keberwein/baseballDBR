@@ -4,7 +4,7 @@
 \alias{RC2002}
 \title{Calculate Runs Created using the updated 2002 formula.}
 \usage{
-RC2002(dat = NULL)
+RC2002(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

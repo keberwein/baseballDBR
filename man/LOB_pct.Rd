@@ -4,7 +4,7 @@
 \alias{LOB_pct}
 \title{Calculate the left on base percentage}
 \usage{
-LOB_pct(dat = NULL)
+LOB_pct(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

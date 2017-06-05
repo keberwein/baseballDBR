@@ -39,7 +39,7 @@ As we discussed above, the modifiers that Fangraphs produces are slightly differ
 
 The data from the Baseball Databank does not specify a player's position. Therefore, "fuzzy logic" is used to determine a player's primary position. This may cause instances where a player's statistics are weighted according to a position other than their primary position.
 
-```{r}
+```{r, eval=FALSE}
 library(baseballDBR)
 library(dplyr)
 get_bbdb(table = c("Batting", "Pitching", "Fielding"))

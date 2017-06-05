@@ -4,7 +4,7 @@
 \alias{HR_9}
 \title{Calculate Home Runs per Nine innings}
 \usage{
-HR_9(dat = NULL)
+HR_9(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

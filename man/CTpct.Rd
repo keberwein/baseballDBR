@@ -4,7 +4,7 @@
 \alias{CTpct}
 \title{Calculate a batter's contact rate}
 \usage{
-CTpct(dat = NULL)
+CTpct(dat)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

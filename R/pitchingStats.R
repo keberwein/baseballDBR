@@ -14,17 +14,16 @@
 #'
 #' }
 #'
-BB_9 <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("IPouts", "BB") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               BB_9 <- round((dat$BB*9 / (dat$IPouts / 3)), 3), NA)
-    }
-    if (any(isTRUE(c("BB", "IPouts") %in% names(dat)))){
+BB_9 <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("BB", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'BB', and 'IPouts'")
     }
+    
+    ifelse(dat$IPouts > 2,
+               BB_9 <- round((dat$BB*9 / (dat$IPouts / 3)), 3), NA)
     return(BB_9)
 }
 
@@ -53,9 +52,12 @@ BB_9 <- function (dat=NULL){
 #'
 #' }
 #'
-FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+FIP <- function (dat, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("BB", "HBP", "SO", "IPouts") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'HBP', 'K', and 'IPouts'")
     }
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -65,12 +67,11 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 
     fip <- fip_values(dat=dat, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
-    if (any(!isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
-        if (isTRUE(NA_to_zero)){
+    if (isTRUE(NA_to_zero)){
             dat <- dplyr::mutate(dat, HBP=ifelse(is.na(HBP),0,HBP))
         }
 
-        if(isTRUE(Sep.Leagues)){
+    if(isTRUE(Sep.Leagues)){
             fip <- fip[, c("yearID", "lgID", "cFIP")]
             dat <- dplyr::left_join(dat, fip, by=c("yearID", "lgID"))
         } else {
@@ -80,10 +81,7 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 
         ifelse(dat$SO > 0,
                fip <- (((dat$HR*13) + ((dat$BB + dat$IBB + dat$HBP - dat$IBB)*3) - (dat$SO*2)) / (dat$IPouts/3) + dat$cFIP), NA)
-    }
-    if (any(isTRUE(c("BB", "HBP", "SO", "IPouts") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'BB', 'HBP', 'K', and 'IPouts'")
-    }
+
     return(fip)
 }
 
@@ -103,17 +101,17 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 #'
 #' }
 #'
-H_9 <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               H_9 <- round((dat$H*9) / (dat$IPouts/3), 3), NA)
-    }
-    if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
+H_9 <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("H", "BB", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'IPouts'")
     }
+    
+    ifelse(dat$IPouts > 2,
+               H_9 <- round((dat$H*9) / (dat$IPouts/3), 3), NA)
+
     return(H_9)
 }
 
@@ -132,17 +130,16 @@ H_9 <- function (dat=NULL){
 #'
 #' }
 #'
-HR_9 <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("HR", "IPouts") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               HR_9 <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
-    }
-    if (any(isTRUE(c("Hr", "IPouts") %in% names(dat)))){
+HR_9 <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("Hr", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'Hr', and 'IPouts'")
     }
+
+    ifelse(dat$IPouts > 2,
+               HR_9 <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
     return(HR_9)
 }
 
@@ -161,17 +158,15 @@ HR_9 <- function (dat=NULL){
 #'
 #' }
 #'
-IP <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(isTRUE(c("IPouts") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               IP <- round(dat$IPouts/3, 3), NA)
-    }
-    if (any(!isTRUE(c("IPouts") %in% names(dat)))){
+IP <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'IPouts'")
     }
+    
+    ifelse(dat$IPouts > 2, IP <- round(dat$IPouts/3, 3), NA)
     return(IP)
 }
 
@@ -190,17 +185,15 @@ IP <- function (dat=NULL){
 #'
 #' }
 #'
-K_9 <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               K_9 <- round((dat$SO*9) / (dat$IPouts/3), 3), NA)
-    }
-    if (any(isTRUE(c("H", "BB", "IPouts", "SO") %in% names(dat)))){
+K_9 <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("H", "BB", "IPouts", "SO") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', 'SO', and 'IPouts'")
     }
+    
+    ifelse(dat$IPouts > 2, K_9 <- round((dat$SO*9) / (dat$IPouts/3), 3), NA)
     return(K_9)
 }
 
@@ -219,19 +212,16 @@ K_9 <- function (dat=NULL){
 #'
 #' }
 #'
-LOB_pct <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               LOB_pct <- round(
-                   (dat$H+dat$BB+dat$HBP-dat$R) / (dat$H+dat$BB+dat$HBP-(1.4*dat$HR))
-                   , 3), NA)
-    }
-    if (any(isTRUE(c("H", "BB", "HBP", "R", "HR") %in% names(dat)))){
+LOB_pct <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("H", "BB", "HBP", "R", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
+    
+    ifelse(dat$IPouts > 2, LOB_pct <- round((dat$H+dat$BB+dat$HBP-dat$R) / (dat$H+dat$BB+dat$HBP-(1.4*dat$HR)), 3), NA)
+    
     return(LOB_pct)
 }
 
@@ -250,17 +240,16 @@ LOB_pct <- function (dat=NULL){
 #'
 #' }
 #'
-WHIP <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
-        ifelse(dat$IPouts > 2,
-               WHIP <- round((dat$BB+dat$H) / (dat$IPouts/3), 3), NA)
-    }
-    if (any(isTRUE(c("H", "BB", "IPouts") %in% names(dat)))){
+WHIP <- function (dat){
+    ifelse(isTRUE(exists("Pitching")), dat <- Pitching,
+           ifelse(isTRUE(exists("pitching")), dat <- pitching, dat <- dat))
+    
+    if (!all(c("H", "BB", "IPouts") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'BB', and 'IPouts'")
     }
+
+    ifelse(dat$IPouts > 2, WHIP <- round((dat$BB+dat$H) / (dat$IPouts/3), 3), NA)
+    
     return(WHIP)
 }
 

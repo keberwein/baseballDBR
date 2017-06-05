@@ -14,17 +14,13 @@
 #'
 #' }
 #'
-BA <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+BA <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+    if(!all(c("AB", "H") %in% colnames(dat))) {
+        message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'AB'")
     }
-    if (any(!isTRUE(c("AB", "H") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               BA <- round((dat$H/dat$AB), 3), NA)
-    }
-    if (any(isTRUE(c("AB", "H") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
-    }
+    ifelse(dat$AB > 0, BA <- round((dat$H/dat$AB), 3), NA)
     return(BA)
 }
 
@@ -43,17 +39,16 @@ BA <- function (dat=NULL){
 #'
 #' }
 #'
-BABIP <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+BABIP <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if(!all(c("AB", "SO", "H", "SF") %in% colnames(dat))) {
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'SO', 'H' and 'SF'")
     }
-    if (any(!isTRUE(c("AB", "SO", "H", "SF") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               BABIP <- round(((dat$H-dat$HR)/(dat$AB-dat$SO-dat$HR+dat$SF)), 3), NA)
-    }
-    if (any(isTRUE(c("AB", "BB", "H", "HBP", "SF", "SH", "HR", "SO") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'H', 'HBP', 'SF', 'SH', 'HR', and 'SO.'")
-    }
+
+    ifelse(dat$AB > 0, BABIP <- round(((dat$H-dat$HR)/(dat$AB-dat$SO-dat$HR+dat$SF)), 3), NA)
+
     return(BABIP)
 }
 
@@ -73,17 +68,14 @@ BABIP <- function (dat=NULL){
 #'
 #' }
 #'
-BBpct <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "IBB") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               BBpct <- round((dat$BB/(dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)) * 100, 3) , NA)
-    }
-    if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
+BBpct <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'IBB', 'HBP', 'SF', and 'SH'")
     }
+    ifelse(dat$AB > 0, BBpct <- round((dat$BB/(dat$AB+dat$BB+dat$HBP+dat$SF+dat$SH)) * 100, 3) , NA)
     return(BBpct)
 }
 
@@ -102,17 +94,15 @@ BBpct <- function (dat=NULL){
 #'
 #' }
 #'
-CTpct <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "SO") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               CTpct <- round(((dat$AB-dat$SO)/dat$AB) * 100, 3), NA)
-    }
-    if (any(isTRUE(c("AB", "SO") %in% names(dat)))){
+CTpct <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "SO") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB' and 'SO'")
     }
+
+    ifelse(dat$AB > 0, CTpct <- round(((dat$AB-dat$SO)/dat$AB) * 100, 3), NA)
     return(BBpct)
 }
 
@@ -131,17 +121,15 @@ CTpct <- function (dat=NULL){
 #'
 #' }
 #'
-HRpct <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "HR") %in% names(dat)))){
-        ifelse(dat$HR > 0,
-               HRpct <- round(dat$HR/dat$AB * 100, 3), NA)
-    }
-    if (any(isTRUE(c("AB", "HR") %in% names(dat)))){
+HRpct <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'HR'")
     }
+
+    ifelse(dat$HR > 0, HRpct <- round(dat$HR/dat$AB * 100, 3), NA)
     return(HRpct)
 }
 
@@ -160,17 +148,16 @@ HRpct <- function (dat=NULL){
 #'
 #' }
 #'
-ISO <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               ISO <- round((((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB)-dat$H/dat$AB, 3), NA)
-    }
-    if (any(isTRUE(c("AB", "X2B", "X3B", "HR") %in% names(dat)))){
+ISO <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'X2B', 'X3B' and 'HR'")
     }
+
+    ifelse(dat$AB > 0,
+               ISO <- round((((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB)-dat$H/dat$AB, 3), NA)
     return(ISO)
 }
 
@@ -189,17 +176,16 @@ ISO <- function (dat=NULL){
 #'
 #' }
 #'
-Kpct <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
-        ifelse(dat$SO > 0,
-               Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
-    }
-    if (any(isTRUE(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat)))){
+Kpct <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "SO", "BB", "HBP", "SF", "SH") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'SO', 'BB', 'HBP', 'SF', and 'SH'")
     }
+
+    ifelse(dat$SO > 0,
+               Kpct <- round((dat$SO / (dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
     return(Kpct)
 }
 
@@ -218,17 +204,16 @@ Kpct <- function (dat=NULL){
 #'
 #' }
 #'
-OBP <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF") %in% names(dat)))){
-        ifelse(dat$H > 0,
-               OBP <- round((dat$H+dat$BB+dat$HBP)/(dat$AB+dat$BB+dat$HBP+dat$SF), 3), NA)
-    }
-    if (any(isTRUE(c("H", "BB", "HBP", "AB", "SF") %in% names(dat)))){
+OBP <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("H", "BB", "HBP", "AB", "SF") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'BB', 'HBP' and 'SF'")
     }
+
+   ifelse(dat$H > 0,
+               OBP <- round((dat$H+dat$BB+dat$HBP)/(dat$AB+dat$BB+dat$HBP+dat$SF), 3), NA)
     return(OBP)
 }
 
@@ -247,19 +232,17 @@ OBP <- function (dat=NULL){
 #'
 #' }
 #'
-OPS <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
-        ifelse(dat$H > 0,
-               OPS <- round((dat$H+dat$BB+dat$HBP)/
-                                    (dat$AB+dat$BB+dat$HBP+dat$SF)+
-                                    ((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
-    }
-    if (any(isTRUE(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)))){
+OPS <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!allc("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'BB', 'SF', 'X2B', 'X3B', and 'HR'")
     }
+
+    ifelse(dat$H > 0,
+               OPS <- round((dat$H+dat$BB+dat$HBP) / (dat$AB+dat$BB+dat$HBP+dat$SF) +
+                                    ((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
     return(OPS)
 }
 
@@ -278,17 +261,16 @@ OPS <- function (dat=NULL){
 #'
 #' }
 #'
-PA <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+PA <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "BB", "HBP", "SF") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds AB', 'BB', 'HBP', and 'SF'")
     }
-    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
-        ifelse(dat$AB >= 0,
+
+    ifelse(dat$AB >= 0,
                PA <- dat$AB+dat$BB+dat$HBP+dat$SF)
-    }
-    if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds AB', 'BB', 'HBP', 'SF', and 'SH'")
-    }
     return(PA)
 }
 
@@ -307,17 +289,16 @@ PA <- function (dat=NULL){
 #'
 #' }
 #'
-XBHpct <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
-    }
-    if (any(isTRUE(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat)))){
+XBHpct <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'BB', 'HBP', 'SF', 'SH', 'X2B', 'X2B' and 'HR'")
     }
+
+    ifelse(dat$AB > 0,
+               XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$AB + dat$BB + dat$HBP + dat$SF + dat$SH)) * 100, 3), NA)
     return(XBHpct)
 }
 
@@ -336,17 +317,16 @@ XBHpct <- function (dat=NULL){
 #'
 #' }
 #'
-XBperH <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$H > 0,
-               XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
-    }
-    if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
+XBperH <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!allisTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'X2B', 'X3B' and 'HR'")
     }
+
+    ifelse(dat$H > 0,
+           XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
 
     return(XBHpct)
 }
@@ -366,18 +346,16 @@ XBperH <- function (dat=NULL){
 #'
 #' }
 #'
-RCbasic <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               RCbasic <- ((dat$H+dat$BB)*(dat$H+2*dat$X2B+3*dat$X3B+4*dat$HR)/(dat$AB+dat$BB)), NA)
-    }
-    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat)))){
+RCbasic <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!allisTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B', and 'HR.'")
     }
 
+    ifelse(dat$AB > 0,
+               RCbasic <- ((dat$H+dat$BB)*(dat$H+2*dat$X2B+3*dat$X3B+4*dat$HR)/(dat$AB+dat$BB)), NA)
     return(RCbasic)
 }
 
@@ -398,25 +376,21 @@ RCbasic <- function (dat=NULL){
 #'
 #' }
 #'
-RCtech <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+RCtech <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!allisTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+                          "SB", "CS", "SF", "SH", "IBB") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', and 'IBB.'")
     }
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
-                          "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
-    #X2B=X3B=HR=NULL
     X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
     TB <- X1B + 2*dat$X2B + 3*dat$X3B + 4*dat$HR
     ifelse(dat$AB > 0,
            RCtech <- (((dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP)*
                                         (TB+(.26*(dat$BB-dat$IBB+dat$HBP))) + (.52*(dat$SH+dat$SF+dat$SB)))/
                                         (dat$AB+dat$BB+dat$HBP+dat$SH+dat$SF)), NA)
-    }
-    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
-                     "SB", "CS", "SF", "SH", "IBB") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
-                'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', and 'IBB.'")
-    }
     return(RCtech)
 }
 
@@ -437,12 +411,16 @@ RCtech <- function (dat=NULL){
 #'
 #' }
 #'
-RC2002 <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
+RC2002 <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!all(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+               "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', 'SO', and 'IBB.'")
     }
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
-                      "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat)))){
+
     X1B <- dat$H-dat$X2B-dat$X3B-dat$HR
     OnBaseFact <- dat$H+dat$BB-dat$CS+dat$HBP-dat$GIDP
     AdvanceFact <- (1.25*X1B)+(1.69*dat$X2B)+(3.02*dat$X3B)+(3.73*dat$HR)+0.29*(dat$BB-dat$IBB+dat$HBP)+
@@ -451,12 +429,6 @@ RC2002 <- function (dat=NULL){
     ifelse(dat$AB > 0,
            RC2002 <- (((((2.4*OpportunityFact)+OnBaseFact)*((3*OpportunityFact)+AdvanceFact))/
                                   (9*OpportunityFact))-(0.9*OpportunityFact)), NA)
-    }
-    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
-                     "SB", "CS", "SF", "SH", "IBB", "SO") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
-                'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', 'SO', and 'IBB.'")
-    }
     return(RC2002)
 }
 
@@ -475,17 +447,16 @@ RC2002 <- function (dat=NULL){
 #'
 #' }
 #'
-SLG <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
-        ifelse(dat$H > 0,
-               SLG <- round(((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
-    }
-    if (any(isTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat)))){
+SLG <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!allisTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'X2B', 'X3B' and 'HR'")
     }
+
+    ifelse(dat$H > 0,
+               SLG <- round(((dat$H-dat$X2B-dat$X3B-dat$HR) + (dat$X2B*2) + (dat$X3B*3) + (dat$HR*4))/dat$AB, 3), NA)
     return(SLG)
 }
 
@@ -504,21 +475,18 @@ SLG <- function (dat=NULL){
 #'
 #' }
 #'
-TBs <- function (dat=NULL){
-    if (is.null(dat)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
-    if (any(!isTRUE(c("AB", "H", "X2B", "X3B", "HR") %in% names(dat)))){
-        ifelse(dat$AB > 0,
-               TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
-    }
-    if (any(isTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat)))){
+TBs <- function (dat){
+    ifelse(isTRUE(exists("Batting")), dat <- Batting,
+           ifelse(isTRUE(exists("batting")), dat <- batting, dat <- dat))
+
+    if (!allisTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB','H', 'X2B', 'X3B' and 'HR'")
     }
+
+    ifelse(dat$AB > 0,
+               TBs <- round(((dat$H)+(2*dat$X2B)+(3*dat$X3B)+(4*dat$HR)), 3), NA)
     return(TBs)
 }
-
-
 
 #' @title Calculate Weighted On-Base Average (wOBA)
 #' @description Find the wOBA for all players with one or more hits for a particular season.
@@ -550,9 +518,12 @@ TBs <- function (dat=NULL){
 #' }
 #'
 wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(BattingTable) | is.null(PitchingTable) | is.null(FieldingTable)){
-        print("Please supply source Batting, Pitching, and Fielding data frames.")
-    }
+    ifelse(isTRUE(exists("Batting")), BattingTable <- Batting,
+           ifelse(isTRUE(exists("batting")), BattingTable <- batting, BattingTable <- BattingTable))
+    ifelse(isTRUE(exists("Pitching")), PitchingTable <- Pitching,
+           ifelse(isTRUE(exists("pitching")), PitchingTable <- pitching, dat <- dat))
+    ifelse(isTRUE(exists("Fielding")), FieldingTable <- Fielding,
+           ifelse(isTRUE(exists("fielding")), FieldingTable <- fielding, dat <- dat))
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
@@ -562,13 +533,19 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
     dat <- BattingTable
     wOBA_values <- wOBA_values(BattingTable, PitchingTable, FieldingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        if (isTRUE(NA_to_zero)){
+    if (!all(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'HBP', 'SF', and 'IBB.'")
+    }
+
+    if (isTRUE(NA_to_zero)){
             dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
-        }
-        if(isTRUE(Sep.Leagues)){
+    }
+
+    if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
             dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
+
         } else {
             wOBA_values <- wOBA_values[, c("yearID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR")]
             dat <- left_join(dat, wOBA_values, by="yearID")
@@ -578,11 +555,6 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
                wOBA <- (dat$wBB*(dat$BB-dat$IBB) + dat$wHBP*dat$HBP + dat$w1B*(dat$H-dat$X2B-dat$X3B-dat$HR) +
                                 dat$w2B*dat$X2B + dat$w3B*dat$X3B + dat$wHR*dat$HR)/
                                   (dat$AB+(dat$BB-dat$IBB)+dat$SF+dat$HBP) , NA)
-    }
-    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
-                'HR', 'HBP', 'SF', and 'IBB.'")
-    }
     return(wOBA)
 }
 
@@ -617,23 +589,31 @@ wOBA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, N
 #'
 #' }
 #'
-wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(BattingTable) | is.null(PitchingTable) | is.null(FieldingTable)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
+wRAA <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    ifelse(isTRUE(exists("Batting")), BattingTable <- Batting,
+           ifelse(isTRUE(exists("batting")), BattingTable <- batting, BattingTable <- BattingTable))
+    ifelse(isTRUE(exists("Pitching")), PitchingTable <- Pitching,
+           ifelse(isTRUE(exists("pitching")), PitchingTable <- pitching, dat <- dat))
+    ifelse(isTRUE(exists("Fielding")), FieldingTable <- Fielding,
+           ifelse(isTRUE(exists("fielding")), FieldingTable <- fielding, dat <- dat))
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
         Fangraphs=FALSE
     }
     dat <- BattingTable
+
+    if (!all(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'HBP', 'SF', and 'IBB.'")
+    }
+
     wOBA_values <- wOBA_values(BattingTable, PitchingTable, FieldingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        if (isTRUE(NA_to_zero)){
+    if (isTRUE(NA_to_zero)){
             dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
-        if(isTRUE(Sep.Leagues)){
+    if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba")]
             dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
@@ -648,12 +628,6 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 
         ifelse(dat$H > 0,
                wRAA <- ((dat$wOBA-dat$lg_woba) / dat$woba_scale * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
-
-    }
-    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
-                'HR', 'HBP', 'SF', and 'IBB.'")
-    }
     return(wRAA)
 }
 
@@ -688,26 +662,34 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #'
 #' }
 #'
-wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
-    if (is.null(BattingTable) | is.null(PitchingTable) | is.null(FieldingTable)){
-        print("Please supply a source data frame. See the get_bbdb() function for help.")
-    }
+wRC <- function (BattingTable, PitchingTable, FieldingTable, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
+    ifelse(isTRUE(exists("Batting")), BattingTable <- Batting,
+           ifelse(isTRUE(exists("batting")), BattingTable <- batting, BattingTable <- BattingTable))
+    ifelse(isTRUE(exists("Pitching")), PitchingTable <- Pitching,
+           ifelse(isTRUE(exists("pitching")), PitchingTable <- pitching, dat <- dat))
+    ifelse(isTRUE(exists("Fielding")), FieldingTable <- Fielding,
+           ifelse(isTRUE(exists("fielding")), FieldingTable <- fielding, dat <- dat))
 
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
         print("The Fangraphs Guts table does not sperate wOBA by league. Applying the default calculation...")
         Fangraphs=FALSE
     }
     dat <- BattingTable
+
+    if (!all(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
+                'HR', 'HBP', 'SF', and 'IBB.'")
+    }
+
     wOBA_values <- wOBA_values(BattingTable, PitchingTable, FieldingTable, Fangraphs=Fangraphs, Sep.Leagues=Sep.Leagues)
 
-    if (any(!isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        if (!isTRUE(Fangraphs)) {
+    if (!isTRUE(Fangraphs)) {
             wOBA_values$lg_r_pa <- wOBA_values$R / (wOBA_values$AB+wOBA_values$BB+wOBA_values$HBP+wOBA_values$SF)
         }
-        if (isTRUE(NA_to_zero)){
+    if (isTRUE(NA_to_zero)){
             dat <- mutate(dat, SF=ifelse(is.na(SF),0,SF), IBB=ifelse(is.na(IBB),0,IBB), HBP=ifelse(is.na(HBP),0,HBP))
         }
-        if(isTRUE(Sep.Leagues)){
+    if(isTRUE(Sep.Leagues)){
             wOBA_values <- wOBA_values[, c("yearID", "lgID", "wBB", "wHBP", "w1B", "w2B", "w3B", "wHR", "woba_scale", "lg_woba", "lg_r_pa")]
             dat <- left_join(dat, wOBA_values, by=c("yearID", "lgID"))
         } else {
@@ -722,12 +704,6 @@ wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fang
 
         ifelse(dat$H > 0,
                wRC <- ((((dat$wOBA-dat$lg_woba) / dat$woba_scale) + dat$lg_r_pa) * (dat$AB+dat$BB+dat$HBP+dat$SF)), NA)
-
-    }
-    if (any(isTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB") %in% names(dat)))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
-                'HR', 'HBP', 'SF', and 'IBB.'")
-    }
     return(wRC)
     }
 
