@@ -4,7 +4,7 @@
 \alias{PA}
 \title{Calculate plate appearances for batters}
 \usage{
-PA(dat)
+PA(dat = NULL)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

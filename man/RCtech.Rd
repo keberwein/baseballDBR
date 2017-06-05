@@ -4,7 +4,7 @@
 \alias{RCtech}
 \title{Calculate Runs Created using the technical formula.}
 \usage{
-RCtech(dat)
+RCtech(dat = NULL)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

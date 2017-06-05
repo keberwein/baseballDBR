@@ -4,8 +4,8 @@
 \alias{wOBA}
 \title{Calculate Weighted On-Base Average (wOBA)}
 \usage{
-wOBA(BattingTable, PitchingTable, FieldingTable, Fangraphs = FALSE,
-  NA_to_zero = TRUE, Sep.Leagues = FALSE)
+wOBA(BattingTable = NULL, PitchingTable = NULL, FieldingTable = NULL,
+  Fangraphs = FALSE, NA_to_zero = TRUE, Sep.Leagues = FALSE)
 }
 \arguments{
 \item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.

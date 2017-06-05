@@ -4,7 +4,7 @@
 \alias{BB_9}
 \title{Calculate walks per nine innings}
 \usage{
-BB_9(dat)
+BB_9(dat = NULL)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in

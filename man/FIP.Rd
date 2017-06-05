@@ -4,7 +4,8 @@
 \alias{FIP}
 \title{Fielding Independent Pitching (FIP)}
 \usage{
-FIP(dat, Fangraphs = FALSE, NA_to_zero = TRUE, Sep.Leagues = FALSE)
+FIP(dat = NULL, Fangraphs = FALSE, NA_to_zero = TRUE,
+  Sep.Leagues = FALSE)
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
