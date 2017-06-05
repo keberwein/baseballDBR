@@ -19,7 +19,7 @@ library(baseballDBR)
 # BaseballDBR
 [![Build Status](https://travis-ci.org/keberwein/baseballDBR.png?branch=master)](https://travis-ci.org/keberwein/baseballDBR)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/baseballDBR)](http://www.r-pkg.org/badges/version/baseballDBR)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 # Install
 
@@ -100,16 +100,26 @@ A relational database is not needed to work with these data. However, we may wan
 
 ```{r, eval=F}
 library(baseballDBR)
+library(RPostgreSQL)
+
+# Load all tables into the Global Environment.
 get_bbdb(AllTables = TRUE)
 
-dbTables <- names(which(unlist(eapply(.GlobalEnv,is.data.frame))))
+# Make a list of all data frames.
+dbTables <- names(Filter(isTRUE, eapply(.GlobalEnv, is.data.frame)))
 
-#for (i in 1:length(dbTables)) { dbWriteTable(con, name =  dbTables[i], value = dbTables[i], overwrite=T) }
-
-library(RPostgreSQL)
+# Load data base drivers and load all data frames in a loop.
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, host= "localhost", dbname, user, password)
-dbWriteTable(con, "Batting", Batting)
+con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+
+for (i in 1:length(dbTables)) { 
+    if (dbExistsTable(con, dbTables[i])) {
+        dbRemoveTable(dbTables[i])
+    }
+    dbWriteTable(con, name =  dbTables[i], value = get0(dbTables[i])) 
+}
+
+# Disconnect from database.
 dbDisconnect(con)
 rm(con, drv)
 ```
