@@ -85,7 +85,7 @@ BBpct <- function (dat=NULL){
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords CTpct contact rate
-#' @export BBpct
+#' @export CTpct
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
@@ -101,7 +101,7 @@ CTpct <- function (dat=NULL){
     }
 
     ifelse(dat$AB > 0, CTpct <- round(((dat$AB-dat$SO)/dat$AB) * 100, 3), NA)
-    return(BBpct)
+    return(CTpct)
 }
 
 #' @title Calculate home run percentage
@@ -229,7 +229,7 @@ OBP <- function (dat=NULL){
 OPS <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!allc("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat)){
+    if (!all(c("H", "BB", "HBP", "AB", "SF", "X2B", "X3B", "HR", "AB") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'BB', 'SF', 'X2B', 'X3B', and 'HR'")
     }
 
@@ -311,14 +311,14 @@ XBHpct <- function (dat=NULL){
 XBperH <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!allisTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat))){
+    if (!all(c("H", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'X2B', 'X3B' and 'HR'")
     }
 
     ifelse(dat$H > 0,
            XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
 
-    return(XBHpct)
+    return(XBperH)
 }
 
 #' @title Calculate Runs Created using the basic formula.
@@ -339,7 +339,7 @@ XBperH <- function (dat=NULL){
 RCbasic <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!allisTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat))){
+    if (!all(c("AB", "H", "BB", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B', and 'HR.'")
     }
 
@@ -368,7 +368,7 @@ RCbasic <- function (dat=NULL){
 RCtech <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!allisTRUE(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
+    if (!all(c("AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP",
                           "SB", "CS", "SF", "SH", "IBB") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB', 'H', 'BB', 'X2B', 'X3B',\n
                 'HR', 'GIDP', 'HBP', 'SB', 'CS', 'SF', 'SH', and 'IBB.'")
@@ -464,7 +464,7 @@ SLG <- function (dat=NULL){
 TBs <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!allisTRUE(c("H", "X2B", "X3B", "HR") %in% names(dat))){
+    if (!all(c("H", "X2B", "X3B", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'AB','H', 'X2B', 'X3B' and 'HR'")
     }
 
