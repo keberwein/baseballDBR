@@ -316,7 +316,7 @@ XBperH <- function (dat=NULL){
     }
 
     ifelse(dat$H > 0,
-           XBHpct <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
+           XBperH <- round(((dat$X2B+dat$X3B+dat$HR)/(dat$H)) * 100, 3), NA)
 
     return(XBperH)
 }
@@ -437,7 +437,7 @@ RC2002 <- function (dat=NULL){
 SLG <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!allisTRUE(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat))){
+    if (!all(c("H", "X2B", "X3B", "AB", "HR") %in% names(dat))){
         message("Not enough data to calculate. Please make sure your data inclueds 'H', 'AB', 'X2B', 'X3B' and 'HR'")
     }
 

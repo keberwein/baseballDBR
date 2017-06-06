@@ -27,7 +27,8 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
         }
         else {
             print(print("Chadwick Bureau failed to connect, trying backup."))
-            if (isTRUE(baseballDBR::urlExists("https://github.com/keberwein/baseballdatabank/archive/master.zip"))){
+            if (!isTRUE(baseballDBR::urlExists("https://github.com/chadwickbureau/baseballdatabank/archive/master.zip")) &
+                isTRUE(baseballDBR::urlExists("https://github.com/keberwein/baseballdatabank/archive/master.zip"))){
                 download.file("https://github.com/keberwein/baseballdatabank/archive/master.zip", "master.zip")
             }
             else {print("Primary and backup URLs failed. Please check your internet connection.")}
