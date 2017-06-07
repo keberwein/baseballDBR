@@ -1,0 +1,111 @@
+---
+title: "Database Loading and Extracting Baseball Data"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The data contained in the Baseball Databank / Lahman Database are small enough to fit directly into memory using R. However, many may find it preferable to store the data in a local database to be accessed at a later time. There are two primary methods to accomplish this; extract transform load (ETL), and extract load transform (ELT).
+
+The following examples use a local PostgreSQL database and the `RPostgreSQL` package. Many of the following methods would also work with other database connections such as the `RMySQL` and `DBI` packages.
+
+## ETL
+
+The goal here is to extrac the data from source, do the transformations in R, and load them into the database. With the `baseballDBR` and `RPostgreSQL` packages, this is a simple task. The following assumes we are starting with an empty Postgres instance named "lahman."
+
+```{r, eval=FALSE}
+library(baseballDBR)
+library(RPostgreSQL)
+library(dplyr)
+
+get_bbdb(AllTables = TRUE)
+
+# Make a list of all data frames.
+dbTables <- names(Filter(isTRUE, eapply(.GlobalEnv, is.data.frame)))
+
+# Load data base drivers and load all data frames in a loop.
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+
+# Do some transformations on our selected dataframes.
+Batting <- mutate(Batting, BA = BA(Batting), PA = PA(Batting), OBP = OBP(Batting), OPS = OPS(Batting))
+
+# Create a loop to write all of our data frames our Postgres instance.
+for (i in 1:length(dbTables)) { 
+    if (dbExistsTable(con, dbTables[i])) {
+       dbRemoveTable(con, dbTables[i])
+    }
+    dbWriteTable(con, name =  dbTables[i], value = get0(dbTables[i]), row.names = FALSE) 
+}
+
+# Make sure every thing wrote correctly.
+test <- dbGetQuery(con, "SELECT * FROM Batting LIMIT 5")
+test
+rm(test)
+
+# Close the database connection.
+dbDisconnect(con)
+dbUnloadDriver(drv)
+```
+
+## ELT
+
+Once our data are loaded into a local database instance, working with the data becomes less cumbersome because we have the choice to only load into R the data that we neeed, or the choice to leverage `dplyr` or `SQL` backends to work with the data without loading into R at all.
+
+### Using dplyr Backends
+
+The `dplyr` package allows us to work with remote or on-disk data stored in databases using a familiar syntax and `dplyr` verbs. For more on database backends, see the [Databases vignette](https://cran.r-project.org/web/packages/dplyr/vignettes/databases.html) in the dplyr package. A current limitation to this method is, functions from the `baseballDBR` package will not work, and the method is limited to `dplyr` verbs.
+
+```{r, eval=FALSE}
+library(dplyr)
+library(baseballDBR)
+
+# Use an "src" connection to access the database. This requires the same arguments that RPostreSQL uses to connect to the database.
+# Note: There are also src functions for connecting to various types of databases.
+pgcon <- src_postgres(host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+
+# We're not laoding the batting table, rather we're loading a method to access it.
+Batting_tbl <- tbl(pgcon, "Batting")
+
+# Use familiar dplyr verbs to access our data.
+Batting_tbl %>% select(playerID, yearID, H, AB) %>% filter(yearID >= 1900)
+
+# We can pull our data into R to permorm some modifications.
+Batting <- collect(Batting_tbl, n = Inf) %>% mutate(BABIP = BABIP(Batting))
+
+# Write the modified table back to the database.
+db_insert_into( con = pgcon$con, table = "Batting", values = Batting)
+
+```
+
+### Using SQL Backends
+
+For those familiar with SQL, the same process can be acheived in our relational databases's native language.
+
+```{r, eval=FALSE}
+library(RPostgreSQL)
+library(baseballDBR)
+
+# Load data base drivers and load all data frames in a loop.
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+
+# Load the Batting table into R.
+Batting <- dbGetQuery(con, "SELECT * FROM Batting")
+
+# Permorm some modifications.
+Batting <- mutate(BABIP = BABIP(Batting))
+
+# Write modified table back to the database.
+dbWriteTable("Batting", Batting)
+
+# Close the database connection.
+dbDisconnect(con)
+dbUnloadDriver(drv)
+
+```
+
