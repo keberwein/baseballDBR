@@ -1,0 +1,59 @@
+---
+title: "Fielding Independent Pitching (FIP)"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `baseballDBR` package provides two functions for fielding independent pitching (FIP), the `FIP()` function, which calculates the metric for players in the "Pitching" table, and the `fip_values()` function, which calculates the league averages and constraints used in the calculation.
+
+The FIP metric attempts to estimate a pitcher's performance independent of the performance of the other players on the defense. The goal is similar to that of earned run average (ERA), but unlike ERA, FIP removes the variable of a pitcher's "luck" from plays made by other defenders.
+
+Like wOBA, FIP is a weighted metric that relies on a system of linear weights and league averages. The formula for FIP is:
+
+$$\frac{13*HR + 3(BB + HBP) - 2*SO}{IP} + FIP constant$$
+
+The above formula is based off of work by Tom Tango, and is similar to the DIPS metric by Voros McCracken. It looks at only the things a pitching *can* control such as hit-by-pitch, base-on-ball, strikeouts, and home runs and weights them accordingly. 
+
+## The FIP Constant
+
+The FIP constant is used in the FIP calculation solely to bring the number onto the ERA scale, and make it more familiar to users. The wOBA constant works in much the same way to bring wOBA closer to OBP. The formula for the FIP constant is:
+
+$$\frac{lgERA - (HR*13) + (BB + IBB + HBP - IBB)3 - (SO*2)}{IP}$$
+
+```{r, eval=FALSE}
+library(baseballDBR)
+
+# Grab the Pitching table from the Baseabll Databank
+get_bbdb(table = "Pitching")
+
+Pitching$FIP <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=FALSE, Sep.Leagues=FALSE)
+
+
+```
+
+
+### Arguments
+
+Unlike the `wOBA()` functions, which require three data frames, the `FIP()` function only requires the "Pitching" data frame.
+
+* Fan graphs: Should the function use the package's native algorithm or download the FIP constraints from Fangraphs? The default is FALSE, as the results will likely be identical.
+
+* Sep.Leagues: Should the function determine separate FIP values for the National and American leagues. Standard practice would be to use FIP values that combine both leagues. Note, this function is not possible if `Fangraphs=TRUE` as Fangraphs does not separate leagues.
+
+* NA_to_zero: Should the function apply `0` to statistics that may not have been counted? For example, Cy Young's intentional base-on-balls `IBB` metric is NA because that statistic wasn't tracked when he played, so his `FIPS` should be NA. Note, that it is a statistically unsound practice to set NAs to zero. However, the authors of this package recognize the desire to compare past players to current players.
+
+### Fip Values
+
+For deeper analysis, the `fip_values()` function allows us to look at the league averages that are the underpinnings of the FIP calculation.
+
+```{r, eval=FALSE}
+library(baseballDBR)
+
+fip_valz <- fip_values(Pitching, Fangraphs = FALSE, Sep.Leagues = FALSE)
+```
+

@@ -9,11 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The data contained in the Baseball Databank / Lahman Database are small enough to fit directly into memory using R. However, many may find it preferable to store the data in a local database to be accessed at a later time. There are two primary methods to accomplish this; extract transform load (ETL), and extract load transform (ELT).
+The data contained in the Baseball Databank / Lahman Database are small enough to fit directly into memory using R. However, many may find it preferable to store the data in a local database to be accessed at a later time. The following examples use a local PostgreSQL database and the `RPostgreSQL` package. Many of the following methods would also work with other database connections such as the `RMySQL` and `DBI` packages.
 
-The following examples use a local PostgreSQL database and the `RPostgreSQL` package. Many of the following methods would also work with other database connections such as the `RMySQL` and `DBI` packages.
-
-## ETL
+## Loading Data
 
 The goal here is to extrac the data from source, do the transformations in R, and load them into the database. With the `baseballDBR` and `RPostgreSQL` packages, this is a simple task. The following assumes we are starting with an empty Postgres instance named "lahman."
 
@@ -52,7 +50,7 @@ dbDisconnect(con)
 dbUnloadDriver(drv)
 ```
 
-## ELT
+## Accessing Data
 
 Once our data are loaded into a local database instance, working with the data becomes less cumbersome because we have the choice to only load into R the data that we neeed, or the choice to leverage `dplyr` or `SQL` backends to work with the data without loading into R at all.
 

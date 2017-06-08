@@ -63,7 +63,7 @@ The `wOBA()` and `wOBA_values()` functions require three data frames:
 
 * Fangraphs: Should the function use Fangraphs wOBA values or the package's native Tango method?
 
-* NA_to_zero: Should the function apply `0` to statistics that may not have been counted. For example, Babe Ruth's sacrifice fly `SF` metric is NA because that statistic wasn't tracked when he played, so his `wOBA` should be NA. Note, that it is a statistically unsound practice to set NAs to zero. However, the authors of this package recognize the desire to compare past players to current players.
+* NA_to_zero: Should the function apply `0` to statistics that may not have been counted? For example, Babe Ruth's sacrifice fly `SF` metric is NA because that statistic wasn't tracked when he played, so his `wOBA` should be NA. Note, that it is a statistically unsound practice to set NAs to zero. However, the authors of this package recognize the desire to compare past players to current players.
 
 * Sep.Leagues: Should the function determine separate wOBA values for the National and American leagues. Standard practice would be to use wOBA values that combine both leagues. Note, this function is not possible if `Fangraphs=TRUE`.
 

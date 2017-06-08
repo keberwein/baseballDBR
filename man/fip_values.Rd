@@ -23,7 +23,7 @@ Both the Tango and Frangraphs formulas use ERA for their FIP constants.
 }
 \examples{
 \dontrun{
-fip_df <- fip_values(Fangraphs=FALSE)
+fip_df <- fip_values(Pitching, Fangraphs=FALSE)
 head(fip_df)
 }
 

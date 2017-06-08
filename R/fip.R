@@ -16,7 +16,7 @@
 #' @export fip_values
 #' @examples
 #' \dontrun{
-#' fip_df <- fip_values(Fangraphs=FALSE)
+#' fip_df <- fip_values(Pitching, Fangraphs=FALSE)
 #' head(fip_df)
 #'}
 #'
@@ -57,10 +57,6 @@ fip_values <- function(dat=NULL, Sep.Leagues=FALSE, Fangraphs=FALSE){
             dplyr::mutate(IP=IPouts/3, lgERA=(ER / IP)*9, lgRA=(R / IP)*9,
                           cFIP=lgERA - ((HR*13) + ((BB + IBB + HBP - IBB)*3) - (SO*2)) / IP,
                           cRA=lgRA - ((HR*13) + ((BB + IBB + HBP - IBB)*3) - (SO*2)) / IP)
-            #dplyr::mutate(lgERA=(ER / IP)*9) %>%
-            #dplyr::mutate(lgRA=(R / IP)*9) %>%
-            #dplyr::mutate(FIP_ERA=lgERA - ((HR*13) + ((BB + IBB + HBP - IBB)*3) - (SO*2)) / IP) %>%
-            #dplyr::mutate(FIP_RA=lgRA - ((HR*13) + ((BB + IBB + HBP - IBB)*3) - (SO*2)) / IP)
     }
     return(dat)
 }
