@@ -498,8 +498,8 @@ TBs <- function (dat=NULL){
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-#'
+#' Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs=FALSE,
+#'                           NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #' }
 #'
 wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
@@ -563,7 +563,8 @@ wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @examples
 #' \dontrun{
 #' get_bbdb("Batting")
-#' Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
+#' Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE,
+#'                           NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
 #' }
 #'

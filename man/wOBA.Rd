@@ -37,8 +37,8 @@ Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", 
 \examples{
 \dontrun{
 get_bbdb("Batting")
-Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
-
+Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs=FALSE,
+                          NA_to_zero=TRUE, Sep.Leagues=FALSE)
 }
 
 }
