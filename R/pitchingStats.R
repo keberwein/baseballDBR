@@ -4,7 +4,6 @@
 #' Required fields from the Pitching table are; "IPouts", and "BB."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BB BB_9 BB9 bb/9
 #' @export BB_9
 #' @examples
@@ -31,7 +30,6 @@ BB_9 <- function (dat=NULL){
 #' Required fields from the Pitching table are "BB", "HBP", "SO", and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
 #' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leauges. The default for this argument is FALSE.
@@ -89,7 +87,6 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 #' Required fields from the Pitching table are; "H", "BB", and "IPouts."
 #' @param dat A data frame you would wish to calculate.  The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords hits per nine innings
 #' @export H_9
 #' @examples
@@ -117,7 +114,6 @@ H_9 <- function (dat=NULL){
 #' Required fields from the Pitching table are; "H" and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords hits per nine innings
 #' @export HR_9
 #' @examples
@@ -143,7 +139,6 @@ HR_9 <- function (dat=NULL){
 #' Required fields from the Pitching table are; "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords innings pitched
 #' @export IP
 #' @examples
@@ -169,7 +164,6 @@ IP <- function (dat=NULL){
 #' Required fields from the Pitching table are; "H", "BB", "IPouts", and "SO."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords strikes per nine innings
 #' @export K_9
 #' @examples
@@ -195,7 +189,6 @@ K_9 <- function (dat=NULL){
 #' Required fields from the Pitching table are; "H", "BB", "HBP", "R", and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords LOB_pct LOB LOB percentage
 #' @export LOB_pct
 #' @examples
@@ -222,7 +215,6 @@ LOB_pct <- function (dat=NULL){
 #' Required fields from the Pitching table are; "H", "BB", and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords Walks plus Hits per Innings Pitched WHIP
 #' @export WHIP
 #' @examples

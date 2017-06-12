@@ -9,8 +9,7 @@ FIP(dat = NULL, Fangraphs = FALSE, NA_to_zero = TRUE,
 }
 \arguments{
 \item{dat}{A data frame you would wish to calculate. The data frame must have the same column names found in
-The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-For a list of column names, use the \code{Lahman_names()} function.}
+The \code{Lahman} package or the Chadwick Bureau GitHub repository.}
 
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. If FALSE the function will use the internal
 formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and

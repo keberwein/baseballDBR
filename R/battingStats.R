@@ -4,7 +4,6 @@
 #' Required fields from the Batting table are; "AB", and "H."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BA base on ball percentage bb
 #' @export BA
 #' @examples
@@ -29,7 +28,6 @@ BA <- function (dat=NULL){
 #' Required fields from the Batting table are; "AB", "BB", "H", "HBP", "SF", "SH", "HR"  and "SO."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BABIP base on ball percentage bb
 #' @export BABIP
 #' @examples
@@ -57,7 +55,6 @@ BABIP <- function (dat=NULL){
 #' Intentional base on balls (IBB) is added for the years that metric is available.
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords BBpct base on ball percentage bb
 #' @export BBpct
 #' @examples
@@ -83,7 +80,6 @@ BBpct <- function (dat=NULL){
 #' Required fields from the batting table are "AB" and "SO."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords CTpct contact rate
 #' @export CTpct
 #' @examples
@@ -109,7 +105,6 @@ CTpct <- function (dat=NULL){
 #' Required fields from the Batting table are "AB" and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords HRpct home run percentage
 #' @export HRpct
 #' @examples
@@ -135,7 +130,6 @@ HRpct <- function (dat=NULL){
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords ISO isolated power
 #' @export ISO
 #' @examples
@@ -162,7 +156,6 @@ ISO <- function (dat=NULL){
 #' Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords Kpct strikeout percentage
 #' @export Kpct
 #' @examples
@@ -189,7 +182,6 @@ Kpct <- function (dat=NULL){
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords OBP on base percentage
 #' @export OBP
 #' @examples
@@ -216,7 +208,6 @@ OBP <- function (dat=NULL){
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR", "BB", "HBP", "AB" and "SF."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords OPS on base percentage
 #' @export OPS
 #' @examples
@@ -244,7 +235,6 @@ OPS <- function (dat=NULL){
 #' Required fields from the batting table are "AB", "BB", "HBP", "SH", and "SF."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords PA on base percentage
 #' @export PA
 #' @examples
@@ -271,7 +261,6 @@ PA <- function (dat=NULL){
 #' Required fields from the batting table are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords XBHpct extra base percentage
 #' @export XBHpct
 #' @examples
@@ -298,7 +287,6 @@ XBHpct <- function (dat=NULL){
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords XBperH extra base per hit
 #' @export XBperH
 #' @examples
@@ -326,7 +314,6 @@ XBperH <- function (dat=NULL){
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords RCbasic extra base per hit
 #' @export RCbasic
 #' @examples
@@ -355,7 +342,6 @@ RCbasic <- function (dat=NULL){
 #' "SF" and "SH," and "IBB."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords RCtech extra base per hit
 #' @export RCtech
 #' @examples
@@ -389,7 +375,6 @@ RCtech <- function (dat=NULL){
 #' "SF" and "SH," "SO", and "IBB."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords RC2002 extra base per hit
 #' @export RC2002
 #' @examples
@@ -424,7 +409,6 @@ RC2002 <- function (dat=NULL){
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords SLG on base percentage
 #' @export SLG
 #' @examples
@@ -451,7 +435,6 @@ SLG <- function (dat=NULL){
 #' Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' For a list of column names, use the \code{Lahman_names()} function.
 #' @keywords TBs total bases
 #' @export TBs
 #' @examples
