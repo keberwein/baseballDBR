@@ -120,7 +120,7 @@ dbTables <- names(Filter(isTRUE, eapply(.GlobalEnv, is.data.frame)))
 
 # Load data base drivers and load all data frames in a loop.
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "YOUR_USERNAME", password = "YOUR_PASSWORD")
 
 for (i in 1:length(dbTables)) { 
     if (dbExistsTable(con, dbTables[i])) {
