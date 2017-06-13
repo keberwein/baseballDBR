@@ -27,7 +27,7 @@ dbTables <- names(Filter(isTRUE, eapply(.GlobalEnv, is.data.frame)))
 
 # Load data base drivers and load all data frames in a loop.
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "YOUR_USERNAME", password = "YOUR_PASSWORD")
 
 # Do some transformations on our selected dataframes.
 Batting <- mutate(Batting, BA = BA(Batting), PA = PA(Batting), OBP = OBP(Batting), OPS = OPS(Batting))
@@ -64,7 +64,7 @@ library(baseballDBR)
 
 # Use an "src" connection to access the database. This requires the same arguments that RPostreSQL uses to connect to the database.
 # Note: There are also src functions for connecting to various types of databases.
-pgcon <- src_postgres(host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+pgcon <- src_postgres(host= "localhost", dbname= "lahman", user= "YOUR_USERNAME", password = "YOUR_PASSWORD")
 
 # We're not laoding the batting table, rather we're loading a method to access it.
 Batting_tbl <- tbl(pgcon, "Batting")
@@ -90,7 +90,7 @@ library(baseballDBR)
 
 # Load data base drivers and load all data frames in a loop.
 drv <- dbDriver("PostgreSQL")
-con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "kriseberwein", password = "pissoff")
+con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "YOUR_USERNAME", password = "YOUR_PASSWORD")
 
 # Load the Batting table into R.
 Batting <- dbGetQuery(con, "SELECT * FROM Batting")
