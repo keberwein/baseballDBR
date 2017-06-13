@@ -4,7 +4,9 @@
 
 * Added `urlExists()` function to perform tryCatch on URLs.
 
-* Added backup URLs for `get_bbdb()` function.
+* Added backup URLs for the `get_bbdb()` function.
+
+* Added `downloadZip` argument to the `get_bbdb()` function.
 
 * Added vignettes.
 

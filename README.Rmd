@@ -4,8 +4,6 @@ output:
     variant: markdown_github
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -16,6 +14,7 @@ knitr::opts_chunk$set(
 )
 library(baseballDBR)
 ```
+
 # BaseballDBR
 [![Build Status](https://travis-ci.org/keberwein/baseballDBR.png?branch=master)](https://travis-ci.org/keberwein/baseballDBR)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/baseballDBR)](http://www.r-pkg.org/badges/version/baseballDBR)
@@ -31,7 +30,7 @@ devtools::install_github("keberwein/baseballDBR")
 
 # Gathering Data
 
-The `baseballDBR` package requires data that is formatted similar to the [Baseball Databank](https://github.com/chadwickbureau/baseballdatabank) or Sean Lahman's [Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/). The `Lahman` package is great source for these data. The package also contains the `get_bbdb()` function, which allows us to download the most up-to-date tables directly from the Chadwick Bureau's GitHub repository. For example, we can easily load the "Batting" table into our R environment.
+The `baseballDBR` package requires data that is formatted similar to the [Baseball Databank](https://github.com/chadwickbureau/baseballdatabank) or Sean Lahman's [Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/). The package also contains the `get_bbdb()` function, which allows us to download the most up-to-date tables directly from the Chadwick Bureau's GitHub repository. For example, we can easily load the "Batting" table into our R environment.
 
 ```{r}
 library(baseballDBR)
@@ -39,6 +38,17 @@ library(baseballDBR)
 get_bbdb(table = "Batting")
 head(Batting)
 ```
+
+### Use with the Lahman Package
+
+```{r}
+library(Lahman)
+library(baseballDBR)
+
+Batting <- Lahman::Batting
+head(Batting)
+```
+
 
 # Adding Basic Metrics
 
@@ -56,7 +66,7 @@ head(Batting, 3)
 
 # Advanced Metrics
 
-The package includes a suite of advanced metrics such as wOBA, RAA, and FIP among others. Many of the advanced metrics require multiple tables. For example, the wOBA metric requires the Batting, Pitching, and Fielding tables in order to establish a player's regular defensive position.
+The package includes a suite of advanced metrics such as wOBA, RAA, and FIP, among others. Many of the advanced metrics require multiple tables. For example, the wOBA metric requires the Batting, Pitching, and Fielding tables in order to establish a player's regular defensive position.
 
 ```{r}
 library(baseballDBR)
@@ -67,7 +77,7 @@ Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs = T)
 head(Batting, 3)
 ```
 
-The code above uses [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn) wOBA values. The default behavior is to uses [Tom Tango's formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/). Other options include `Sep.Leagues`, which may act as a buffer to any bias created by the designated hitter.
+The code above uses [Fangraphs](http://www.fangraphs.com/guts.aspx?type=cn) wOBA values. The default behavior is to uses Tom Tango's adapted [SQL formula](http://www.insidethebook.com/ee/index.php/site/article/woba_year_by_year_calculations/). Other options include `Sep.Leagues`, which may act as a buffer to any bias created by the designated hitter.
 
 ```{r}
 library(baseballDBR)

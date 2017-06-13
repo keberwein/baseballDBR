@@ -1,7 +1,7 @@
 Package: baseballDBR
 Type: Package
 Title: Sabermetrics and advanced statistics on the Lahman baseball database
-Version: 0.0.0.9003
+Version: 0.1.0
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
 Description: Updated version of the Lahman database along wiht additional statistical functions.

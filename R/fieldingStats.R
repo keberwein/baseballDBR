@@ -16,8 +16,8 @@
 Ch <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if(!all(c("PO", "A", "H") %in% colnames(dat))) {
-        message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'AB'")
+    if(!all(c("PO", "A", "E") %in% colnames(dat))) {
+        message("Not enough data to calculate. Please make sure your data inclueds 'PO', 'A' and 'E'")
     }
     Ch <- dat$A + dat$PO + dat$E
     return(Ch)
@@ -43,7 +43,7 @@ Fld_pct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
     if(!all(c("PO", "A", "E") %in% colnames(dat))) {
-        message("Not enough data to calculate. Please make sure your data inclueds 'H', and 'AB'")
+        message("Not enough data to calculate. Please make sure your data inclueds 'PO', 'A' and 'E'")
     }
     ifelse(dat$PO+dat$A+dat$E > 0, Fld_pct <- round(((dat$PO + dat$A) / (dat$PO + dat$A + dat$E)), 3), NA)
     return(Fld_pct)

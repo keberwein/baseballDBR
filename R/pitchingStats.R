@@ -126,8 +126,8 @@ H_9 <- function (dat=NULL){
 HR_9 <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
 
-    if (!all(c("Hr", "IPouts") %in% names(dat))){
-        message("Not enough data to calculate. Please make sure your data inclueds 'Hr', and 'IPouts'")
+    if (!all(c("HR", "IPouts") %in% names(dat))){
+        message("Not enough data to calculate. Please make sure your data inclueds 'HR', and 'IPouts'")
     }
 
     ifelse(dat$IPouts > 2, HR_9 <- round((dat$HR*9) / (dat$IPouts/3), 3), NA)
