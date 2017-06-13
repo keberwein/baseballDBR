@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{RCtech}
 \alias{RCtech}
-\title{Calculate Runs Created using the technical formula.}
+\title{Batting: Calculate Runs Created using the technical formula.}
 \usage{
 RCtech(dat = NULL)
 }
@@ -23,6 +23,17 @@ Batting$RCtech <- RCtech(Batting)
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{BBpct}},
+  \code{\link{CTpct}}, \code{\link{HRpct}},
+  \code{\link{ISO}}, \code{\link{Kpct}}, \code{\link{OBP}},
+  \code{\link{OPS}}, \code{\link{PA}},
+  \code{\link{RC2002}}, \code{\link{RCbasic}},
+  \code{\link{SLG}}, \code{\link{TBs}},
+  \code{\link{XBHpct}}, \code{\link{XBperH}},
+  \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
 \keyword{RCtech}
 \keyword{base}

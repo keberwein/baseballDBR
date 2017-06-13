@@ -1,10 +1,11 @@
 
-#' @title Calculate batting average
+#' @title Batting: Calculate batting average
 #' @description Find batting average for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", and "H."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords BA base on ball percentage bb
+#' @family Batting functions
 #' @export BA
 #' @examples
 #' \dontrun{
@@ -23,12 +24,13 @@ BA <- function (dat=NULL){
     return(BA)
 }
 
-#' @title Calculate batting average on balls in play (BABIP)
+#' @title Batting: Calculate batting average on balls in play (BABIP)
 #' @description Find BABIP for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "BB", "H", "HBP", "SF", "SH", "HR"  and "SO."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords BABIP base on ball percentage bb
+#' @family Batting functions
 #' @export BABIP
 #' @examples
 #' \dontrun{
@@ -49,13 +51,14 @@ BABIP <- function (dat=NULL){
     return(BABIP)
 }
 
-#' @title Calculate base on ball percentage
+#' @title Batting: Calculate base on ball percentage
 #' @description Find base on ball percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
 #' Intentional base on balls (IBB) is added for the years that metric is available.
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords BBpct base on ball percentage bb
+#' @family Batting functions
 #' @export BBpct
 #' @examples
 #' \dontrun{
@@ -75,12 +78,13 @@ BBpct <- function (dat=NULL){
     return(BBpct)
 }
 
-#' @title Calculate a batter's contact rate
+#' @title Batting: Calculate a batter's contact rate
 #' @description Find the contact rate for batters.
 #' Required fields from the batting table are "AB" and "SO."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords CTpct contact rate
+#' @family Batting functions
 #' @export CTpct
 #' @examples
 #' \dontrun{
@@ -100,12 +104,13 @@ CTpct <- function (dat=NULL){
     return(CTpct)
 }
 
-#' @title Calculate home run percentage
+#' @title Batting: Calculate home run percentage
 #' @description Find home run percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are "AB" and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords HRpct home run percentage
+#' @family Batting functions
 #' @export HRpct
 #' @examples
 #' \dontrun{
@@ -125,12 +130,13 @@ HRpct <- function (dat=NULL){
     return(HRpct)
 }
 
-#' @title Calculate ISO for batters
+#' @title Batting: Calculate ISO for batters
 #' @description Find isolated power (ISO) for batters with more than zero at bats.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords ISO isolated power
+#' @family Batting functions
 #' @export ISO
 #' @examples
 #' \dontrun{
@@ -151,12 +157,13 @@ ISO <- function (dat=NULL){
     return(ISO)
 }
 
-#' @title Calculate strikeout percentage
+#' @title Batting: Calculate strikeout percentage
 #' @description Find strikeout percentage for batters with more than zero at bats.
 #' Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords Kpct strikeout percentage
+#' @family Batting functions
 #' @export Kpct
 #' @examples
 #' \dontrun{
@@ -177,12 +184,13 @@ Kpct <- function (dat=NULL){
     return(Kpct)
 }
 
-#' @title Calculate on base percentage (OBP)
+#' @title Batting: Calculate on base percentage (OBP)
 #' @description Find the OBP for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords OBP on base percentage
+#' @family Batting functions
 #' @export OBP
 #' @examples
 #' \dontrun{
@@ -203,12 +211,13 @@ OBP <- function (dat=NULL){
     return(OBP)
 }
 
-#' @title Calculate on base percentage plus slugging (OPS)
+#' @title Batting: Calculate on base percentage plus slugging (OPS)
 #' @description Find the OPS for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR", "BB", "HBP", "AB" and "SF."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords OPS on base percentage
+#' @family Batting functions
 #' @export OPS
 #' @examples
 #' \dontrun{
@@ -230,12 +239,13 @@ OPS <- function (dat=NULL){
     return(OPS)
 }
 
-#' @title Calculate plate appearances for batters
+#' @title Batting: Calculate plate appearances for batters
 #' @description Find the plate appearances (PA) for batters.
 #' Required fields from the batting table are "AB", "BB", "HBP", "SH", and "SF."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords PA on base percentage
+#' @family Batting functions
 #' @export PA
 #' @examples
 #' \dontrun{
@@ -256,12 +266,13 @@ PA <- function (dat=NULL){
     return(PA)
 }
 
-#' @title Calculate extra base percentage
+#' @title Batting: Calculate extra base percentage
 #' @description Find extra base percentage for batters with more than zero at bats.
 #' Required fields from the batting table are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords XBHpct extra base percentage
+#' @family Batting functions
 #' @export XBHpct
 #' @examples
 #' \dontrun{
@@ -282,12 +293,13 @@ XBHpct <- function (dat=NULL){
     return(XBHpct)
 }
 
-#' @title Calculate extra base per hit
+#' @title Batting: Calculate extra base per hit
 #' @description Find the average extra bases per hit for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords XBperH extra base per hit
+#' @family Batting functions
 #' @export XBperH
 #' @examples
 #' \dontrun{
@@ -309,12 +321,13 @@ XBperH <- function (dat=NULL){
     return(XBperH)
 }
 
-#' @title Calculate Runs Created using the basic formula.
+#' @title Batting: Calculate Runs Created using the basic formula.
 #' @description Find the runs created using the basic formula presented by Bill James in the late 1970s.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords RCbasic extra base per hit
+#' @family Batting functions
 #' @export RCbasic
 #' @examples
 #' \dontrun{
@@ -335,7 +348,7 @@ RCbasic <- function (dat=NULL){
     return(RCbasic)
 }
 
-#' @title Calculate Runs Created using the technical formula.
+#' @title Batting: Calculate Runs Created using the technical formula.
 #' @description The "Technical Version" is the most well-known formula for RC. It adds several factors to the
 #' basic formula such as sacrifice hits, stolen bases and intentional base on balls.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP", "SB", "CS",
@@ -343,6 +356,7 @@ RCbasic <- function (dat=NULL){
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords RCtech extra base per hit
+#' @family Batting functions
 #' @export RCtech
 #' @examples
 #' \dontrun{
@@ -368,7 +382,7 @@ RCtech <- function (dat=NULL){
     return(RCtech)
 }
 
-#' @title Calculate Runs Created using the updated 2002 formula.
+#' @title Batting: Calculate Runs Created using the updated 2002 formula.
 #' @description The "2002 Version" is an updated version of the "Technical Version" by Bill James.
 #' The 2002 RC uses the same counting stats as the Technical Version but applies weights to many of the raw stats.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "GIDP", "HBP", "SB", "CS",
@@ -376,6 +390,7 @@ RCtech <- function (dat=NULL){
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords RC2002 extra base per hit
+#' @family Batting functions
 #' @export RC2002
 #' @examples
 #' \dontrun{
@@ -404,12 +419,13 @@ RC2002 <- function (dat=NULL){
     return(RC2002)
 }
 
-#' @title Calculate slugging percentage (SLG)
+#' @title Batting: Calculate slugging percentage (SLG)
 #' @description Find the SLG for batters with more than zero hits.
 #' Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords SLG on base percentage
+#' @family Batting functions
 #' @export SLG
 #' @examples
 #' \dontrun{
@@ -430,12 +446,13 @@ SLG <- function (dat=NULL){
     return(SLG)
 }
 
-#' @title Calculate a batter's total bases
+#' @title Batting: Calculate a batter's total bases
 #' @description Find total bases.
 #' Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords TBs total bases
+#' @family Batting functions
 #' @export TBs
 #' @examples
 #' \dontrun{
@@ -456,7 +473,7 @@ TBs <- function (dat=NULL){
     return(TBs)
 }
 
-#' @title Calculate Weighted On-Base Average (wOBA)
+#' @title Batting: Calculate Weighted On-Base Average (wOBA)
 #' @description Find the wOBA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
@@ -476,6 +493,7 @@ TBs <- function (dat=NULL){
 #' formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
 #' does not require an external download. If not specified, the default is set to FALSE.
 #' @keywords wOBA Weighted On-Base Average
+#' @family Batting functions
 #' @import dplyr
 #' @export wOBA
 #' @examples
@@ -520,7 +538,7 @@ wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 }
 
 
-#' @title Calculate Weighted Runs Above Average (wRAA)
+#' @title Batting: Calculate Weighted Runs Above Average (wRAA)
 #' @description Find the wRAA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
@@ -541,6 +559,7 @@ wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRAA should be expected.
 #' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
 #' @keywords wRAA Weighted Runs Above Average
+#' @family Batting functions
 #' @import dplyr
 #' @export wRAA
 #' @examples
@@ -587,7 +606,7 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 }
 
 
-#' @title Calculate Weighted Runs Created (wRC)
+#' @title Batting: Calculate Weighted Runs Created (wRC)
 #' @description Find the wRC for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
@@ -608,6 +627,7 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRC should be expected.
 #' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
 #' @keywords wRC Weighted Runs Above Average
+#' @family Batting functions
 #' @import dplyr
 #' @export wRC
 #' @examples

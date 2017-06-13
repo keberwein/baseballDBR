@@ -2,7 +2,7 @@
 % Please edit documentation in R/fieldingStats.R
 \name{Fld_pct}
 \alias{Fld_pct}
-\title{Calculate batting average}
+\title{Fielding: Calculate batting average}
 \usage{
 Fld_pct(dat = NULL)
 }
@@ -21,6 +21,9 @@ Fielding$Fld_pct <- Fld_pct(Fielding)
 
 }
 
+}
+\seealso{
+Other Fielding functions: \code{\link{Ch}}
 }
 \keyword{Fld_pct}
 \keyword{fielding}

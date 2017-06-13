@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{IP}
 \alias{IP}
-\title{Calculate the innings pitched}
+\title{Pitching: Calculate the innings pitched}
 \usage{
 IP(dat = NULL)
 }
@@ -21,6 +21,12 @@ Pitching$IP <- IP(Pitching)
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{BB_9}},
+  \code{\link{FIP}}, \code{\link{HR_9}}, \code{\link{H_9}},
+  \code{\link{K_9}}, \code{\link{LOB_pct}},
+  \code{\link{WHIP}}
 }
 \keyword{innings}
 \keyword{pitched}

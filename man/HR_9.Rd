@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{HR_9}
 \alias{HR_9}
-\title{Calculate Home Runs per Nine innings}
+\title{Pitching: Calculate Home Runs per Nine innings}
 \usage{
 HR_9(dat = NULL)
 }
@@ -21,6 +21,12 @@ Pitching$HR_9 <- HR_9(Pitching)
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{BB_9}},
+  \code{\link{FIP}}, \code{\link{H_9}}, \code{\link{IP}},
+  \code{\link{K_9}}, \code{\link{LOB_pct}},
+  \code{\link{WHIP}}
 }
 \keyword{hits}
 \keyword{innings}

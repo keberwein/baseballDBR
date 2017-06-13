@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{TBs}
 \alias{TBs}
-\title{Calculate a batter's total bases}
+\title{Batting: Calculate a batter's total bases}
 \usage{
 TBs(dat = NULL)
 }
@@ -21,6 +21,17 @@ Batting$TBs <- TBs(Batting)
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{BBpct}},
+  \code{\link{CTpct}}, \code{\link{HRpct}},
+  \code{\link{ISO}}, \code{\link{Kpct}}, \code{\link{OBP}},
+  \code{\link{OPS}}, \code{\link{PA}},
+  \code{\link{RC2002}}, \code{\link{RCbasic}},
+  \code{\link{RCtech}}, \code{\link{SLG}},
+  \code{\link{XBHpct}}, \code{\link{XBperH}},
+  \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
 \keyword{TBs}
 \keyword{bases}

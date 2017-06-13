@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{RC2002}
 \alias{RC2002}
-\title{Calculate Runs Created using the updated 2002 formula.}
+\title{Batting: Calculate Runs Created using the updated 2002 formula.}
 \usage{
 RC2002(dat = NULL)
 }
@@ -23,6 +23,17 @@ Batting$RC2002 <- RC2002(Batting)
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{BBpct}},
+  \code{\link{CTpct}}, \code{\link{HRpct}},
+  \code{\link{ISO}}, \code{\link{Kpct}}, \code{\link{OBP}},
+  \code{\link{OPS}}, \code{\link{PA}},
+  \code{\link{RCbasic}}, \code{\link{RCtech}},
+  \code{\link{SLG}}, \code{\link{TBs}},
+  \code{\link{XBHpct}}, \code{\link{XBperH}},
+  \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
 \keyword{RC2002}
 \keyword{base}

@@ -1,6 +1,5 @@
+
 #' baseballDBR: A package for working with data from the Baseball Databank/Lahman Database.
-#'
-#' @docType package
 #' @name baseballDBR
 NULL
 # Global variables

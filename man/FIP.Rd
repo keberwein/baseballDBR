@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{FIP}
 \alias{FIP}
-\title{Fielding Independent Pitching (FIP)}
+\title{Pitching: Fielding Independent Pitching (FIP)}
 \usage{
 FIP(dat = NULL, Fangraphs = FALSE, NA_to_zero = TRUE,
   Sep.Leagues = FALSE)
@@ -35,6 +35,12 @@ Pitching$FIP <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALS
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{BB_9}},
+  \code{\link{HR_9}}, \code{\link{H_9}}, \code{\link{IP}},
+  \code{\link{K_9}}, \code{\link{LOB_pct}},
+  \code{\link{WHIP}}
 }
 \keyword{FIP}
 \keyword{fielding}

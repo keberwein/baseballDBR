@@ -1,23 +1,23 @@
 Package: baseballDBR
 Type: Package
-Title: Sabermetrics and advanced statistics on the Lahman baseball database
+Title: Sabermetrics and advanced baseball statistics
 Version: 0.1.0
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
-Description: Updated version of the Lahman database along wiht additional statistical functions.
+Description: A tool for gathering and analyzing major league baseball data.
 Depends:
     R (>= 3.3.3)
 Imports:
 	rvest,
 	xml2,
 	magrittr,
-	dplyr,
-	Lahman
+	dplyr
 Suggests:
 	testthat,
 	tidyr,
 	rmarkdown,
-	knitr
+	knitr,
+	Lahman
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/moneyball
 BugReports: https://github.com/keberwein/moneyball/issues

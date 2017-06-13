@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{PA}
 \alias{PA}
-\title{Calculate plate appearances for batters}
+\title{Batting: Calculate plate appearances for batters}
 \usage{
 PA(dat = NULL)
 }
@@ -21,6 +21,17 @@ Batting$PA <- PA(Batting)
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{BBpct}},
+  \code{\link{CTpct}}, \code{\link{HRpct}},
+  \code{\link{ISO}}, \code{\link{Kpct}}, \code{\link{OBP}},
+  \code{\link{OPS}}, \code{\link{RC2002}},
+  \code{\link{RCbasic}}, \code{\link{RCtech}},
+  \code{\link{SLG}}, \code{\link{TBs}},
+  \code{\link{XBHpct}}, \code{\link{XBperH}},
+  \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
 \keyword{PA}
 \keyword{base}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fieldingStats.R
 \name{Ch}
 \alias{Ch}
-\title{Calculate defensive chances}
+\title{Fielding: Calculate defensive chances}
 \usage{
 Ch(dat = NULL)
 }
@@ -21,6 +21,9 @@ Fielding$Ch <- Ch(Fielding)
 
 }
 
+}
+\seealso{
+Other Fielding functions: \code{\link{Fld_pct}}
 }
 \keyword{Ch}
 \keyword{Chances}

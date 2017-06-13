@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{LOB_pct}
 \alias{LOB_pct}
-\title{Calculate the left on base percentage}
+\title{Pitching: Calculate the left on base percentage}
 \usage{
 LOB_pct(dat = NULL)
 }
@@ -21,6 +21,11 @@ Pitching$LOB_pct <- LOB_pct(pitching_df)
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{BB_9}},
+  \code{\link{FIP}}, \code{\link{HR_9}}, \code{\link{H_9}},
+  \code{\link{IP}}, \code{\link{K_9}}, \code{\link{WHIP}}
 }
 \keyword{LOB}
 \keyword{LOB_pct}

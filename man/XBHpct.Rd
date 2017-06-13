@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{XBHpct}
 \alias{XBHpct}
-\title{Calculate extra base percentage}
+\title{Batting: Calculate extra base percentage}
 \usage{
 XBHpct(dat = NULL)
 }
@@ -21,6 +21,17 @@ Batting$XBHpct <- XBHpct(Batting)
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{BBpct}},
+  \code{\link{CTpct}}, \code{\link{HRpct}},
+  \code{\link{ISO}}, \code{\link{Kpct}}, \code{\link{OBP}},
+  \code{\link{OPS}}, \code{\link{PA}},
+  \code{\link{RC2002}}, \code{\link{RCbasic}},
+  \code{\link{RCtech}}, \code{\link{SLG}},
+  \code{\link{TBs}}, \code{\link{XBperH}},
+  \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
 \keyword{XBHpct}
 \keyword{base}

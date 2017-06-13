@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{BB_9}
 \alias{BB_9}
-\title{Calculate walks per nine innings}
+\title{Pitching: Calculate walks per nine innings}
 \usage{
 BB_9(dat = NULL)
 }
@@ -21,6 +21,12 @@ Pitching$BB_9 <- BB_9(Pitching)
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{FIP}},
+  \code{\link{HR_9}}, \code{\link{H_9}}, \code{\link{IP}},
+  \code{\link{K_9}}, \code{\link{LOB_pct}},
+  \code{\link{WHIP}}
 }
 \keyword{BB}
 \keyword{BB9}

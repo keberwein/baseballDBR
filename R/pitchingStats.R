@@ -1,10 +1,11 @@
 
-#' @title Calculate walks per nine innings
+#' @title Pitching: Calculate walks per nine innings
 #' @description Find batting average walks per nine innings for pitchers with more one or more inning pitched.
 #' Required fields from the Pitching table are; "IPouts", and "BB."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords BB BB_9 BB9 bb/9
+#' @family Pitching functions
 #' @export BB_9
 #' @examples
 #' \dontrun{
@@ -25,7 +26,7 @@ BB_9 <- function (dat=NULL){
     return(BB_9)
 }
 
-#' @title Fielding Independent Pitching (FIP)
+#' @title Pitching: Fielding Independent Pitching (FIP)
 #' @description Find the FIP for all pitchers with one or strike outs in a particular season.
 #' Required fields from the Pitching table are "BB", "HBP", "SO", and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
@@ -41,6 +42,7 @@ BB_9 <- function (dat=NULL){
 #' formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
 #' does not require an external download. If not specified, the default is set to FALSE.
 #' @keywords FIP fielding independent pitching
+#' @family Pitching functions
 #' @export FIP
 #' @examples
 #' \dontrun{
@@ -82,12 +84,13 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 }
 
 
-#' @title Calculate Hits per Nine innings
+#' @title Pitching: Calculate Hits per Nine innings
 #' @description Find the number of hits a pitcher throws per nine innings pitched.
 #' Required fields from the Pitching table are; "H", "BB", and "IPouts."
 #' @param dat A data frame you would wish to calculate.  The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords hits per nine innings
+#' @family Pitching functions
 #' @export H_9
 #' @examples
 #' \dontrun{
@@ -109,12 +112,13 @@ H_9 <- function (dat=NULL){
     return(H_9)
 }
 
-#' @title Calculate Home Runs per Nine innings
+#' @title Pitching: Calculate Home Runs per Nine innings
 #' @description Find the number of home runs a pitcher allows per nine innings pitched.
 #' Required fields from the Pitching table are; "H" and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords hits per nine innings
+#' @family Pitching functions
 #' @export HR_9
 #' @examples
 #' \dontrun{
@@ -134,12 +138,13 @@ HR_9 <- function (dat=NULL){
     return(HR_9)
 }
 
-#' @title Calculate the innings pitched
+#' @title Pitching: Calculate the innings pitched
 #' @description Find the number of innings a player has ptiched for a season.
 #' Required fields from the Pitching table are; "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords innings pitched
+#' @family Pitching functions
 #' @export IP
 #' @examples
 #' \dontrun{
@@ -159,12 +164,13 @@ IP <- function (dat=NULL){
     return(IP)
 }
 
-#' @title Calculate Strikes per Nine innings
+#' @title Pitching: Calculate Strikes per Nine innings
 #' @description Find the number of strikes a pitcher throws per nine innings pitched.
 #' Required fields from the Pitching table are; "H", "BB", "IPouts", and "SO."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords strikes per nine innings
+#' @family Pitching functions
 #' @export K_9
 #' @examples
 #' \dontrun{
@@ -184,12 +190,13 @@ K_9 <- function (dat=NULL){
     return(K_9)
 }
 
-#' @title Calculate the left on base percentage
+#' @title Pitching: Calculate the left on base percentage
 #' @description Find the percentaqge of base runners that a pitcher leaves on base of the course of a season.
 #' Required fields from the Pitching table are; "H", "BB", "HBP", "R", and "HR."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords LOB_pct LOB LOB percentage
+#' @family Pitching functions
 #' @export LOB_pct
 #' @examples
 #' \dontrun{
@@ -210,12 +217,13 @@ LOB_pct <- function (dat=NULL){
     return(LOB_pct)
 }
 
-#' @title Calculate Walks plus Hits per Innings Pitched
+#' @title Pitching: Calculate Walks plus Hits per Innings Pitched
 #' @description Find the number of walks plus hits a pitcher allows per inning pitched.
 #' Required fields from the Pitching table are; "H", "BB", and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' @keywords Walks plus Hits per Innings Pitched WHIP
+#' @family Pitching functions
 #' @export WHIP
 #' @examples
 #' \dontrun{

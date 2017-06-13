@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{BBpct}
 \alias{BBpct}
-\title{Calculate base on ball percentage}
+\title{Batting: Calculate base on ball percentage}
 \usage{
 BBpct(dat = NULL)
 }
@@ -22,6 +22,17 @@ Batting$BBpct <- BBpct(Batting)
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{CTpct}},
+  \code{\link{HRpct}}, \code{\link{ISO}},
+  \code{\link{Kpct}}, \code{\link{OBP}}, \code{\link{OPS}},
+  \code{\link{PA}}, \code{\link{RC2002}},
+  \code{\link{RCbasic}}, \code{\link{RCtech}},
+  \code{\link{SLG}}, \code{\link{TBs}},
+  \code{\link{XBHpct}}, \code{\link{XBperH}},
+  \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
 \keyword{BBpct}
 \keyword{ball}

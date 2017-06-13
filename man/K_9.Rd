@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{K_9}
 \alias{K_9}
-\title{Calculate Strikes per Nine innings}
+\title{Pitching: Calculate Strikes per Nine innings}
 \usage{
 K_9(dat = NULL)
 }
@@ -21,6 +21,12 @@ Pitching$K_9 <- K_9(Pitching)
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{BB_9}},
+  \code{\link{FIP}}, \code{\link{HR_9}}, \code{\link{H_9}},
+  \code{\link{IP}}, \code{\link{LOB_pct}},
+  \code{\link{WHIP}}
 }
 \keyword{innings}
 \keyword{nine}

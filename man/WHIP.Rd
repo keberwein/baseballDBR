@@ -2,7 +2,7 @@
 % Please edit documentation in R/pitchingStats.R
 \name{WHIP}
 \alias{WHIP}
-\title{Calculate Walks plus Hits per Innings Pitched}
+\title{Pitching: Calculate Walks plus Hits per Innings Pitched}
 \usage{
 WHIP(dat = NULL)
 }
@@ -21,6 +21,12 @@ Pitching$WHIP <- WHIP(pitching_df)
 
 }
 
+}
+\seealso{
+Other Pitching functions: \code{\link{BB_9}},
+  \code{\link{FIP}}, \code{\link{HR_9}}, \code{\link{H_9}},
+  \code{\link{IP}}, \code{\link{K_9}},
+  \code{\link{LOB_pct}}
 }
 \keyword{Hits}
 \keyword{Innings}

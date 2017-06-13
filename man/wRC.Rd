@@ -2,7 +2,7 @@
 % Please edit documentation in R/battingStats.R
 \name{wRC}
 \alias{wRC}
-\title{Calculate Weighted Runs Created (wRC)}
+\title{Batting: Calculate Weighted Runs Created (wRC)}
 \usage{
 wRC(BattingTable = NULL, PitchingTable = NULL, FieldingTable = NULL,
   Fangraphs = FALSE, NA_to_zero = TRUE, Sep.Leagues = FALSE)
@@ -42,6 +42,18 @@ Batting$wRC <- wRC(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE
 
 }
 
+}
+\seealso{
+Other Batting functions: \code{\link{BABIP}},
+  \code{\link{BA}}, \code{\link{BBpct}},
+  \code{\link{CTpct}}, \code{\link{HRpct}},
+  \code{\link{ISO}}, \code{\link{Kpct}}, \code{\link{OBP}},
+  \code{\link{OPS}}, \code{\link{PA}},
+  \code{\link{RC2002}}, \code{\link{RCbasic}},
+  \code{\link{RCtech}}, \code{\link{SLG}},
+  \code{\link{TBs}}, \code{\link{XBHpct}},
+  \code{\link{XBperH}}, \code{\link{wOBA}},
+  \code{\link{wRAA}}
 }
 \keyword{Above}
 \keyword{Average}
