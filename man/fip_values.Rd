@@ -13,8 +13,8 @@ Any subsetting or removal of players will affect your results. All players for e
 \item{Sep.Leagues}{If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
 helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.}
 
-\item{Fangraphs}{If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjuction with the
-\code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.}
+\item{Fangraphs}{If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjunction with the
+\code{Sep.Leagues} argument because Fangraphs does not separate FIP constants by league.}
 }
 \description{
 Get fip constants for each season. By default the function uses a method adapted from

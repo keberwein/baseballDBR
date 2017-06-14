@@ -15,12 +15,12 @@ The \code{Lahman} package or the Chadwick Bureau GitHub repository.}
 formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
 does not require an external download. If not specified, the default is set to FALSE.}
 
-\item{NA_to_zero}{If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
-weren't a counted statistic until 1954, therefore we are technically unable to calculate wOBA for any player prior to 1954.
+\item{NA_to_zero}{If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits
+were not a counted statistic until 1954, therefore we are technically unable to calculate wOBA for any player prior to 1954.
 The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
 If FALSE, the wOBA calculation will return NaN for years with missing data.}
 
-\item{Sep.Leagues}{If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+\item{Sep.Leagues}{If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
 the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 park factors between the American and National leauges. The default for this argument is FALSE.}
 }

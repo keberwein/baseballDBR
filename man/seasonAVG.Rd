@@ -3,12 +3,12 @@
 \docType{data}
 \name{seasonAVG}
 \alias{seasonAVG}
-\title{Leauge averages and aggregates from 1901 to present.}
+\title{League averages and aggregates from 1901 to present.}
 \format{A data frame with 115 rows and 20 variables:
 \describe{
   \item{yearID}{year}
   \item{tot_G}{total games played}
-  \item{tot_PA}{total plate appearences}
+  \item{tot_PA}{total plate appearances}
   \item{tot_HR}{total home runs}
   \item{tot_R}{total runs scored}
   \item{tot_RBI}{total runs batted in}
