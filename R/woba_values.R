@@ -1,6 +1,6 @@
 #' @title Return wOBA values per season
 #' @description Get wOBA values for each year in your database. This calculation requires all fields of
-#' the Pitching, Fielding and Batting tables from the Lahman package, or a comprable data set. The function uses
+#' the Pitching, Fielding and Batting tables from the Lahman package, or a comparable data set. The function uses
 #' a version of Tom Tango's wOBA formula by default, but can also return Fangraphs wOBA values.
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
@@ -12,7 +12,7 @@
 #' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
 #' @param Fangraphs if TRUE the function will return the Fangraphs wOBA values. By default the function uses a method adapted from
 #' Tom Tango. These values are often very close to Fangraphs, but are not the same due to Fangraphs using a different algorithum.
-#' This can not be used in conjuction with the \code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.
+#' This can not be used in conjunction with the \code{Sep.Leagues} argument because Fangraphs does not separate FIP constants by league.
 #' @keywords woba, wOBA, on base average, fangraphs
 #' @importFrom rvest html_node html_table
 #' @importFrom xml2 read_html

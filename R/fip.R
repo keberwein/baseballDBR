@@ -6,8 +6,8 @@
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
 #' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
-#' @param Fangraphs If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjuction with the
-#' \code{Sep.Leagues} argument because Fangraphs does not seperate FIP constants by league.
+#' @param Fangraphs If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjunction with the
+#' \code{Sep.Leagues} argument because Fangraphs does not separate FIP constants by league.
 #' @keywords woba, wOBA, on base average, fangraphs
 #' @importFrom rvest html_node
 #' @importFrom xml2 read_html

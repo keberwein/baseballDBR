@@ -1,4 +1,4 @@
-#' Leauge averages and aggregates from 1901 to present.
+#' League averages and aggregates from 1901 to present.
 #'
 #' A dataset containing combined aggregates and averages for all of the
 #' MLB. These stats are primarily used in calculated advanced player stats.
@@ -7,7 +7,7 @@
 #' \describe{
 #'   \item{yearID}{year}
 #'   \item{tot_G}{total games played}
-#'   \item{tot_PA}{total plate appearences}
+#'   \item{tot_PA}{total plate appearances}
 #'   \item{tot_HR}{total home runs}
 #'   \item{tot_R}{total runs scored}
 #'   \item{tot_RBI}{total runs batted in}

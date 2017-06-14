@@ -482,11 +482,11 @@ TBs <- function (dat=NULL){
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
-#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
-#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
-#' park factors between the American and National leauges. The default for this argument is FALSE.
-#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
-#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wOBA for any player prior to 1954.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
+#' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leagues. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits
+#' were not a counted statistic until 1954, therefore we are technically unable to calculate wOBA for any player prior to 1954.
 #' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
 #' If FALSE, the wOBA calculation will return NaN for years with missing data.
 #' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. If FALSE the function will use the internal
@@ -548,13 +548,13 @@ wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
-#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
-#' park factors between the American and National leauges. The default for this argument is FALSE.
-#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
-#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wRAA for any player prior to 1954.
+#' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leagues. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits
+#' were not a counted statistic until 1954, therefore we are technically unable to calculate wRAA for any player prior to 1954.
 #' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
 #' If FALSE, the wRAA calculation will return NaN for years with missing data.
-#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRAA
+#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and league wOBA are used in the wRAA
 #' calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
 #' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRAA should be expected.
 #' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
@@ -616,13 +616,13 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @param FieldingTable A full fielding table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
 #' Any subsetting or removal of players will affect your results. All players for each year are recomended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
-#' the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
-#' park factors between the American and National leauges. The default for this argument is FALSE.
-#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats weren't counted. For example, sacrafice hits
-#' weren't a counted statistic until 1954, therefore we are technically unable to calculate wRC for any player prior to 1954.
+#' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+#' park factors between the American and National leagues. The default for this argument is FALSE.
+#' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits
+#' were not a counted statistic until 1954, therefore we are technically unable to calculate wRC for any player prior to 1954.
 #' The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
 #' If FALSE, the wRC calculation will return NaN for years with missing data.
-#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and leauge wOBA are used in the wRC
+#' @param Fangraphs If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and league wOBA are used in the wRC
 #' calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
 #' This algorithum produces a slightly different wOBA scale than the Fangraphs wOBA scale, so variations in wRC should be expected.
 #' The default internal method does not require an external download from Fangraphs. If not specified, the default is set to FALSE.
