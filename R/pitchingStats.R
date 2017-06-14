@@ -31,7 +31,7 @@ BB_9 <- function (dat=NULL){
 #' Required fields from the Pitching table are "BB", "HBP", "SO", and "IPouts."
 #' @param dat A data frame you would wish to calculate. The data frame must have the same column names found in
 #' The \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' @param Sep.Leagues If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
+#' @param Sep.Leagues If TRUE the algorithm will calculate different run environments for the National and American leagues. Grouping
 #' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leagues. The default for this argument is FALSE.
 #' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits

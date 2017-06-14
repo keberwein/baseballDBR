@@ -26,7 +26,7 @@ were not a counted statistic until 1954, therefore we are technically unable to 
 The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
 If FALSE, the wOBA calculation will return NaN for years with missing data.}
 
-\item{Sep.Leagues}{If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
+\item{Sep.Leagues}{If TRUE the algorithm will calculate different run environments for the National and American leagues. Grouping
 the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 park factors between the American and National leagues. The default for this argument is FALSE.}
 }
