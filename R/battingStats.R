@@ -477,11 +477,11 @@ TBs <- function (dat=NULL){
 #' @description Find the wOBA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param Sep.Leagues If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
 #' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leagues. The default for this argument is FALSE.
@@ -542,12 +542,12 @@ wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @description Find the wRAA for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param FieldingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
-#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
 #' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leagues. The default for this argument is FALSE.
 #' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits
@@ -610,12 +610,12 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @description Find the wRC for all players with one or more hits for a particular season.
 #' Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 #' @param BattingTable A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param PitchingTable A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param FieldingTable A full fielding table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
-#' @param Sep.Leagues If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
+#' @param Sep.Leagues If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
 #' the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 #' park factors between the American and National leagues. The default for this argument is FALSE.
 #' @param NA_to_zero If TRUE this will replace NAs with 0 for years that certain stats were not counted. For example, sacrifice hits

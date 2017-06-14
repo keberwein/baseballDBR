@@ -21,8 +21,8 @@ The default is set to TRUE. Even though this is bad practice mathematically, man
 If FALSE, the wOBA calculation will return NaN for years with missing data.}
 
 \item{Sep.Leagues}{If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
-the leauges can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
-park factors between the American and National leauges. The default for this argument is FALSE.}
+the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
+park factors between the American and National leagues. The default for this argument is FALSE.}
 }
 \description{
 Find the FIP for all pitchers with one or strike outs in a particular season.

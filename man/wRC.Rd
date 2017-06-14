@@ -9,13 +9,13 @@ wRC(BattingTable = NULL, PitchingTable = NULL, FieldingTable = NULL,
 }
 \arguments{
 \item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{FieldingTable}{A full fielding table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. Both wOBA scale and league wOBA are used in the wRC
 calculation. If FALSE the function will use the internal wOBA algorithum, which is adapted from Tom Tango's original wOBA formula.
@@ -27,7 +27,7 @@ were not a counted statistic until 1954, therefore we are technically unable to 
 The default is set to TRUE. Even though this is bad practice mathematically, many in the sabermetrics community accept the practice.
 If FALSE, the wRC calculation will return NaN for years with missing data.}
 
-\item{Sep.Leagues}{If TRUE the algorithum will calculate different run enviornments for the National and American leagues. Grouping
+\item{Sep.Leagues}{If TRUE the algorithum will calculate different run environments for the National and American leagues. Grouping
 the leagues can solve problems introduced by the designated hitter and hitting pitchers. It also serves to further isolate for
 park factors between the American and National leagues. The default for this argument is FALSE.}
 }

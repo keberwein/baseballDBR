@@ -11,7 +11,7 @@ IP(dat = NULL)
 The \code{Lahman} package or the Chadwick Bureau GitHub repository.}
 }
 \description{
-Find the number of innings a player has ptiched for a season.
+Find the number of innings a player has pitched for a season.
 Required fields from the Pitching table are; "IPouts."
 }
 \examples{

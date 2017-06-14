@@ -8,7 +8,7 @@ fip_values(dat = NULL, Sep.Leagues = FALSE, Fangraphs = FALSE)
 }
 \arguments{
 \item{dat}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{Sep.Leagues}{If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
 helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.}

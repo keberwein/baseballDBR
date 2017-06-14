@@ -3,7 +3,7 @@
 #' Tom Tango and used by Fangraphs. The function returns FIP constants based on ERA \code{FIP_ERA} as well as constants based on RA \code{FIP_RA}.
 #' Both the Tango and Frangraphs formulas use ERA for their FIP constants.
 #' @param dat A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-#' Any subsetting or removal of players will affect your results. All players for each year are recomended.
+#' Any subsetting or removal of players will affect your results. All players for each year are recommended.
 #' @param Sep.Leagues If TRUE, this will split the calculation and return unique FIP constants for the various leagues. This can be
 #' helpful in handling Designated Hitters and National League pitchers. It also isolates the park factors to their respective leagues.
 #' @param Fangraphs If TRUE the function will return the Fangraphs FIP constants. This can not be used in conjunction with the

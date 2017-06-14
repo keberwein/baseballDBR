@@ -11,7 +11,7 @@ LOB_pct(dat = NULL)
 The \code{Lahman} package or the Chadwick Bureau GitHub repository.}
 }
 \description{
-Find the percentaqge of base runners that a pitcher leaves on base of the course of a season.
+Find the percentage of base runners that a pitcher leaves on base of the course of a season.
 Required fields from the Pitching table are; "H", "BB", "HBP", "R", and "HR."
 }
 \examples{

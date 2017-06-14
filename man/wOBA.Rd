@@ -9,13 +9,13 @@ wOBA(BattingTable = NULL, PitchingTable = NULL, FieldingTable = NULL,
 }
 \arguments{
 \item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{PitchingTable}{A full pitching table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{FieldingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.
-Any subsetting or removal of players will affect your results. All players for each year are recomended.}
+Any subsetting or removal of players will affect your results. All players for each year are recommended.}
 
 \item{Fangraphs}{If TRUE the function will download wOBA values from Fangraphs. If FALSE the function will use the internal
 formula adapted from Tom Tango's original wOBA formula. Note, the internal formula is typically identical to Fangraphs and
