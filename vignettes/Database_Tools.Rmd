@@ -56,7 +56,7 @@ Once our data are loaded into a local database instance, working with the data b
 
 ### Using dplyr Backends
 
-The `dplyr` package allows us to work with remote or on-disk data stored in databases using a familiar syntax and `dplyr` verbs. For more on database backends, see the [Databases vignette](https://cran.r-project.org/web/packages/dplyr/vignettes/databases.html) in the dplyr package. A current limitation to this method is, functions from the `baseballDBR` package will not work, and the method is limited to `dplyr` verbs.
+The `dplyr` package allows us to work with remote or on-disk data stored in databases using a familiar syntax and `dplyr` verbs. For more on database backends, see the dplyr [Databases vignette](https://cran.r-project.org/package=dplyr). A current limitation to this method is, functions from the `baseballDBR` package will not work, and the method is limited to `dplyr` verbs.
 
 ```{r, eval=FALSE}
 library(dplyr)

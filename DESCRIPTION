@@ -1,10 +1,10 @@
 Package: baseballDBR
 Type: Package
-Title: Sabermetrics and advanced baseball statistics
-Version: 0.1.0
+Title: Sabermetrics and Advanced Baseball Statistics
+Version: 0.1.1
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
-Description: A tool for gathering and analyzing major league baseball data.
+Description: A tool for gathering and analyzing data from the Baseball Databank, which includes player performance statistics from major league baseball in the United States beginning in the year 1871.
 Depends:
     R (>= 3.3.3)
 Imports:
