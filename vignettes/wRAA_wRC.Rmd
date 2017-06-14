@@ -45,7 +45,7 @@ Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TR
 
 The wRC metric attempts to quantify a player’s total offensive value and measure it by runs that player creates. The wRC metric is based the "Runs Created" metric that was originally used by Bill James.
 
-wRC requres the same data and accepts the same argumets as the `wRAA()` and `wOBA()` functions.
+wRC requires the same data and accepts the same arguments as the `wRAA()` and `wOBA()` functions.
 
 ```{r, eval=FALSE}
 library(baseballDBR)
