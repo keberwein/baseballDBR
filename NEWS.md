@@ -1,4 +1,14 @@
-# baseballDBR 0.1.0
+# baseballDBR 0.1.2
+
+## New Features
+
+* Added internal data sets `Batting2016`, `Pitching2016`, and `Fielding2016`.
+
+## Enhancements
+
+* Added more testing for functions on package build.
+
+# baseballDBR 0.1.1
 
 ## New features
 

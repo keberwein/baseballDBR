@@ -22,10 +22,13 @@ Tom Tango and used by Fangraphs. The function returns FIP constants based on ERA
 Both the Tango and Frangraphs formulas use ERA for their FIP constants.
 }
 \examples{
-\dontrun{
-fip_df <- fip_values(Pitching, Fangraphs=FALSE)
+
+data("Pitching2016")
+head(Pitching2016)
+
+fip_df <- fip_values(Pitching2016, Fangraphs=FALSE)
 head(fip_df)
-}
+
 
 }
 \keyword{average,}

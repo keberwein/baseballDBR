@@ -10,6 +10,9 @@
 #' @import utils
 #' @export get_bbdb
 #' @examples
+#'
+#' get_bbdb(table = "Batting")
+#'
 #' \dontrun{
 #' get_bbdb(table = c("Batting", "Pitching"))
 #'}
@@ -18,7 +21,6 @@
 #' get_bbdb(downloadZip = TRUE)
 #'}
 
-# Todo: Clean up code block with ifelse()
 get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
     if (isTRUE(downloadZip)) {
         # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
@@ -79,5 +81,3 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
         unlink("baseballdatabank-master", recursive=T)
     }
 }
-
-

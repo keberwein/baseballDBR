@@ -15,11 +15,11 @@ Find BABIP for batters with more than zero at bats.
 Required fields from the Batting table are; "AB", "BB", "H", "HBP", "SF", "SH", "HR"  and "SO."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$BABIP <- BABIP(batting_df)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$BABIP <- BABIP(Batting2016)
 
 }
 \seealso{

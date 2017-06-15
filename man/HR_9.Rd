@@ -15,11 +15,11 @@ Find the number of home runs a pitcher allows per nine innings pitched.
 Required fields from the Pitching table are; "H" and "IPouts."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$HR_9 <- HR_9(Pitching)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$HR_9 <- HR_9(Pitching2016)
 
 }
 \seealso{

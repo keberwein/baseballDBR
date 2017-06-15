@@ -20,10 +20,15 @@
 #' @import dplyr
 #' @export wOBA_values
 #' @examples
-#' \dontrun{
-#' woba_df <- wOBA_values(Sep.Leagues=FALSE, Fangraphs=FALSE)
-#' head(woba_df)
-#'}
+#'
+#' data("Batting2016")
+#' head(Batting2016)
+#' data("Pitching2016")
+#' head(Pitching2016)
+#' data("Fielding2016")
+#' head(Fielding2016)
+#'
+#' woba_df <- wOBA_values(Batting2016, Pitching2016, Fielding2016, Sep.Leagues=FALSE, Fangraphs=FALSE)
 #'
 
 wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=FALSE, Fangraphs=FALSE){

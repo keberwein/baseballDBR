@@ -8,11 +8,11 @@
 #' @family Batting functions
 #' @export BA
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$BA <- BA(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$BA <- BA(Batting2016)
 #'
 BA <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -33,11 +33,11 @@ BA <- function (dat=NULL){
 #' @family Batting functions
 #' @export BABIP
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$BABIP <- BABIP(batting_df)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$BABIP <- BABIP(Batting2016)
 #'
 BABIP <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -61,11 +61,11 @@ BABIP <- function (dat=NULL){
 #' @family Batting functions
 #' @export BBpct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$BBpct <- BBpct(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$BBpct <- BBpct(Batting2016)
 #'
 BBpct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -87,11 +87,11 @@ BBpct <- function (dat=NULL){
 #' @family Batting functions
 #' @export CTpct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$CTpct <- CTpct(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$CTpct <- CTpct(Batting2016)
 #'
 CTpct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -113,11 +113,11 @@ CTpct <- function (dat=NULL){
 #' @family Batting functions
 #' @export HRpct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$HRpct <- HRpct(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$HRpct <- HRpct(Batting2016)
 #'
 HRpct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -139,11 +139,11 @@ HRpct <- function (dat=NULL){
 #' @family Batting functions
 #' @export ISO
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$ISO <- ISO(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$ISO <- ISO(Batting2016)
 #'
 ISO <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -166,11 +166,11 @@ ISO <- function (dat=NULL){
 #' @family Batting functions
 #' @export Kpct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$Kpct <- Kpct(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$Kpct <- Kpct(Batting2016)
 #'
 Kpct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -193,11 +193,11 @@ Kpct <- function (dat=NULL){
 #' @family Batting functions
 #' @export OBP
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$OBP <- OBP(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$OBP <- OBP(Batting2016)
 #'
 OBP <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -220,11 +220,11 @@ OBP <- function (dat=NULL){
 #' @family Batting functions
 #' @export OPS
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$OPS <- OPS(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$OPS <- OPS(Batting2016)
 #'
 OPS <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -248,11 +248,11 @@ OPS <- function (dat=NULL){
 #' @family Batting functions
 #' @export PA
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$PA <- PA(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$PA <- PA(Batting2016)
 #'
 PA <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -275,11 +275,11 @@ PA <- function (dat=NULL){
 #' @family Batting functions
 #' @export XBHpct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$XBHpct <- XBHpct(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$XBHpct <- XBHpct(Batting2016)
 #'
 XBHpct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -302,11 +302,11 @@ XBHpct <- function (dat=NULL){
 #' @family Batting functions
 #' @export XBperH
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$XBperH <- XBperH(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$XBperH <- XBperH(Batting2016)
 #'
 XBperH <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -330,11 +330,11 @@ XBperH <- function (dat=NULL){
 #' @family Batting functions
 #' @export RCbasic
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$RCbasic <- RCbasic(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$RCbasic <- RCbasic(Batting2016)
 #'
 RCbasic <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -359,11 +359,11 @@ RCbasic <- function (dat=NULL){
 #' @family Batting functions
 #' @export RCtech
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$RCtech <- RCtech(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$RCtech <- RCtech(Batting2016)
 #'
 RCtech <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -393,11 +393,11 @@ RCtech <- function (dat=NULL){
 #' @family Batting functions
 #' @export RC2002
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$RC2002 <- RC2002(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$RC2002 <- RC2002(Batting2016)
 #'
 RC2002 <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -428,11 +428,11 @@ RC2002 <- function (dat=NULL){
 #' @family Batting functions
 #' @export SLG
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$SLG <- SLG(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$SLG <- SLG(Batting2016)
 #'
 SLG <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -455,11 +455,11 @@ SLG <- function (dat=NULL){
 #' @family Batting functions
 #' @export TBs
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$TBs <- TBs(Batting)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#'
+#' Batting2016$TBs <- TBs(Batting2016)
 #'
 TBs <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -497,11 +497,16 @@ TBs <- function (dat=NULL){
 #' @import dplyr
 #' @export wOBA
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$wOBA <- wOBA(Batting, Pitching, Fielding, Fangraphs=FALSE,
+#'
+#' data("Batting2016")
+#' head(Batting2016)
+#' data("Pitching2016")
+#' head(Pitching2016)
+#' data("Fielding2016")
+#' head(Fielding2016)
+#'
+#' Batting2016$wOBA <- wOBA(Batting2016, Pitching2016, Fielding2016, Fangraphs=FALSE,
 #'                           NA_to_zero=TRUE, Sep.Leagues=FALSE)
-#' }
 #'
 wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -563,12 +568,16 @@ wOBA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @import dplyr
 #' @export wRAA
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$wRAA <- wRAA(Batting, Pitching, Fielding, Fangraphs=FALSE,
-#'                           NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#' data("Pitching2016")
+#' head(Pitching2016)
+#' data("Fielding2016")
+#' head(Fielding2016)
+#'
+#' Batting2016$wRAA <- wRAA(Batting2016, Pitching2016, Fielding2016, Fangraphs=FALSE,
+#'                           NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
 wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){
@@ -631,11 +640,16 @@ wRAA <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fan
 #' @import dplyr
 #' @export wRC
 #' @examples
-#' \dontrun{
-#' get_bbdb("Batting")
-#' Batting$wRC <- wRC(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
-#' }
+#' data("Batting2016")
+#' head(Batting2016)
+#' data("Pitching2016")
+#' head(Pitching2016)
+#' data("Fielding2016")
+#' head(Fielding2016)
+#'
+#' Batting2016$wRC <- wRC(Batting2016, Pitching2016, Fielding2016, Fangraphs=FALSE,
+#'                          NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
 wRC <- function (BattingTable=NULL, PitchingTable=NULL, FieldingTable=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     if(isTRUE(Sep.Leagues) & isTRUE(Fangraphs)){

@@ -15,11 +15,11 @@ Find batting average walks per nine innings for pitchers with more one or more i
 Required fields from the Pitching table are; "IPouts", and "BB."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$BB_9 <- BB_9(Pitching)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$BB_9 <- BB_9(Pitching2016)
 
 }
 \seealso{

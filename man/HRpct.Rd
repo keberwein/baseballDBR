@@ -15,11 +15,11 @@ Find home run percentage for batters with more than zero at bats.
 Required fields from the Batting table are "AB" and "HR."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$HRpct <- HRpct(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$HRpct <- HRpct(Batting2016)
 
 }
 \seealso{

@@ -8,11 +8,11 @@
 #' @family Fielding functions
 #' @export Ch
 #' @examples
-#' \dontrun{
-#' get_bbdb("Fielding")
-#' Fielding$Ch <- Ch(Fielding)
 #'
-#' }
+#' data("Fielding2016")
+#' head(Fielding2016)
+#'
+#' Fielding2016$Ch <- Ch(Fielding2016)
 #'
 Ch <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -35,11 +35,11 @@ Ch <- function (dat=NULL){
 #' @family Fielding functions
 #' @export Fld_pct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Fielding")
-#' Fielding$Fld_pct <- Fld_pct(Fielding)
 #'
-#' }
+#' data("Fielding2016")
+#' head(Fielding2016)
+#'
+#' Fielding2016$Fld_pct <- Fld_pct(Fielding2016)
 #'
 Fld_pct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)

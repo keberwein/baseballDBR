@@ -15,11 +15,11 @@ Find the OBP for batters with more than zero hits.
 Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$OBP <- OBP(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$OBP <- OBP(Batting2016)
 
 }
 \seealso{

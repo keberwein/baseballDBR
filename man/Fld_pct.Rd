@@ -15,11 +15,11 @@ Find batting average for batters with more than zero at bats.
 Required fields from the Fielding table are; "PO", "A", and "E."
 }
 \examples{
-\dontrun{
-get_bbdb("Fielding")
-Fielding$Fld_pct <- Fld_pct(Fielding)
 
-}
+data("Fielding2016")
+head(Fielding2016)
+
+Fielding2016$Fld_pct <- Fld_pct(Fielding2016)
 
 }
 \seealso{

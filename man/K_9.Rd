@@ -15,11 +15,11 @@ Find the number of strikes a pitcher throws per nine innings pitched.
 Required fields from the Pitching table are; "H", "BB", "IPouts", and "SO."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$K_9 <- K_9(Pitching)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$K_9 <- K_9(Pitching2016)
 
 }
 \seealso{

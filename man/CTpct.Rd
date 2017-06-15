@@ -15,11 +15,11 @@ Find the contact rate for batters.
 Required fields from the batting table are "AB" and "SO."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$CTpct <- CTpct(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$CTpct <- CTpct(Batting2016)
 
 }
 \seealso{

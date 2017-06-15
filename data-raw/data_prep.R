@@ -10,3 +10,26 @@ colnames(seasonAVG) <- c("yearID", "tot_G", "tot_PA", "tot_HR", "tot_R", "tot_RB
 names(seasonAVG)
 devtools::use_data(seasonAVG, overwrite = TRUE)
 rm(seasonAVG)
+
+
+# Get example Batting, Pitching, and Fielding tables to be used in package testing to avoid long test times.
+library(baseballDBR)
+library(dplyr)
+
+get_bbdb("Batting")
+Batting2016 <- subset(Batting, yearID == "2016")
+devtools::use_data(Batting2016, overwrite = TRUE)
+rm(Batting2016)
+rm(Batting)
+
+get_bbdb("Pitching")
+Pitching2016 <- subset(Pitching, yearID == "2016")
+devtools::use_data(Pitching2016, overwrite = TRUE)
+rm(Pitching2016)
+rm(Pitching)
+
+get_bbdb("Fielding")
+Fielding2016 <- subset(Fielding, yearID == "2016")
+devtools::use_data(Fielding2016, overwrite = TRUE)
+rm(Fielding2016)
+rm(Fielding)

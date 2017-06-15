@@ -15,11 +15,11 @@ The number of chances a player had to make a defensive play.
 Required fields from the Fielding table are; "PO", "A", and "E."
 }
 \examples{
-\dontrun{
-get_bbdb("Fielding")
-Fielding$Ch <- Ch(Fielding)
 
-}
+data("Fielding2016")
+head(Fielding2016)
+
+Fielding2016$Ch <- Ch(Fielding2016)
 
 }
 \seealso{

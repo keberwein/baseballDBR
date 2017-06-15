@@ -20,6 +20,9 @@ Sean Lahman's baseball database and is always under development. This function w
 There is also an option to download the entire directory.
 }
 \examples{
+
+get_bbdb(table = "Batting")
+
 \dontrun{
 get_bbdb(table = c("Batting", "Pitching"))
 }

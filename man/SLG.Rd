@@ -15,11 +15,11 @@ Find the SLG for batters with more than zero hits.
 Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$SLG <- SLG(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$SLG <- SLG(Batting2016)
 
 }
 \seealso{

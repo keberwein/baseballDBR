@@ -15,11 +15,11 @@ Find the number of innings a player has pitched for a season.
 Required fields from the Pitching table are; "IPouts."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$IP <- IP(Pitching)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$IP <- IP(Pitching2016)
 
 }
 \seealso{

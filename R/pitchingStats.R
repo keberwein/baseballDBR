@@ -8,11 +8,11 @@
 #' @family Pitching functions
 #' @export BB_9
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$BB_9 <- BB_9(Pitching)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$BB_9 <- BB_9(Pitching2016)
 #'
 BB_9 <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -45,11 +45,11 @@ BB_9 <- function (dat=NULL){
 #' @family Pitching functions
 #' @export FIP
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$FIP <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$FIP <- FIP(Pitching2016, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 #'
 FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -93,11 +93,11 @@ FIP <- function (dat=NULL, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE){
 #' @family Pitching functions
 #' @export H_9
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$H_9 <- H_9(Pitching)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$H_9 <- H_9(Pitching2016)
 #'
 H_9 <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -121,11 +121,11 @@ H_9 <- function (dat=NULL){
 #' @family Pitching functions
 #' @export HR_9
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$HR_9 <- HR_9(Pitching)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$HR_9 <- HR_9(Pitching2016)
 #'
 HR_9 <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -147,11 +147,11 @@ HR_9 <- function (dat=NULL){
 #' @family Pitching functions
 #' @export IP
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$IP <- IP(Pitching)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$IP <- IP(Pitching2016)
 #'
 IP <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -173,11 +173,11 @@ IP <- function (dat=NULL){
 #' @family Pitching functions
 #' @export K_9
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$K_9 <- K_9(Pitching)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$K_9 <- K_9(Pitching2016)
 #'
 K_9 <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -199,11 +199,11 @@ K_9 <- function (dat=NULL){
 #' @family Pitching functions
 #' @export LOB_pct
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$LOB_pct <- LOB_pct(pitching_df)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$LOB_pct <- LOB_pct(Pitching2016)
 #'
 LOB_pct <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)
@@ -226,11 +226,11 @@ LOB_pct <- function (dat=NULL){
 #' @family Pitching functions
 #' @export WHIP
 #' @examples
-#' \dontrun{
-#' get_bbdb("Pitching")
-#' Pitching$WHIP <- WHIP(pitching_df)
 #'
-#' }
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' Pitching2016$WHIP <- WHIP(Pitching2016)
 #'
 WHIP <- function (dat=NULL){
     ifelse(is.null(dat), message("Please supply a valid data frame."), dat <- dat)

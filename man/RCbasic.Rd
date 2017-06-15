@@ -15,11 +15,11 @@ Find the runs created using the basic formula presented by Bill James in the lat
 Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", and "HR."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$RCbasic <- RCbasic(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$RCbasic <- RCbasic(Batting2016)
 
 }
 \seealso{

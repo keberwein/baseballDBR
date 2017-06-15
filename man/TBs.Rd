@@ -15,11 +15,11 @@ Find total bases.
 Required fields from the batting table are "AB","H", "X2B", "X3B" and "HR."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$TBs <- TBs(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$TBs <- TBs(Batting2016)
 
 }
 \seealso{

@@ -15,11 +15,11 @@ Find batting average for batters with more than zero at bats.
 Required fields from the Batting table are; "AB", and "H."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$BA <- BA(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$BA <- BA(Batting2016)
 
 }
 \seealso{

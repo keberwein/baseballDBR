@@ -15,11 +15,11 @@ Find the number of walks plus hits a pitcher allows per inning pitched.
 Required fields from the Pitching table are; "H", "BB", and "IPouts."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$WHIP <- WHIP(pitching_df)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$WHIP <- WHIP(Pitching2016)
 
 }
 \seealso{

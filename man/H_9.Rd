@@ -15,11 +15,11 @@ Find the number of hits a pitcher throws per nine innings pitched.
 Required fields from the Pitching table are; "H", "BB", and "IPouts."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$H_9 <- H_9(Pitching)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$H_9 <- H_9(Pitching2016)
 
 }
 \seealso{

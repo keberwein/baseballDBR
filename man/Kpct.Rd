@@ -15,11 +15,11 @@ Find strikeout percentage for batters with more than zero at bats.
 Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "SH."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$Kpct <- Kpct(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$Kpct <- Kpct(Batting2016)
 
 }
 \seealso{

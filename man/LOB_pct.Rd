@@ -15,11 +15,11 @@ Find the percentage of base runners that a pitcher leaves on base of the course 
 Required fields from the Pitching table are; "H", "BB", "HBP", "R", and "HR."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$LOB_pct <- LOB_pct(pitching_df)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$LOB_pct <- LOB_pct(Pitching2016)
 
 }
 \seealso{

@@ -15,11 +15,11 @@ Find the OPS for batters with more than zero hits.
 Required fields from the batting table are "H", "X2B", "X3B", "HR", "BB", "HBP", "AB" and "SF."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$OPS <- OPS(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$OPS <- OPS(Batting2016)
 
 }
 \seealso{

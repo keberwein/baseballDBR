@@ -15,11 +15,11 @@ Find isolated power (ISO) for batters with more than zero at bats.
 Required fields from the batting table are "H", "X2B", "X3B", "HR"."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$ISO <- ISO(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$ISO <- ISO(Batting2016)
 
 }
 \seealso{

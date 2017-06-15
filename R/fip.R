@@ -15,10 +15,13 @@
 #' @import dplyr
 #' @export fip_values
 #' @examples
-#' \dontrun{
-#' fip_df <- fip_values(Pitching, Fangraphs=FALSE)
+#'
+#' data("Pitching2016")
+#' head(Pitching2016)
+#'
+#' fip_df <- fip_values(Pitching2016, Fangraphs=FALSE)
 #' head(fip_df)
-#'}
+#'
 #'
 
 fip_values <- function(dat=NULL, Sep.Leagues=FALSE, Fangraphs=FALSE){

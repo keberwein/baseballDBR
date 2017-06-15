@@ -16,11 +16,11 @@ Required fields from the Batting table are; "AB", "SO", "BB", "HBP", "SF", and "
 Intentional base on balls (IBB) is added for the years that metric is available.
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$BBpct <- BBpct(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$BBpct <- BBpct(Batting2016)
 
 }
 \seealso{

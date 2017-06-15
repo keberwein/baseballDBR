@@ -15,11 +15,11 @@ Find extra base percentage for batters with more than zero at bats.
 Required fields from the batting table are "AB", "BB", "HBP", "SF", "SH", "X2B", "X3B", "HR"."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$XBHpct <- XBHpct(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$XBHpct <- XBHpct(Batting2016)
 
 }
 \seealso{

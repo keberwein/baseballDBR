@@ -15,11 +15,11 @@ Find the plate appearances (PA) for batters.
 Required fields from the batting table are "AB", "BB", "HBP", "SH", and "SF."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$PA <- PA(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$PA <- PA(Batting2016)
 
 }
 \seealso{

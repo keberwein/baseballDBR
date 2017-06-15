@@ -36,11 +36,16 @@ Find the wRC for all players with one or more hits for a particular season.
 Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", "HBP", "SF", "IBB."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$wRC <- wRC(Batting, Pitching, Fielding, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 
-}
+data("Batting2016")
+head(Batting2016)
+data("Pitching2016")
+head(Pitching2016)
+data("Fielding2016")
+head(Fielding2016)
+
+Batting2016$wRC <- wRC(Batting2016, Pitching2016, Fielding2016, Fangraphs=FALSE,
+                         NA_to_zero=TRUE, Sep.Leagues=FALSE)
 
 }
 \seealso{

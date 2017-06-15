@@ -29,11 +29,11 @@ Find the FIP for all pitchers with one or strike outs in a particular season.
 Required fields from the Pitching table are "BB", "HBP", "SO", and "IPouts."
 }
 \examples{
-\dontrun{
-get_bbdb("Pitching")
-Pitching$FIP <- FIP(Pitching, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 
-}
+data("Pitching2016")
+head(Pitching2016)
+
+Pitching2016$FIP <- FIP(Pitching2016, Fangraphs=FALSE, NA_to_zero=TRUE, Sep.Leagues=FALSE)
 
 }
 \seealso{

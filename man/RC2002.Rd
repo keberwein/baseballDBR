@@ -17,11 +17,11 @@ Required fields from the batting table are "AB", "H", "BB", "X2B", "X3B", "HR", 
 "SF" and "SH," "SO", and "IBB."
 }
 \examples{
-\dontrun{
-get_bbdb("Batting")
-Batting$RC2002 <- RC2002(Batting)
 
-}
+data("Batting2016")
+head(Batting2016)
+
+Batting2016$RC2002 <- RC2002(Batting2016)
 
 }
 \seealso{
