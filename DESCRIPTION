@@ -19,8 +19,8 @@ Suggests:
 	knitr,
 	Lahman
 License: MIT + file LICENSE
-URL: https://github.com/keberwein/moneyball
-BugReports: https://github.com/keberwein/moneyball/issues
+URL: https://github.com/keberwein/baseballDBR
+BugReports: https://github.com/keberwein/baseballDBR/issues
 LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
