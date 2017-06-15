@@ -12,7 +12,7 @@ Install
 install.packages("baseballDBR")
 ```
 
--   Or, the latest development version from GitHub:
+-   Or, install the latest development version from GitHub:
 
 ``` r
 devtools::install_github("keberwein/baseballDBR")
