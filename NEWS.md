@@ -1,6 +1,8 @@
 # baseballDBR 0.1.3
 
-* 
+## Bug Fixes
+
+* Updated URLs in Description
 
 # baseballDBR 0.1.2
 

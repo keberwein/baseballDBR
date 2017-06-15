@@ -1,5 +1,5 @@
-BaseballDBR
-===========
+BaseballDBR <img src="man/figures/baseballDBR_hex.png" align="right" />
+=======================================================================
 
 [![Build Status](https://travis-ci.org/keberwein/baseballDBR.png?branch=master)](https://travis-ci.org/keberwein/baseballDBR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/baseballDBR)](http://www.r-pkg.org/badges/version/baseballDBR) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
