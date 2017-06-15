@@ -6,7 +6,13 @@ BaseballDBR
 Install
 =======
 
--   The latest development version from GitHub:
+-   Install from CRAN
+
+``` r
+install.packages("baseballDBR")
+```
+
+-   Or, the latest development version from GitHub:
 
 ``` r
 devtools::install_github("keberwein/baseballDBR")
@@ -136,11 +142,11 @@ get_bbdb(table = c("Batting", "Pitching", "Fielding"))
 fangraphs_woba <- wOBA_values(Batting, Pitching, Fielding, Fangraphs=T)
 head(fangraphs_woba, 3)
 #>   yearID lg_woba woba_scale   wBB  wHBP   w1B   w2B   w3B   wHR runSB
-#> 1   2017   0.319      1.197 0.692 0.722 0.878 1.237 1.560 1.994   0.2
+#> 1   2017   0.320      1.192 0.693 0.723 0.878 1.236 1.558 1.989   0.2
 #> 2   2016   0.318      1.212 0.691 0.721 0.878 1.242 1.569 2.015   0.2
 #> 3   2015   0.313      1.251 0.687 0.718 0.881 1.256 1.594 2.065   0.2
 #>    runCS lg_r_pa lg_r_w  cFIP
-#> 1 -0.419   0.121  9.967 3.109
+#> 1 -0.421   0.121 10.007 3.126
 #> 2 -0.410   0.118  9.778 3.147
 #> 3 -0.392   0.113  9.421 3.134
 
