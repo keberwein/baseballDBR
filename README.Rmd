@@ -130,10 +130,7 @@ drv <- dbDriver("PostgreSQL")
 con <- dbConnect(drv, host= "localhost", dbname= "lahman", user= "YOUR_USERNAME", password = "YOUR_PASSWORD")
 
 for (i in 1:length(dbTables)) { 
-    if (dbExistsTable(con, dbTables[i])) {
-        dbRemoveTable(dbTables[i])
-    }
-    dbWriteTable(con, name =  dbTables[i], value = get0(dbTables[i])) 
+    dbWriteTable(con, name =  dbTables[i], value = get0(dbTables[i]), overwrite = TRUE) 
 }
 
 # Disconnect from database.
