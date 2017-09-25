@@ -28,7 +28,7 @@ get_bbdb(table = c("Batting", "Pitching"))
 }
 
 \dontrun{
-get_bbdb(downloadZip = TRUE)
+get_bbdb(AllTables = TRUE)
 }
 }
 \keyword{data}

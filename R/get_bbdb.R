@@ -18,7 +18,7 @@
 #'}
 #'
 #'\dontrun{
-#' get_bbdb(downloadZip = TRUE)
+#' get_bbdb(AllTables = TRUE)
 #'}
 
 get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
