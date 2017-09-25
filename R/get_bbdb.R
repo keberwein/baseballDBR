@@ -35,6 +35,11 @@ get_bbdb <- function(table=NULL, downloadZip=FALSE, AllTables=FALSE){
         }
     }
     if (!is.null(table)) {
+        if("Master" %in% table) {
+            warning('The "Master" table is referred to as "People" in the Baseball Data Bank. Downloading the "People table."')
+            table <- gsub("Master", "People", table)
+        }
+
         # Try to ping the Chadwick Bureau repository. If that fails to connect, try the backup repo.
         if (isTRUE(baseballDBR::urlExists("https://github.com/chadwickbureau/baseballdatabank/tree/master/core"))){
             baseURL <- "https://raw.githubusercontent.com/chadwickbureau/baseballdatabank/master/core/"
