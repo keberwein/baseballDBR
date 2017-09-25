@@ -1,3 +1,9 @@
+# baseballDBR 0.1.4
+
+## Bug fixes
+
+* Added a warning regarding name changes when user tries to download "Master" table.
+
 # baseballDBR 0.1.3
 
 ## Bug Fixes
