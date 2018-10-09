@@ -59,6 +59,7 @@ Other Batting functions: \code{\link{BABIP}},
   \code{\link{XBperH}}, \code{\link{wRAA}},
   \code{\link{wRC}}
 }
+\concept{Batting functions}
 \keyword{Average}
 \keyword{On-Base}
 \keyword{Weighted}

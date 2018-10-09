@@ -28,6 +28,7 @@ Other Pitching functions: \code{\link{FIP}},
   \code{\link{K_9}}, \code{\link{LOB_pct}},
   \code{\link{WHIP}}
 }
+\concept{Pitching functions}
 \keyword{BB}
 \keyword{BB9}
 \keyword{BB_9}

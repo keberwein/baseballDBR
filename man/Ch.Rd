@@ -25,6 +25,7 @@ Fielding2016$Ch <- Ch(Fielding2016)
 \seealso{
 Other Fielding functions: \code{\link{Fld_pct}}
 }
+\concept{Fielding functions}
 \keyword{Ch}
 \keyword{Chances}
 \keyword{Defensive}

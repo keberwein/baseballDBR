@@ -42,6 +42,7 @@ Other Pitching functions: \code{\link{BB_9}},
   \code{\link{K_9}}, \code{\link{LOB_pct}},
   \code{\link{WHIP}}
 }
+\concept{Pitching functions}
 \keyword{FIP}
 \keyword{fielding}
 \keyword{independent}

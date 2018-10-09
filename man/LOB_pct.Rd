@@ -27,6 +27,7 @@ Other Pitching functions: \code{\link{BB_9}},
   \code{\link{FIP}}, \code{\link{HR_9}}, \code{\link{H_9}},
   \code{\link{IP}}, \code{\link{K_9}}, \code{\link{WHIP}}
 }
+\concept{Pitching functions}
 \keyword{LOB}
 \keyword{LOB_pct}
 \keyword{percentage}

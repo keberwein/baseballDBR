@@ -4,8 +4,8 @@
 \alias{wOBA_values}
 \title{Return wOBA values per season}
 \usage{
-wOBA_values(BattingTable, PitchingTable, FieldingTable, Sep.Leagues = FALSE,
-  Fangraphs = FALSE)
+wOBA_values(BattingTable, PitchingTable, FieldingTable,
+  Sep.Leagues = FALSE, Fangraphs = FALSE)
 }
 \arguments{
 \item{BattingTable}{A full batting table from the \code{Lahman} package or the Chadwick Bureau GitHub repository.

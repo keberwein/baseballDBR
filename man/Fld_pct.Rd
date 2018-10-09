@@ -25,6 +25,7 @@ Fielding2016$Fld_pct <- Fld_pct(Fielding2016)
 \seealso{
 Other Fielding functions: \code{\link{Ch}}
 }
+\concept{Fielding functions}
 \keyword{Fld_pct}
 \keyword{fielding}
 \keyword{percentage}

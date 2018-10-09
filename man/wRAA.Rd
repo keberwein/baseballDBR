@@ -60,6 +60,7 @@ Other Batting functions: \code{\link{BABIP}},
   \code{\link{XBperH}}, \code{\link{wOBA}},
   \code{\link{wRC}}
 }
+\concept{Batting functions}
 \keyword{Above}
 \keyword{Average}
 \keyword{Runs}

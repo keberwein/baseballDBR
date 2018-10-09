@@ -33,6 +33,7 @@ Other Batting functions: \code{\link{BABIP}},
   \code{\link{TBs}}, \code{\link{XBHpct}},
   \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
+\concept{Batting functions}
 \keyword{XBperH}
 \keyword{base}
 \keyword{extra}

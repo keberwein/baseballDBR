@@ -28,6 +28,7 @@ Other Pitching functions: \code{\link{BB_9}},
   \code{\link{K_9}}, \code{\link{LOB_pct}},
   \code{\link{WHIP}}
 }
+\concept{Pitching functions}
 \keyword{hits}
 \keyword{innings}
 \keyword{nine}

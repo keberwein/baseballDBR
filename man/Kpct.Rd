@@ -33,6 +33,7 @@ Other Batting functions: \code{\link{BABIP}},
   \code{\link{XBHpct}}, \code{\link{XBperH}},
   \code{\link{wOBA}}, \code{\link{wRAA}}, \code{\link{wRC}}
 }
+\concept{Batting functions}
 \keyword{Kpct}
 \keyword{percentage}
 \keyword{strikeout}
