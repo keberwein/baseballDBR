@@ -22,6 +22,6 @@ testthat::expect_true(urlExists("https://raw.githubusercontent.com/chadwickburea
 # Check my personal fork, backup.
 testthat::expect_true(urlExists("https://raw.githubusercontent.com/keberwein/baseballdatabank/master/core/AllstarFull.csv"))
 # Check Fangraph guts page.
-testthat::expect_true(urlExists("http://www.fangraphs.com/guts.aspx?type=cn"))
+testthat::expect_true(urlExists("https://www.fangraphs.com/guts.aspx?type=cn"))
 
 

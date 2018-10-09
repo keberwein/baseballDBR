@@ -43,7 +43,7 @@ wOBA_values <- function(BattingTable, PitchingTable, FieldingTable, Sep.Leagues=
 
     if(isTRUE(Fangraphs)){
         # If user wants to use Fangraphs, grab it from the website.
-        runsBatting <- xml2::read_html("http://www.fangraphs.com/guts.aspx?type=cn") %>%
+        runsBatting <- xml2::read_html("https://www.fangraphs.com/guts.aspx?type=cn") %>%
             html_node(xpath = '//*[(@id = "GutsBoard1_dg1_ctl00")]') %>%
             html_table() %>%
             setNames(c("yearID", "lg_woba", "woba_scale", "wBB", "wHBP", "w1B", "w2B",
